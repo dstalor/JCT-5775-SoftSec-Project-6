@@ -12,8 +12,8 @@ class psd:
 
 def test_HexView(psd_project):
     from psd_visualizer.View import HexView
-    hv = HexView(psd_project.pe,(0,1000))
-    hv.get_lines((0,15))
+    hv = HexView(psd_project.pe,(0,3000))
+    hv.get_lines((0,50))
 
 if __name__=="__main__":
     psd_main = psd()
