@@ -24,5 +24,5 @@ class psd_Project:
         # This function loads the file, parse it and creates pefile object from it.
         self.pe = PE(filename)
 
-	def run_executable(self):
-		raise NotImplementedError()
+    def run_executable(self):
+        raise NotImplementedError()
