@@ -14,7 +14,7 @@ class AddressViewRangeMap(RangeMap):
         return self._line_range
 
     def update_line_range(self, base_line):
-        self._line_range = self._obj.update_line_range(base_line)
+        self._line_range = self._obj.calculate_line_range(base_line)
         # return the new base line: the next line after this line-range
         return self._line_range[1]+1
 
@@ -27,3 +27,23 @@ class AddressViewRangeMapList(RangeMapList):
         base_line = 0
         for rm in self._range_map_lst:
             base_line = rm.update_line_range(base_line)
+
+    def get_lines(self, lines_range):
+        str = ""
+        for rm in self._range_map_lst:
+            view = rm.get_obj()
+            str += view.get_lines(lines_range)
+        return str
+
+    def get_all_lines_range(self):
+        #we assume that the lines are sorted, so
+        start = 0
+        if not self._range_map_lst[-1]:
+            end = 0
+        else:
+            end = self._range_map_lst[-1].get_lines()[1]
+
+        return (start, end)
+
+    def get_all_lines(self):
+        return self.get_lines(self.get_all_lines_range())
