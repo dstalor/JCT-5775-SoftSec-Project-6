@@ -53,33 +53,33 @@
 	}
 	</style>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+    <link rel="stylesheet" href="http://jqueryui.com/resources/demos/style.css">
+    <script>
+    $(function() {
+    $( "#tabs" ).tabs();
+    });
+    </script>
 	<script>
 	$(document).ready(function () {
-		$("#datahex").click(function() {
-			$("#content").html('<pre><span class="datahex-row-header">0x00000:</span><span id="datahex-00000-data" class="datahex-byte-data">4D</span><span id="datahex-00001-data" class="datahex-byte-data spaceafter">5A</span><span id="datahex-00002-data" class="datahex-byte-data">74</span><span id="datahex-00003-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00004-data" class="datahex-byte-data">B8</span><span id="datahex-00005-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00006-data" class="datahex-byte-data">00</span><span id="datahex-00007-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00008-data" class="datahex-byte-data">26</span><span id="datahex-00009-data" class="datahex-byte-data spaceafter">04</span><span id="datahex-0000A-data" class="datahex-byte-data">01</span><span id="datahex-0000B-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-0000C-data" class="datahex-byte-data">FF</span><span id="datahex-0000D-data" class="datahex-byte-data spaceafter">FF</span><span id="datahex-0000E-data" class="datahex-byte-data">00</span><span id="datahex-0000F-data" class="datahex-byte-data doublespaceafter">00</span><span id="datahex-00000-ascii" class="datahex-byte-ascii">&#77;</span><span id="datahex-00001-ascii" class="datahex-byte-ascii">&#90;</span><span id="datahex-00002-ascii" class="datahex-byte-ascii">&#116;</span><span id="datahex-00003-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00004-ascii" class="datahex-byte-ascii">&#184;</span><span id="datahex-00005-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00006-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00007-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00008-ascii" class="datahex-byte-ascii">&#38;</span><span id="datahex-00009-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000A-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000B-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000C-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000D-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000E-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000F-ascii" class="datahex-byte-ascii">&#46;</span></pre>');
-			$("span.datahex-byte-data").click(function() {
-				$( this ).toggleClass( "highlight" );
-			});
-		});
-		$("#dataview").click(function() {
-			$("#content").html('<pre><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">\'%H:%M:%S\' ,0</span></pre>');
-		});
-		$("#codeview").click(function() {
-			$("#content").html('<pre><span class="codeview-row-header 4spacesafter">.text:00408E79</span><span class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span class="codeview-constant">20h</span></span></pre>');
-			$("span.codeview-constant").click(function() {
-				$( this ).text(function(i,origText){
-					if (origText.slice(-1) == 'h') {
-						return (hex2bin(origText.substr(0, origText.length - 1)) + 'b');
-					}
-					else if (origText.slice(-1) == 'b'){
-						return (bin2dec(origText.substr(0, origText.length - 1)));
-					}
-					else {
-						return (dec2hex(origText) + 'h');
-					}
-				});
-			});
-		});
+        $("span.datahex-byte-data").click(function() {
+            $( this ).toggleClass( "highlight" );
+        });
+	    $("span.codeview-constant").click(function() {
+            $( this ).text(function(i,origText){
+                if (origText.slice(-1) == 'h') {
+                    return (hex2bin(origText.substr(0, origText.length - 1)) + 'b');
+                }
+                else if (origText.slice(-1) == 'b'){
+                    return (bin2dec(origText.substr(0, origText.length - 1)));
+                }
+                else {
+                    return (dec2hex(origText) + 'h');
+                }
+            });
+        });
 	});
 	/**
 	* Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -139,9 +139,21 @@
 </head>
 <html>
 	<body>
-		<h1 id="datahex">Data hex view</h1>
-		<h1 id="dataview">Data view</h1>
-		<h1 id="codeview">Code view</h1>
-		<div id="content"></div>
+        <div id="tabs">
+            <ul>
+                <li><a href="#datahex">Data hex view</a></li>
+                <li><a href="#dataview">Data view</a></li>
+                <li><a href="#codeview">Code view</a></li>
+            </ul>
+            <div id="datahex">
+                <pre><span class="datahex-row-header">0x00000:</span><span id="datahex-00000-data" class="datahex-byte-data">4D</span><span id="datahex-00001-data" class="datahex-byte-data spaceafter">5A</span><span id="datahex-00002-data" class="datahex-byte-data">74</span><span id="datahex-00003-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00004-data" class="datahex-byte-data">B8</span><span id="datahex-00005-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00006-data" class="datahex-byte-data">00</span><span id="datahex-00007-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00008-data" class="datahex-byte-data">26</span><span id="datahex-00009-data" class="datahex-byte-data spaceafter">04</span><span id="datahex-0000A-data" class="datahex-byte-data">01</span><span id="datahex-0000B-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-0000C-data" class="datahex-byte-data">FF</span><span id="datahex-0000D-data" class="datahex-byte-data spaceafter">FF</span><span id="datahex-0000E-data" class="datahex-byte-data">00</span><span id="datahex-0000F-data" class="datahex-byte-data doublespaceafter">00</span><span id="datahex-00000-ascii" class="datahex-byte-ascii">&#77;</span><span id="datahex-00001-ascii" class="datahex-byte-ascii">&#90;</span><span id="datahex-00002-ascii" class="datahex-byte-ascii">&#116;</span><span id="datahex-00003-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00004-ascii" class="datahex-byte-ascii">&#184;</span><span id="datahex-00005-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00006-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00007-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00008-ascii" class="datahex-byte-ascii">&#38;</span><span id="datahex-00009-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000A-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000B-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000C-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000D-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000E-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000F-ascii" class="datahex-byte-ascii">&#46;</span></pre>
+            </div>
+            <div id="dataview">
+                <pre><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></pre>
+            </div>
+            <div id="codeview">
+                <pre><span class="codeview-row-header 4spacesafter">.text:00408E79</span><span class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span class="codeview-constant">20h</span></span></pre>
+            </div>
+        </div>
 	</body>
 </html>
