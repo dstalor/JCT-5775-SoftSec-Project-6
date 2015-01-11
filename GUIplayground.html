@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<head>
+	<style>
+	pre {
+		font-weight: bold;
+	}
+	/* Data hex view */
+	.datahex-row-header {
+		color: #008080;
+	}
+	.datahex-byte-data {
+		color: #000080;
+	}
+	.datahex-byte-ascii {
+		color: #000000;
+	}
+	/* Data view */
+	.dataview-row-header {
+		color: #848484;
+		margin-right: 8px;
+	}
+	.dataview-label, .dataview-length {
+		color: #000080;
+		margin-right: 8px;
+	}
+	.dataview-data {
+		color: #008000;
+	}
+	/* Code view */
+	.codeview-row-header {
+		color: #000000;
+		margin-right: 8px;
+	}
+	.codeview-opcode, .codeview-param {
+		color: #000080;
+	}
+	.codeview-constant {
+		color: #008000;
+	}
+	/* Spacing */
+	.spaceafter {
+		margin-right: 8px;
+	}
+	.doublespaceafter {
+		margin-right: 16px;
+	}
+	.4spacesafter {
+		margin-right: 48px;
+	}
+
+	.highlight {
+		background-color: yellow;
+	}
+	</style>
+	<script src="jquery-1.11.2.min.js"></script>
+	<script>
+	$(document).ready(function () {
+		$("#datahex").click(function() {
+			$("#content").html('<pre><span class="datahex-row-header">0x00000:</span><span id="datahex-00000-data" class="datahex-byte-data">4D</span><span id="datahex-00001-data" class="datahex-byte-data spaceafter">5A</span><span id="datahex-00002-data" class="datahex-byte-data">74</span><span id="datahex-00003-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00004-data" class="datahex-byte-data">B8</span><span id="datahex-00005-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00006-data" class="datahex-byte-data">00</span><span id="datahex-00007-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-00008-data" class="datahex-byte-data">26</span><span id="datahex-00009-data" class="datahex-byte-data spaceafter">04</span><span id="datahex-0000A-data" class="datahex-byte-data">01</span><span id="datahex-0000B-data" class="datahex-byte-data spaceafter">00</span><span id="datahex-0000C-data" class="datahex-byte-data">FF</span><span id="datahex-0000D-data" class="datahex-byte-data spaceafter">FF</span><span id="datahex-0000E-data" class="datahex-byte-data">00</span><span id="datahex-0000F-data" class="datahex-byte-data doublespaceafter">00</span><span id="datahex-00000-ascii" class="datahex-byte-ascii">&#77;</span><span id="datahex-00001-ascii" class="datahex-byte-ascii">&#90;</span><span id="datahex-00002-ascii" class="datahex-byte-ascii">&#116;</span><span id="datahex-00003-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00004-ascii" class="datahex-byte-ascii">&#184;</span><span id="datahex-00005-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00006-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00007-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-00008-ascii" class="datahex-byte-ascii">&#38;</span><span id="datahex-00009-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000A-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000B-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000C-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000D-ascii" class="datahex-byte-ascii">&#255;</span><span id="datahex-0000E-ascii" class="datahex-byte-ascii">&#46;</span><span id="datahex-0000F-ascii" class="datahex-byte-ascii">&#46;</span></pre>');
+			$("span.datahex-byte-data").click(function() {
+				$( this ).toggleClass( "highlight" );
+			});
+		});
+		$("#dataview").click(function() {
+			$("#content").html('<pre><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">\'%H:%M:%S\' ,0</span></pre>');
+		});
+		$("#codeview").click(function() {
+			$("#content").html('<pre><span class="codeview-row-header 4spacesafter">.text:00408E79</span><span class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span class="codeview-constant">20h</span></span></pre>');
+			$("span.codeview-constant").click(function() {
+				$( this ).text(function(i,origText){
+					if (origText.slice(-1) == 'h') {
+						return (hex2bin(origText.substr(0, origText.length - 1)) + 'b');
+					}
+					else if (origText.slice(-1) == 'b'){
+						return (bin2dec(origText.substr(0, origText.length - 1)));
+					}
+					else {
+						return (dec2hex(origText) + 'h');
+					}
+				});
+			});
+		});
+	});
+	/**
+	* Convert From/To Binary/Decimal/Hexadecimal in JavaScript
+	* https://gist.github.com/faisalman
+	*
+	* Copyright 2012, Faisalman <fyzlman@gmail.com>
+	* Licensed under The MIT License
+	* http://www.opensource.org/licenses/mit-license
+	*/
+
+	(function(){
+
+		var convertBase = function (num) {
+			this.from = function (baseFrom) {
+				this.to = function (baseTo) {
+					return parseInt(num, baseFrom).toString(baseTo);
+				};
+				return this;
+			};
+			return this;
+		};
+
+		// binary to decimal
+		this.bin2dec = function (num) {
+			return convertBase(num).from(2).to(10);
+		};
+
+		// binary to hexadecimal
+		this.bin2hex = function (num) {
+			return convertBase(num).from(2).to(16);
+		};
+
+		// decimal to binary
+		this.dec2bin = function (num) {
+			return convertBase(num).from(10).to(2);
+		};
+
+		// decimal to hexadecimal
+		this.dec2hex = function (num) {
+			return convertBase(num).from(10).to(16);
+		};
+
+		// hexadecimal to binary
+		this.hex2bin = function (num) {
+			return convertBase(num).from(16).to(2);
+		};
+
+		// hexadecimal to decimal
+		this.hex2dec = function (num) {
+			return convertBase(num).from(16).to(10);
+		};
+
+		return this;
+	})();
+
+	</script>
+</head>
+<html>
+	<body>
+		<h1 id="datahex">Data hex view</h1>
+		<h1 id="dataview">Data view</h1>
+		<h1 id="codeview">Code view</h1>
+		<div id="content"></div>
+	</body>
+</html>
