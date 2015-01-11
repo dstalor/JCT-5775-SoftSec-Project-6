@@ -63,9 +63,11 @@
     </script>
 	<script>
 	$(document).ready(function () {
-        $("span.datahex-byte-data").click(function() {
-            $( this ).toggleClass( "highlight" );
+        $("span.datahex-byte-data").click(function () {
+            $(this).toggleClass("highlight");
         });
+    });
+    $(document).ready(function () {
 	    $("span.codeview-constant").click(function() {
             $( this ).text(function(i,origText){
                 if (origText.slice(-1) == 'h') {
