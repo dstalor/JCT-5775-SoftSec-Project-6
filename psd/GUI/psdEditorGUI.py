@@ -6,6 +6,7 @@ class psdEditorGUI(object):
         self.html = ""
         self.webview = webview
         self.line_count = self.calculate_line_count()
+        webview.page().mainFrame().addToJavaScriptWindowObject("pyObj", self.psd_project.visualizer)
 
     def calculate_line_count(self):
         return 100 # to-do: calculate here how much lines there are in the view
@@ -65,7 +66,7 @@ class psdEditorGUI(object):
         	.doublespaceafter {
         		margin-right: 16px;
         	}
-        	.4spacesafter {
+        	.fourspacesafter {
         		margin-right: 48px;
         	}
         	
@@ -93,6 +94,11 @@ class psdEditorGUI(object):
         				}
         			});
         		});
+        		$("#button").click(function() {
+        			$("#main").text(function(i,origText){
+        				return pyObj.get_all_lines();
+        			});
+				)};
         	});
         	/**
         	* Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -149,5 +155,5 @@ class psdEditorGUI(object):
         	})();
         	</script>
         </head>
-        """+"<html><body><pre>"+str+"</pre></body></html>"
+        """+"<html><body><button type='button' id='button'>Click Me!</button><pre id='main'></pre></body></html>"
         self.set_html(new_html)
