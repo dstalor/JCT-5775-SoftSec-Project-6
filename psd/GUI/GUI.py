@@ -3,11 +3,11 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 from psdEditorGUI import *
 from psd import *
 
-class psdGUI(object):
 
+class psdGUI(object):
     def __init__(self, psd):
         self.psd = psd
-        self.editor_view  = None
+        self.editor_view = None
         self.main_window = None
 
     def create_main_window(self):
@@ -32,6 +32,6 @@ class psdGUI(object):
         sys.exit(app.exec_())
 
 # if __name__ == '__main__':
-#     psd_main = psd()
+# psd_main = psd()
 #     psd_main.create_new_project("examples\\helloworld.exe")
 #     psd_GUI = psdGUI(psd_main)
