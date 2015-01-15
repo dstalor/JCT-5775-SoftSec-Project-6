@@ -72,7 +72,7 @@ class HexView(View):
             str_bytedata += self.html_bytedata(start_address + i, byte, specialclass)
             str_asciidata += self.html_byte_ascii(start_address + i, byte)
 
-        return str_rowheader + str_bytedata + str_asciidata + "\n"
+        return str_rowheader + str_bytedata + str_asciidata + "<br />\n"
 
     def html_rowheader(self, address):
         return "<span class=\"datahex-row-header\">0x{0:08x}: </span>".format(address)

@@ -19,7 +19,7 @@
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
     <style>
-        pre {
+        #datahexview, #dataview,#codeview {
             font-weight: bold;
             font-family: "Consolas", "Courier New", Courier, monospace;
         }
@@ -106,7 +106,7 @@
             });
         });
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
-            $("#datahexview-pre").html(pyObj.visualizer_lines);
+            $("#datahexview").html(pyObj.visualizer_lines);
             $("span.datahex-byte-data").click(function () {
                 $(this).toggleClass("highlight");
             });
@@ -180,15 +180,14 @@
     </ul>
     <div id="myTabContent" class="tab-content">
         <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab">
-<pre id="codeview-pre"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+<span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
         class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
-        class="codeview-constant">20h</span></span></pre>
+        class="codeview-constant">20h</span></span>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab">
-            <pre id="datahexview-pre"></pre>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab">
-            <pre id="dataview-pre"><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></pre>
+            <span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span>
         </div>
     </div>
 </div>
