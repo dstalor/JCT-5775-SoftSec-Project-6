@@ -39,7 +39,7 @@ class HexView(View):
             str_out += fmt.format(*bytes) + "\n"
             address_start += self._offset
 
-        print str_out
+        # print str_out
         return str_out
 
     def get_lines(self, line_range_tup):
@@ -53,7 +53,7 @@ class HexView(View):
             str_out += self.html_line(address_start, bytes)
             address_start += self._offset
 
-        print str_out
+        # print str_out
         return str_out
 
     def html_line(self, start_address, bytes):
