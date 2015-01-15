@@ -1,8 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
     <script src="qrc:/js/jQuery.min.js"></script>
+    <script src="qrc:/js/bootstrap.min.js"></script>
     <style>
         pre {
             font-weight: bold;
+            font-family: "Consolas", "Courier New", Courier, monospace;
         }
 
         /* Data hex view */
@@ -66,6 +85,12 @@
     </style>
     <script>
         $(document).ready(function () {
+            $('#myTab a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            });
+            $('#myTab a[href="#codeview"]').tab('show');
+
             $("span.codeview-constant").click(function () {
                 $(this).text(function (i, origText) {
                     if (origText.slice(-1) == 'h') {
@@ -80,12 +105,12 @@
                 });
             });
         });
-        function dataHexView() {
-            document.getElementById("main").innerHTML = pyObj.visualizer_lines;
+        $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
+            $("#datahexview-pre").html(pyObj.visualizer_lines);
             $("span.datahex-byte-data").click(function () {
                 $(this).toggleClass("highlight");
             });
-        }
+        });
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
          * https://gist.github.com/faisalman
@@ -141,9 +166,31 @@
         })();
     </script>
 </head>
-<html>
+
+
 <body>
-<button type="button" id="button" onclick="dataHexView()">Data-Hex View</button>
-<pre id="main"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span class="codeview-constant">20h</span></span></pre></pre>
+<div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
+    <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
+                                            aria-controls="codeview" aria-expanded="false">Code View</a></li>
+        <li role="presentation" class=""><a href="#datahexview" role="tab" id="datahexview-tab" data-toggle="tab"
+                                            aria-controls="datahexview" aria-expanded="false">Data Hex View</a></li>
+        <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
+                                            aria-controls="dataview" aria-expanded="false">Data View</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab">
+<pre id="codeview-pre"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+        class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
+        class="codeview-constant">20h</span></span></pre>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab">
+            <pre id="datahexview-pre"></pre>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab">
+            <pre id="dataview-pre"><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></pre>
+        </div>
+    </div>
+</div>
 </body>
 </html>

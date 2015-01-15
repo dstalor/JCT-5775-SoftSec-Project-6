@@ -9,6 +9,7 @@ class psdGUI(object):
         self.psd = psd
         self.editor_view = None
         self.main_window = None
+        resources.qInitResources()
 
     def create_main_window(self):
         self.main_window = QtGui.QMainWindow()

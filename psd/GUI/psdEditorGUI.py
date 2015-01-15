@@ -10,12 +10,11 @@ class JsHooks(QObject):
     def __init__(self, widget, visualizer):
         QObject.__init__(self)
         self.visualizer = visualizer
-        resources.qInitResources()
 
-    def get_all_lines(self):
+    def _get_all_lines(self):
         return self.visualizer.get_all_lines()
 
-    visualizer_lines = pyqtProperty(str, fget=get_all_lines)
+    visualizer_lines = pyqtProperty(str, fget=_get_all_lines)
 
 
 class psdEditorGUI(object):
