@@ -16,6 +16,7 @@ class psdGUI(object):
 
     def create_editor_view(self, psd_project):
         webview = QtWebKit.QWebView()
+        webview.setContextMenuPolicy(Qt.NoContextMenu)
         self.editor_view = psdEditorGUI(psd_project, webview)
         self.main_window.setCentralWidget(webview)
 

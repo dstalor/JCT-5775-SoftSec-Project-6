@@ -18,8 +18,9 @@
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
+    <script src="qrc:/js/bootstrap-contextmenu.js"></script>
     <style>
-        #datahexview, #dataview,#codeview {
+        #datahexview, #dataview, #codeview {
             font-weight: bold;
             font-family: "Consolas", "Courier New", Courier, monospace;
         }
@@ -105,6 +106,13 @@
                 });
             });
         });
+        $('#dataview').contextmenu({
+        target: '#context-menu',
+        onItem: function (context, e) {
+          alert($(e.target).text());
+        }
+      });
+
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
             $("span.datahex-byte-data").click(function () {
@@ -180,14 +188,24 @@
     </ul>
     <div id="myTabContent" class="tab-content">
         <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab">
-<span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
-        class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
-        class="codeview-constant">20h</span></span>
+            <span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+                class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
+                class="codeview-constant">20h</span></span>
         </div>
         <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab">
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab">
-            <span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span>
+        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context" data-target="#context-menu">
+            <span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span
+                class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span>
+        </div>
+        <div id="context-menu">
+            <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1">Action</a></li>
+                <li><a tabindex="-1">Another action</a></li>
+                <li><a tabindex="-1">Something else here</a></li>
+                <li class="divider"></li>
+                <li><a tabindex="-1">Separated link</a></li>
+            </ul>
         </div>
     </div>
 </div>
