@@ -3,6 +3,7 @@
     <file alias="js/jQuery.min.js">js/jquery-1.11.2.min.js</file>
     <file>js/bootstrap.js</file>
     <file>js/bootstrap.min.js</file>
+    <file>js/bootstrap-contextmenu.js</file>
     <file>js/npm.js</file>
     <file>fonts/glyphicons-halflings-regular.eot</file>
     <file>fonts/glyphicons-halflings-regular.svg</file>
