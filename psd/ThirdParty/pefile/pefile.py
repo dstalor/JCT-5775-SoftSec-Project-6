@@ -25,17 +25,17 @@ __author__ = 'Ero Carrera'
 __version__ = '1.2.10-%d' % int( __revision__[21:-2] )
 __contact__ = 'ero.carrera@gmail.com'
 
-
 import os
 import struct
 import time
 import math
-import re
 import exceptions
 import string
 import array
 import mmap
+
 import ordlookup
+
 
 sha1, sha256, sha512, md5 = None, None, None, None
 

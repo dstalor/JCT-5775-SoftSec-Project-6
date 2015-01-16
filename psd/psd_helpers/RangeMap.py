@@ -1,8 +1,13 @@
 
-# data structue which represent mapping between a range-tuple (start,end) to an object
 class RangeMap(object):
+    """
+    class which represent mapping between a range-tuple (start,end) to an object
+    """
     def __init__(self,range_tup, obj):
         assert type(range_tup) is tuple, " first argument must be a range tuple (start,end))"
+
+        self._rstart = 0
+        self._rend = 0
         self.set_range(range_tup)
         self._obj = obj
 
@@ -54,7 +59,7 @@ class RangeMap(object):
         return self._rstart < other_rangemap.get_range_start()
 
     def __str__(self):
-        return "("+str(self._rstart)+", "+ str(self._rend)+") "+str(self._obj)
+        return "("+hex(self._rstart)+", "+ hex(self._rend)+") "+str(self._obj)
 
 
 
@@ -62,7 +67,7 @@ class RangeMapList(object):
     def __init__(self):
         self._range_map_lst = []
 
-    def add_range_map(self,new_rangemap):
+    def add_range_map(self, new_rangemap):
         n_range = new_rangemap.get_range()
         (n_start, n_end) = n_range
 
@@ -78,11 +83,12 @@ class RangeMapList(object):
                 if rm_start!=n_start:
                     start=rm_start
                     end=n_start-1
-                    self._range_map_lst.append(RangeMap((start, end), rm.get_obj()))
+                    # rm can be class that inherit from RangeMap, therefore we use type(rm)(...)
+                    self._range_map_lst.append(type(rm)((start, end), rm.get_obj()))
                 if rm_end!=n_end:
                     start=n_end+1
                     end=rm_end
-                    self._range_map_lst.append(RangeMap((start, end), rm.get_obj()))
+                    self._range_map_lst.append(type(rm)((start, end), rm.get_obj()))
                 self._range_map_lst.remove(rm)
                 # since we found a range the contains all the new one,
                 # we don't need to do any more changes
@@ -104,6 +110,9 @@ class RangeMapList(object):
             if rm.is_range_same(range_tup):
                 self._range_map_lst.remove(rm)
                 return
+
+    def get_range_map_lst(self):
+        return self._range_map_lst
 
     def __str__(self):
         str=""

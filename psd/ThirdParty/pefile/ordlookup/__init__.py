@@ -8,9 +8,9 @@ infoz.
 '''
 
 ords = {
-    'ws2_32.dll':ws2_32.ord_names,
-    'wsock32.dll':ws2_32.ord_names,
-    'oleaut32.dll':oleaut32.ord_names,
+    'ws2_32.dll': ws2_32.ord_names,
+    'wsock32.dll': ws2_32.ord_names,
+    'oleaut32.dll': oleaut32.ord_names,
 }
 
 def ordLookup(libname, ord, make_name=False):

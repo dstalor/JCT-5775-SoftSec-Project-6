@@ -14,7 +14,9 @@ import os
 import re
 import string
 import urllib
+
 import pefile
+
 
 __author__ = 'Ero Carrera'
 __version__ = pefile.__version__
