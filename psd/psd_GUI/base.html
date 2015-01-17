@@ -4,21 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
-    <title>Bootstrap 101 Template</title>
 
     <!-- Bootstrap -->
     <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
     <script src="qrc:/js/bootstrap-contextmenu.js"></script>
+
     <style>
         #datahexview, #dataview, #codeview {
             font-weight: bold;
@@ -91,33 +84,29 @@
                 $(this).tab('show')
             });
             $('#myTab a[href="#codeview"]').tab('show');
-
-            $("span.codeview-constant").click(function () {
-                $(this).text(function (i, origText) {
-                    if (origText.slice(-1) == 'h') {
-                        return (hex2bin(origText.substr(0, origText.length - 1)) + 'b');
-                    }
-                    else if (origText.slice(-1) == 'b') {
-                        return (bin2dec(origText.substr(0, origText.length - 1)));
-                    }
-                    else {
-                        return (dec2hex(origText) + 'h');
-                    }
-                });
-            });
         });
-        $('#dataview').contextmenu({
-        target: '#context-menu',
-        onItem: function (context, e) {
-          alert($(e.target).text());
-        }
-      });
-
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
             $("span.datahex-byte-data").click(function () {
                 $(this).toggleClass("highlight");
             });
+        });
+        $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
+            $('.codeview-constant').contextmenu({
+                target:'#context-menu-constant',
+                onItem: function(context, e) {
+                    if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
+                        $(context).html(toHex(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Decimal") == 0) {
+                        $(context).html(toDec(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Binary") == 0) {
+                        $(context).html(toBin(context.text()));
+                    }
+                }
+            });
+
         });
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -172,6 +161,39 @@
 
             return this;
         })();
+        function toHex(string){
+            if (string.slice(-1) == 'h') {      // context is hex
+                return string;
+            }
+            else if (string.slice(-1) == 'b') { // context is bin
+                return (bin2hex(string.substr(0, string.length - 1))) + 'h';
+            }
+            else {                              //context is dec
+                return (dec2hex(string) + 'h');
+            }
+        }
+        function toDec(string){
+            if (string.slice(-1) == 'h') {      // context is hex
+                return (hex2dec(string.substr(0, string.length - 1)));
+            }
+            else if (string.slice(-1) == 'b') { // context is bin
+                return (bin2dec(string.substr(0, string.length - 1)));
+            }
+            else {                              //context is dec
+                return string;
+            }
+        }
+        function toBin(string){
+            if (string.slice(-1) == 'h') {      // context is hex
+                return (hex2bin(string.substr(0, string.length - 1))) + 'b';
+            }
+            else if (string.slice(-1) == 'b') { // context is bin
+                return string;
+            }
+            else {                              //context is dec
+                return (dec2bin(string) + 'b');
+            }
+        }
     </script>
 </head>
 
@@ -207,6 +229,14 @@
                 <li><a tabindex="-1">Separated link</a></li>
             </ul>
         </div>
+        <div id="context-menu-constant">
+            <ul class="dropdown-menu" role="menu">
+                <li><a tabindex="-1">Hexadecimal</a></li>
+                <li><a tabindex="-1">Decimal</a></li>
+                <li><a tabindex="-1">Binary</a></li>
+            </ul>
+        </div>
+
     </div>
 </div>
 </body>
