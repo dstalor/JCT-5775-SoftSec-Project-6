@@ -4,7 +4,20 @@
     <bookmark url="file://$PROJECT_DIR$/psd_GUI/GUI.py" line="7" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a223c23c-94cf-4667-9b53-c7dada2d9482" name="Default" comment="" />
+    <list default="true" id="a223c23c-94cf-4667-9b53-c7dada2d9482" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/psd_visualizer/psd_CodeView.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/psd_visualizer/psd_HexView.py" />
+      <change type="MOVED" beforePath="C:\Programming\Python\JCT-5775-SoftSec-Project-6\psd\psd_helpers\RangeMap.py" afterPath="$PROJECT_DIR$/psd_helpers/psd_RangeMap.py" />
+      <change type="MOVED" beforePath="C:\Programming\Python\JCT-5775-SoftSec-Project-6\psd\psd_visualizer\View.py" afterPath="$PROJECT_DIR$/psd_visualizer/psd_View.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py" afterPath="$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_helpers/helpers.py" afterPath="$PROJECT_DIR$/psd_helpers/helpers.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd.py" afterPath="$PROJECT_DIR$/psd.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py" afterPath="$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py" afterPath="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py" afterPath="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py" afterPath="$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="Workspace.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,24 +40,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="psd.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/psd.py">
+      <file leaf-file-name="psd_Project.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psd_Project.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="680">
-              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GUI.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/psd_GUI/GUI.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="765">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -52,8 +53,8 @@
       <file leaf-file-name="psdEditorGUI.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psd_GUI/psdEditorGUI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="731">
-              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
+              <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -62,8 +63,8 @@
       <file leaf-file-name="psd_Analyzer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="481" max-vertical-offset="1241">
-              <caret line="50" column="102" selection-start-line="50" selection-start-column="102" selection-end-line="50" selection-end-column="102" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1281" max-vertical-offset="1938">
+              <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -71,24 +72,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RangeMap.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/psd_helpers/RangeMap.py">
+      <file leaf-file-name="psd_MemoryRangeRangeMap.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="724" max-vertical-offset="2482">
-              <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+              <caret line="12" column="33" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="33" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pefile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ThirdParty/pefile/pefile.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="67602" max-vertical-offset="90746">
-              <caret line="3988" column="0" selection-start-line="3988" selection-start-column="0" selection-end-line="3988" selection-end-column="0" />
-              <folding>
-                <element signature="e#921#930#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -96,9 +85,11 @@
       <file leaf-file-name="psd_Visualizer.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="697">
-              <caret line="8" column="82" selection-start-line="8" selection-start-column="82" selection-end-line="8" selection-end-column="82" />
-              <folding />
+            <state vertical-scroll-proportion="-5.862069" vertical-offset="0" max-vertical-offset="833">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -106,20 +97,20 @@
       <file leaf-file-name="AddressViewRangeMap.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="850">
-              <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="850">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
-                <element signature="e#0#34#0" expanded="true" />
+                <element signature="e#0#38#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="View.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/psd_visualizer/View.py">
+      <file leaf-file-name="psd_View.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_View.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5609756" vertical-offset="1554" max-vertical-offset="2567">
-              <caret line="109" column="58" selection-start-line="109" selection-start-column="58" selection-end-line="109" selection-end-column="58" />
+            <state vertical-scroll-proportion="-15.827586" vertical-offset="0" max-vertical-offset="850">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -128,8 +119,28 @@
       <file leaf-file-name="psd_MemoryRangeMetadata.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="663">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+              <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psd_CodeView.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_CodeView.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6406504" vertical-offset="235" max-vertical-offset="850">
+              <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="psd_HexView.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_HexView.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1785">
+              <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -160,15 +171,19 @@
         <option value="$PROJECT_DIR$/psd_analyzer/__init__.py" />
         <option value="$PROJECT_DIR$/psd_Project.py" />
         <option value="$PROJECT_DIR$/psd.py" />
-        <option value="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py" />
         <option value="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py" />
         <option value="$PROJECT_DIR$/psd_helpers/RangeMap.py" />
-        <option value="$PROJECT_DIR$/psd_helpers/helpers.py" />
-        <option value="$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py" />
-        <option value="$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py" />
-        <option value="$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py" />
         <option value="$PROJECT_DIR$/psd_GUI/psdEditorGUI.py" />
         <option value="$PROJECT_DIR$/psd_visualizer/View.py" />
+        <option value="$PROJECT_DIR$/psd_visualizer/psd_View.py" />
+        <option value="$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py" />
+        <option value="$PROJECT_DIR$/psd_helpers/helpers.py" />
+        <option value="$PROJECT_DIR$/psd_helpers/psd_RangeMap.py" />
+        <option value="$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py" />
+        <option value="$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py" />
+        <option value="$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py" />
+        <option value="$PROJECT_DIR$/psd_visualizer/psd_HexView.py" />
+        <option value="$PROJECT_DIR$/psd_visualizer/psd_CodeView.py" />
       </list>
     </option>
   </component>
@@ -311,6 +326,9 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Programming\Python\JCT-5775-SoftSec-Project-6\psd\psd_visualizer" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Programming\Python\JCT-5775-SoftSec-Project-6\psd\psd_helpers" />
       <recent name="C:\Programming\Python\JCT-5775-SoftSec-Project-6\psd\3rdParty\Installers" />
@@ -500,17 +518,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1176" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1936" height="1176" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18703899" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2118019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32907662" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.44891945" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.327112" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33202356" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.44891945" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.327112" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32907662" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -564,6 +582,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py</url>
+          <line>103</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -574,7 +599,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="47" />
+      <option name="time" value="50" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -585,33 +610,17 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="663">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd_helpers/RangeMap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="639" max-vertical-offset="2329">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="318" max-vertical-offset="918">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/View.py">
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_View.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1082" max-vertical-offset="1972">
           <caret line="57" column="56" selection-start-line="57" selection-start-column="56" selection-end-line="57" selection-end-column="56" />
@@ -655,11 +664,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="221">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_helpers/RangeMap.py">
+    <entry file="file://$PROJECT_DIR$/psd_helpers/psd_RangeMap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2329">
           <caret line="64" column="39" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="39" />
@@ -672,12 +683,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="595">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/View.py">
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_View.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1362" max-vertical-offset="1972">
           <caret line="102" column="23" selection-start-line="102" selection-start-column="23" selection-end-line="102" selection-end-column="23" />
@@ -711,11 +722,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="221">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_helpers/RangeMap.py">
+    <entry file="file://$PROJECT_DIR$/psd_helpers/psd_RangeMap.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="918" max-vertical-offset="2329">
           <caret line="64" column="39" selection-start-line="64" selection-start-column="27" selection-end-line="64" selection-end-column="39" />
@@ -728,12 +741,12 @@
         <state vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="595">
           <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/View.py">
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_View.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="918">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -767,7 +780,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -864,31 +879,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_Project.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.3448277" vertical-offset="88" max-vertical-offset="646">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/psd_analyzer/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="652">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd_helpers/helpers.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="272">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -906,37 +900,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="663">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd_helpers/RangeMap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="724" max-vertical-offset="2482">
-          <caret line="54" column="0" selection-start-line="54" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/psd_GUI/GUI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="46" max-vertical-offset="731">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
-            <element signature="e#0#10#0" expanded="true" />
+            <element signature="e#0#10#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="97" max-vertical-offset="680">
-          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -950,46 +920,112 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py">
+    <entry file="file://$PROJECT_DIR$/psd_helpers/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="850">
-          <caret line="26" column="37" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-          <caret line="8" column="82" selection-start-line="8" selection-start-column="82" selection-end-line="8" selection-end-column="82" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py">
+    <entry file="file://$PROJECT_DIR$/psd_helpers/psd_RangeMap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="481" max-vertical-offset="1241">
-          <caret line="50" column="102" selection-start-line="50" selection-start-column="102" selection-end-line="50" selection-end-column="102" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="2635">
+          <caret line="1" column="6" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/psd_GUI/psdEditorGUI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/psd_visualizer/View.py">
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/AddressViewRangeMap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5609756" vertical-offset="1554" max-vertical-offset="2567">
-          <caret line="109" column="58" selection-start-line="109" selection-start-column="58" selection-end-line="109" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="850">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_View.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.827586" vertical-offset="0" max-vertical-offset="850">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeMetadata.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="867">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_MemoryRangeRangeMap.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <caret line="12" column="33" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_Visualizer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.862069" vertical-offset="0" max-vertical-offset="833">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_Project.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_analyzer/psd_Analyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1281" max-vertical-offset="1938">
+          <caret line="87" column="21" selection-start-line="87" selection-start-column="21" selection-end-line="87" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_HexView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="714" max-vertical-offset="1785">
+          <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/psd_visualizer/psd_CodeView.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6406504" vertical-offset="235" max-vertical-offset="850">
+          <caret line="38" column="56" selection-start-line="38" selection-start-column="56" selection-end-line="38" selection-end-column="56" />
           <folding />
         </state>
       </provider>

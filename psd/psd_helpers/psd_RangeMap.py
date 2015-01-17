@@ -1,5 +1,5 @@
 
-class RangeMap(object):
+class psd_RangeMap(object):
     """
     class which represent mapping between a range-tuple (start,end) to an object
     """
@@ -120,12 +120,21 @@ class RangeMapList(object):
             str+= rm.__str__()+"\n"
         return str
 
+    def get_rm_by_value(self, value):
+        """
+        :return: the rangemap includes value. None if no range is found.
+        """
+        for rm in self._range_map_lst:
+            if rm.is_range_contains_value(value):
+                return rm
+
+        return None
 
 if __name__ == "__main__":
 
     lrm = RangeMapList()
     def addrm(range_tup,str_obj):
-        lrm.add_range_map(RangeMap(range_tup, str_obj))
+        lrm.add_range_map(psd_RangeMap(range_tup, str_obj))
         print lrm
 
 

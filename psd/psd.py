@@ -10,8 +10,9 @@ class psd:
 
 
 def test_HexView(psd_project):
-    from psd_visualizer.View import HexView
-    hv = HexView(psd_project.pe,(0,3000))
+    from psd_visualizer.psd_HexView import psd_HexView
+
+    hv = psd_HexView(psd_project.pe,(0,3000))
     hv.get_html_lines((0,50))
 
 def test_GUI(psd):

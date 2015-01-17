@@ -1,5 +1,4 @@
-# from psd_handlers import psd_HandlersFactory
-# psd_io = psd_HandlersFactory.hfactory.get_psd_io_handler()
+import string
 
 def ask_yes_no(str_prompt):
     answer=""
@@ -7,4 +6,9 @@ def ask_yes_no(str_prompt):
         answer=raw_input(str_prompt+" (y/n)")
     return answer
 
-
+def strip_non_printable(dirty_str):
+    """
+    :param str: string to stripped out of non printable bytes
+    :return: returns string that conatins only printable bytes
+    """
+    return ''.join(filter(string.printable.__contains__, dirty_str))

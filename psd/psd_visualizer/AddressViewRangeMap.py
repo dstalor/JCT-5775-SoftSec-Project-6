@@ -1,9 +1,9 @@
-from psd_helpers.RangeMap import *
-from View import *
+from psd_helpers.psd_RangeMap import *
+from psd_View import *
 
-class AddressViewRangeMap(RangeMap):
+class AddressViewRangeMap(psd_RangeMap):
     def __init__(self, address_range_tup, view_obj):
-        assert isinstance(view_obj, View), "second argument must an object of type View!"
+        assert isinstance(view_obj, psd_View), "second argument must an object of type View!"
         super(AddressViewRangeMap, self).__init__(address_range_tup, view_obj)
 
     def update_line_range(self, base_line):

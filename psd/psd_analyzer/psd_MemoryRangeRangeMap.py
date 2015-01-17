@@ -1,7 +1,7 @@
-from psd_helpers.RangeMap import RangeMap
+from psd_helpers.psd_RangeMap import psd_RangeMap
 from psd_MemoryRangeMetadata import psd_MemoryRangeMetadata
 
-class psd_MemoryRangeRangeMap(RangeMap):
+class psd_MemoryRangeRangeMap(psd_RangeMap):
     """
     This class represent a mapping between address-range and its metadata
     """

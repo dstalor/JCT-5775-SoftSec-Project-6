@@ -1,13 +1,21 @@
 from ThirdParty.pefile.pefile import PE
+from capstone import *
+
+from psd_helpers.helpers import *
 from psd_MemoryRangeMetadata import psd_MemoryRangeMetadata
 from psd_MemoryRangeRangeMap import psd_MemoryRangeRangeMap
-from psd_helpers.RangeMap import RangeMapList
+from psd_helpers.psd_RangeMap import RangeMapList
 
 class psd_Analyzer(object):
     def __init__(self, psd_project):
         self.psd_project = psd_project
         self.address_section_rmp = RangeMapList()
         self.pe = None
+
+        #TODO: Architecture and mode is currently hardcoded - add auto recognition
+        self.asm_architecture = CS_ARCH_X86
+        self.asm_mode = CS_MODE_32
+        self.disassembler = Cs(self.asm_architecture, self.asm_mode)
 
     def load_executable(self, filename):
         """
@@ -29,7 +37,7 @@ class psd_Analyzer(object):
 
         #self.analyze_header() #This function  calls pefile and the result will be in self.pe
         self.analyze_memorymap()
-        #self.disassemble()    #This function calls capstone and the result will be in ?
+        self.disassemble()    #This function calls capstone and the result will be in ?
 
     def analyze_memorymap(self):
         """
@@ -45,14 +53,13 @@ class psd_Analyzer(object):
         for section in self.pe.sections:
             address_range = (section.VirtualAddress, section.VirtualAddress + section.Misc_VirtualSize)
 
-            #TODO: the [:5] is a workaround to strip the non-printable bytes.
-            # do real striping
+            # strip non-printable bytes from section NAME
+            sec_name = strip_non_printable(section.Name)
 
-            new_range = psd_MemoryRangeRangeMap(address_range, psd_MemoryRangeMetadata(section.Name[:4], section))
+            new_range = psd_MemoryRangeRangeMap(address_range, psd_MemoryRangeMetadata(sec_name, section))
+
             self.address_section_rmp.add_range_map(new_range)
         print self.address_section_rmp
-
-
 
     def get_address_range(self):
         """
@@ -66,3 +73,36 @@ class psd_Analyzer(object):
 
     def get_address_section_rmp(self):
         return self.address_section_rmp
+
+    def disassemble(self):
+        """
+        disassemble code parts of the pe file
+        :return:
+        """
+        #TODO: make this more efficiant and easy to use, iterating an entire list to find a specific section is ugly
+        #disassemble .text section
+        for rm in self.address_section_rmp.get_range_map_lst():
+            sec_name = rm.get_memory_range_metadata().get_range_name()
+            if sec_name == ".text":
+                self.disassemble_memory_range(rm)
+                break
+
+
+    def disassemble_memory_range(self, memoryrange_rm):
+        """
+        Analyze a memory range as a code
+        :param memoryrange_rm: MemoryRangeRangeMap
+        :return: none
+        """
+        metadata = memoryrange_rm.get_memory_range_metadata()
+        metadata.set_is_code(True)
+        metadata.set_display("codeview")
+
+        start, end = memoryrange_rm.get_range()
+        code_bytes = self.pe.get_memory_mapped_image()[start: end+1]
+
+        metadata.set_code_lines(self.disassemble_bytes(start, code_bytes))
+
+
+    def disassemble_bytes(self, start_address, code_bytes):
+        return [line for line in self.disassembler.disasm(code_bytes, start_address)]
