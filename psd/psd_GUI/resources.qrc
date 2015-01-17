@@ -1,5 +1,19 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
-    <file alias="jQuery.js">GUI/jquery-1.11.2.min.js</file>
+    <file alias="js/jQuery.min.js">js/jquery-1.11.2.min.js</file>
+    <file>js/bootstrap.js</file>
+    <file>js/bootstrap.min.js</file>
+    <file>js/bootstrap-contextmenu.js</file>
+    <file>js/npm.js</file>
+    <file>fonts/glyphicons-halflings-regular.eot</file>
+    <file>fonts/glyphicons-halflings-regular.svg</file>
+    <file>fonts/glyphicons-halflings-regular.ttf</file>
+    <file>fonts/glyphicons-halflings-regular.woff</file>
+    <file>css/bootstrap.css</file>
+    <file>css/bootstrap.css.map</file>
+    <file>css/bootstrap.min.css</file>
+    <file>css/bootstrap-theme.css</file>
+    <file>css/bootstrap-theme.css.map</file>
+    <file>css/bootstrap-theme.min.css</file>
 </qresource>
 </RCC>

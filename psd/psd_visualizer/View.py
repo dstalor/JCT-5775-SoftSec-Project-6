@@ -70,6 +70,7 @@ class HexView(View):
     #     print str_out
     #     return str_out
 
+
     def get_html_lines(self, line_range_tup):
         intersect_lines = self.get_lines_intersection(line_range_tup)
         if not intersect_lines:
@@ -85,7 +86,6 @@ class HexView(View):
             str_out += self.html_line(address_start, bytes)
             address_start += self._offset
 
-        #print str_out
         return str_out
 
     def html_line(self, start_address, bytes):
@@ -104,7 +104,7 @@ class HexView(View):
             str_bytedata += self.html_bytedata(start_address + i, byte, specialclass)
             str_asciidata += self.html_byte_ascii(start_address + i, byte)
 
-        return str_rowheader + str_bytedata + str_asciidata + "\n"
+        return str_rowheader + str_bytedata + str_asciidata + "<br />\n"
 
     def html_rowheader(self, rangename, address):
         return "<span class=\"datahex-row-header\">{0: >10} 0x{1:08x}: </span>".format(rangename, address)
