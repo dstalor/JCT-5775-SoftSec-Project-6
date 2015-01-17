@@ -16,6 +16,7 @@
         #datahexview, #dataview, #codeview {
             font-weight: bold;
             font-family: "Consolas", "Courier New", Courier, monospace;
+            white-space: pre;
         }
 
         /* Data hex view */
@@ -209,17 +210,13 @@
                                             aria-controls="dataview" aria-expanded="false">Data View</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab">
-            <span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+        <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                 class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
                 class="codeview-constant">20h</span></span>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab">
-        </div>
-        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context" data-target="#context-menu">
-            <span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span
-                class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span>
-        </div>
+        <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab"></div>
+        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context" data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span
+                class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></div>
         <div id="context-menu">
             <ul class="dropdown-menu" role="menu">
                 <li><a tabindex="-1">Action</a></li>
