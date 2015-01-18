@@ -23,7 +23,8 @@ class psd_CodeView(psd_View):
         (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
 
         str_out = ""
-        for line in self._code_lines:
+        for l_idx in range(line_start, line_end):
+            line = self._code_lines[l_idx]
             str_out += self.html_line(line)
 
         return str_out
