@@ -23,7 +23,8 @@ class psd_CodeView(psd_View):
         (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
 
         str_out = ""
-        for line in self._code_lines:
+        for l_idx in range(line_start, line_end):
+            line = self._code_lines[l_idx]
             str_out += self.html_line(line)
 
         return str_out
@@ -39,7 +40,7 @@ class psd_CodeView(psd_View):
         return "<span class=\"codeview-row-header\">{0: >10} 0x{1:08x}: </span>".format(rangename, address)
 
     def html_opcode(self, mnemonic):
-        return "<span class=\"codeview-opcode spaceafter\">{0}</span>".format(mnemonic)
+        return "<span class=\"codeview-opcode spaceafter\">{0: <5}</span>".format(mnemonic)
 
     def html_operands(self, op_str):
         return "<span class=\"codeview-param\" >{0}</span>".format(op_str)

@@ -13,52 +13,59 @@
     <script src="qrc:/js/bootstrap-contextmenu.js"></script>
 
     <style>
+	@font-face {
+			font-family: 'UbuntuMono';
+			src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");		
+			}
+					
         #datahexview, #dataview, #codeview {
-            font-weight: bold;
-            font-family: "Consolas", "Courier New", Courier, monospace;
+			font-size: 120%;
+            font-weight: normal;
+            font-family: "UbuntuMono", "Consolas", "Courier New", Courier, monospace;
             white-space: pre;
+			background-color: #252223;
         }
 
         /* Data hex view */
         .datahex-row-header {
-            color: #008080;
+            color: #EFC564;
         }
 
         .datahex-byte-data {
-            color: #000080;
+            color: #FDE2A2;
         }
 
         .datahex-byte-ascii {
-            color: #000000;
+            color: #FDEECA;
         }
 
         /* Data view */
         .dataview-row-header {
-            color: #848484;
+            color: #3F968A;
             margin-right: 8px;
         }
 
         .dataview-label, .dataview-length {
-            color: #000080;
+            color: #91E2D7;
             margin-right: 8px;
         }
 
         .dataview-data {
-            color: #008000;
+            color: #B4E2DC;
         }
 
         /* Code view */
         .codeview-row-header {
-            color: #000000;
+            color: #68C754;
             margin-right: 8px;
         }
 
-        .codeview-opcode, .codeview-param {
-            color: #000080;
+        .codeview-opcode { 
+            color: #AAF19B;
         }
 
-        .codeview-constant {
-            color: #008000;
+        .codeview-param, .codeview-constant {
+            color: #FDF6A2;
         }
 
         /* Spacing */
