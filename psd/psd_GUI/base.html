@@ -84,7 +84,7 @@
                 e.preventDefault()
                 $(this).tab('show')
             });
-            $('#myTab a[href="#codeview"]').tab('show');
+            $('#myTab a[href="#datahexview"]').tab('show');
         });
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
@@ -202,19 +202,19 @@
 <body>
 <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
     <ul id="myTab" class="nav nav-tabs" role="tablist">
+        <li role="presentation" class=""><a href="#datahexview" role="tab" id="datahexview-tab" data-toggle="tab"
+                                            aria-controls="datahexview" aria-expanded="false">Editor View</a></li>
         <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
                                             aria-controls="codeview" aria-expanded="false">Code View</a></li>
-        <li role="presentation" class=""><a href="#datahexview" role="tab" id="datahexview-tab" data-toggle="tab"
-                                            aria-controls="datahexview" aria-expanded="false">Data Hex View</a></li>
         <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
                                             aria-controls="dataview" aria-expanded="false">Data View</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
-        <div role="tabpanel" class="tab-pane fade active" id="codeview" aria-labelledby="codeview-tab"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+        <div role="tabpanel" class="tab-pane fade active" id="datahexview" aria-labelledby="datahexview-tab"></div>
+        <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                 class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
                 class="codeview-constant">20h</span></span>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="datahexview" aria-labelledby="datahexview-tab"></div>
         <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context" data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span
                 class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></div>
         <div id="context-menu">
