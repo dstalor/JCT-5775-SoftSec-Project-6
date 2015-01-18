@@ -27,7 +27,7 @@ class psdEditorGUI(object):
         self.bridge = JsHooks(webview, psd_project.visualizer)
 
     def calculate_line_count(self):
-        return 100  # TODO: calculate here how much lines there are in the view
+        return 100  # TODO: calculate here how many lines there are in the view
 
     def update_view(self):
         self.set_html()

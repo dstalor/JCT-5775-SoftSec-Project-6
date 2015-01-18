@@ -4,7 +4,7 @@ class psd_View(object):
         self._address_range = memory_range.get_range()
         self._memory_range_metadata = memory_range.get_memory_range_metadata()
         self._pe = pe
-        self._line_range=(0,0)
+        self._line_range = (0, 0)
 
     def update_line_range(self, base_line):
         linecount = self.calculate_line_count()
@@ -21,18 +21,18 @@ class psd_View(object):
     def get_lines_intersection(self, other_lines_tup):
         """
         :param other_lines_tup: other tuple of lines range
-        :return: The intersection if they intersect. otheriwse - None
+        :return: The intersection if they intersect. otherwise - None
         """
         if self._line_range[0] > other_lines_tup[1] or self._line_range[1] < other_lines_tup[0]:
             return None
 
-        start_line = max(self._line_range[0] ,other_lines_tup[0])
+        start_line = max(self._line_range[0], other_lines_tup[0])
         end_line = min(self._line_range[1], other_lines_tup[1])
 
         return (start_line, end_line)
 
     def absolute_lines_to_relative(self, rel_line_tup):
-        start_rel = rel_line_tup[0]-self._line_range[0]
+        start_rel = rel_line_tup[0] - self._line_range[0]
         end_rel = start_rel + (rel_line_tup[1] - rel_line_tup[0])
         return start_rel, end_rel
 
@@ -43,5 +43,5 @@ class psd_View(object):
         raise NotImplementedError()
 
     def html_line_wrap(self, line_num, line_str):
-        parity = "line-even" if line_num%2 == 0 else "line-odd"
+        parity = "line-even" if line_num % 2 == 0 else "line-odd"
         return "<span class=\"line {0}\" id=\"{1:d}\">{2}</span>".format(parity, line_num, line_str)

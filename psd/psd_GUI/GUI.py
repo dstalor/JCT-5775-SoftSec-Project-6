@@ -35,5 +35,5 @@ class psdGUI(object):
 
 # if __name__ == '__main__':
 # psd_main = psd()
-#     psd_main.create_new_project("examples\\helloworld.exe")
+# psd_main.create_new_project("examples\\helloworld.exe")
 #     psd_GUI = psdGUI(psd_main)

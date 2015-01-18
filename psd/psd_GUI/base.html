@@ -13,19 +13,19 @@
     <script src="qrc:/js/bootstrap-contextmenu.js"></script>
 
     <style>
-	@font-face {
-			font-family: 'UbuntuMono';
-			src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");		
-			}
-					
+        @font-face {
+            font-family: 'UbuntuMono';
+            src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");
+        }
+
         #datahexview, #dataview, #codeview {
-			font-size: 120%;
+            font-size: 120%;
             font-weight: normal;
             font-family: "UbuntuMono", "Consolas", "Courier New", Courier, monospace;
             white-space: pre;
-			background-color: #252223;
+            background-color: #252223;
         }
-				
+
         /* Data hex view */
         .datahex-row-header {
             color: #EFC564;
@@ -37,6 +37,10 @@
 
         .datahex-byte-ascii {
             color: #FDEECA;
+        }
+
+        .line-odd {
+            background-color: #3a3738;
         }
 
         /* Data view */
@@ -60,7 +64,7 @@
             margin-right: 8px;
         }
 
-        .codeview-opcode { 
+        .codeview-opcode {
             color: #AAF19B;
         }
 
@@ -104,8 +108,8 @@
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
             $('.codeview-constant').contextmenu({
-                target:'#context-menu-constant',
-                onItem: function(context, e) {
+                target: '#context-menu-constant',
+                onItem: function (context, e) {
                     if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
                         $(context).html(toHex(context.text()));
                     }
@@ -171,7 +175,7 @@
 
             return this;
         })();
-        function toHex(string){
+        function toHex(string) {
             if (string.slice(-1) == 'h') {      // context is hex
                 return string;
             }
@@ -182,7 +186,7 @@
                 return (dec2hex(string) + 'h');
             }
         }
-        function toDec(string){
+        function toDec(string) {
             if (string.slice(-1) == 'h') {      // context is hex
                 return (hex2dec(string.substr(0, string.length - 1)));
             }
@@ -193,7 +197,7 @@
                 return string;
             }
         }
-        function toBin(string){
+        function toBin(string) {
             if (string.slice(-1) == 'h') {      // context is hex
                 return (hex2bin(string.substr(0, string.length - 1))) + 'b';
             }
@@ -220,11 +224,14 @@
     </ul>
     <div id="myTabContent" class="tab-content">
         <div role="tabpanel" class="tab-pane fade active" id="datahexview" aria-labelledby="datahexview-tab"></div>
-        <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span class="codeview-row-header fourspacesafter">.text:00408E79</span><span
+        <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span
+                class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                 class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
                 class="codeview-constant">20h</span></span>
         </div>
-        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context" data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span class="dataview-label">aHMS</span><span
+        <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab" data-toggle="context"
+             data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span
+                class="dataview-label">aHMS</span><span
                 class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></div>
         <div id="context-menu">
             <ul class="dropdown-menu" role="menu">

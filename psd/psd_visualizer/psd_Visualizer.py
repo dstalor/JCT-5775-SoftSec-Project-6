@@ -2,6 +2,7 @@ from AddressViewRangeMap import *
 from psd_visualizer.psd_HexView import psd_HexView
 from psd_visualizer.psd_CodeView import psd_CodeView
 
+
 class psd_Visualizer:
     def __init__(self, psd_project):
         self.psd_project = psd_project
@@ -29,11 +30,12 @@ class psd_Visualizer:
             elif display == "codeview":
                 self.add_codeview(memory_range_rm)
             else:
-                print "Unknown dispaly type:", display
+                print "Unknown display type:", display
 
         print self.addressview_rangemap_list
+
     # def get_lines(self, lines_range_tup):
-    #     return self.addressview_rangemap_list.get_lines(lines_range_tup)
+    # return self.addressview_rangemap_list.get_lines(lines_range_tup)
     #
     def get_all_html_lines(self):
         return self.addressview_rangemap_list.get_all_html_lines()
