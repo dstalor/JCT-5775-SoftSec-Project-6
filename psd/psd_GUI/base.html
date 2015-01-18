@@ -97,8 +97,10 @@
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
             $("span.datahex-byte-data").click(function () {
-                $(this).toggleClass("highlight");
+                //$(this).toggleClass("highlight");
+                $('#30')[0].scrollIntoView();
             });
+
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
             $('.codeview-constant').contextmenu({
@@ -115,7 +117,6 @@
                     }
                 }
             });
-
         });
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
