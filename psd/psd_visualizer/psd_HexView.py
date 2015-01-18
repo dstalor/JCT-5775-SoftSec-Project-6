@@ -35,7 +35,7 @@ class psd_HexView(psd_View):
         if not intersect_lines:
             return ""
 
-        line_abs_index = line_range_tup[0]
+        line_abs_index = intersect_lines[0]
         (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
         address_start = self.find_address_by_line(line_start)
         str_out = ""
