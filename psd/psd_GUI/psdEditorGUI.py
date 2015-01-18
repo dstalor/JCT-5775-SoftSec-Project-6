@@ -11,12 +11,11 @@ class JsHooks(QObject):
         QObject.__init__(self)
         self.visualizer = visualizer
         resources.qInitResources()
-		
+
     def get_all_html_lines(self):
         return self.visualizer.get_all_html_lines()
 
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
-
 
 
 class psdEditorGUI(object):
