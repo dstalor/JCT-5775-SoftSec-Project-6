@@ -35,6 +35,7 @@ class psd_HexView(psd_View):
         if not intersect_lines:
             return ""
 
+        line_abs_index = line_range_tup[0]
         (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
         address_start = self.find_address_by_line(line_start)
         str_out = ""
@@ -42,8 +43,10 @@ class psd_HexView(psd_View):
 
         for l in range(line_start, line_end + 1):
             bytes = map(ord, img[address_start:address_start + self._offset])
-            str_out += self.html_line(address_start, bytes)
+            line_str = self.html_line(address_start, bytes)
+            str_out += self.html_line_wrap(line_abs_index, line_str)
             address_start += self._offset
+            line_abs_index+=1
 
         return str_out
 

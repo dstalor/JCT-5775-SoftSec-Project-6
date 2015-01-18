@@ -20,12 +20,15 @@ class psd_CodeView(psd_View):
         if not intersect_lines:
             return ""
 
+        line_abs_index = line_range_tup[0]
         (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
 
         str_out = ""
         for l_idx in range(line_start, line_end):
             line = self._code_lines[l_idx]
-            str_out += self.html_line(line)
+            line_str = self.html_line(line)
+            str_out += self.html_line_wrap(line_abs_index, line_str)
+            line_abs_index+=1
 
         return str_out
 
