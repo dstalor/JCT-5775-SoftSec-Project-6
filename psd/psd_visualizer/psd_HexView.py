@@ -13,7 +13,7 @@ class psd_HexView(psd_View):
         return self.find_line_by_address(self._address_range[1])
 
     # def get_lines_str(self, line_range_tup):
-    #     line_start = line_range_tup[0] if line_range_tup[0] >
+    # line_start = line_range_tup[0] if line_range_tup[0] >
     #
     #     address_start = self.find_address_by_line(line_start)
     #     fmt = "".join(['{' + str(i) + ':02x} ' for i in range(self._offset)])
@@ -46,12 +46,12 @@ class psd_HexView(psd_View):
             line_str = self.html_line(address_start, bytes)
             str_out += self.html_line_wrap(line_abs_index, line_str)
             address_start += self._offset
-            line_abs_index+=1
+            line_abs_index += 1
 
         return str_out
 
     def html_line(self, start_address, bytes):
-        str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name() , start_address)
+        str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), start_address)
         str_bytedata = ""
         str_asciidata = ""
         for i in range(len(bytes)):
@@ -72,12 +72,16 @@ class psd_HexView(psd_View):
         return "<span class=\"datahex-row-header\">{0: >10} 0x{1:08x}: </span>".format(rangename, address)
 
     def html_bytedata(self, address, byte, specialclass=""):
-        return "<span id=\"datahex-{0:08x}-data\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address, specialclass, byte)
+        return "<span id=\"datahex-{0:08x}-data\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address,
+                                                                                                           specialclass,
+                                                                                                           byte)
 
     def html_byte_ascii(self, address, byte, specialclass=""):
-        return "<span id=\"datahex-{0:08x}-ascii\" class=\"datahex-byte-ascii {1:s}\">{2:s}</span>".format(address, specialclass,
-                                                                                           self.get_visible_ascii(
-                                                                                               chr(byte)))
+        return "<span id=\"datahex-{0:08x}-ascii\" class=\"datahex-byte-ascii {1:s}\">{2:s}</span>".format(address,
+                                                                                                           specialclass,
+                                                                                                           self.get_visible_ascii(
+                                                                                                               chr(
+                                                                                                                   byte)))
 
     # <span id="00000-ascii" class="byte-ascii">&#77;</span>
     # def html_bytedata2(self, address, byte, spaceafter=False):

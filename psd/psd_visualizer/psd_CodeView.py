@@ -28,7 +28,7 @@ class psd_CodeView(psd_View):
             line = self._code_lines[l_idx]
             line_str = self.html_line(line)
             str_out += self.html_line_wrap(line_abs_index, line_str)
-            line_abs_index+=1
+            line_abs_index += 1
 
         return str_out
 
