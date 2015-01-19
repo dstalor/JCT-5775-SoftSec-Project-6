@@ -104,7 +104,9 @@
             $("span.header-address").dblclick(function () {
                 alert("Line #: " + pyObj.get_line_id_by_address($(this).text()));
             });
-
+            $("span.jump-location").click(function () {
+                alert('"' + $(this).text() + '"');
+            });
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
             $('.codeview-constant').contextmenu({
