@@ -15,6 +15,10 @@ class JsHooks(QObject):
     def get_all_html_lines(self):
         return self.visualizer.get_all_html_lines()
 
+    @pyqtSlot(str, result=int)
+    def get_line_id_by_address(self, address):
+        return self.visualizer.get_line_id_by_address(int(str(address), 16))
+
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 
 
@@ -38,5 +42,3 @@ class psdEditorGUI(object):
 
         self.webview.page().mainFrame().addToJavaScriptWindowObject("pyObj", self.bridge)
         self.webview.setHtml(self.html)
-
-        #print self.psd_project.visualizer.get_line_id_by_address(0x1002)

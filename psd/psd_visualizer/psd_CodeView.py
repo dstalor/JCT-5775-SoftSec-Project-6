@@ -40,7 +40,7 @@ class psd_CodeView(psd_View):
         return str_rowheader + str_opcode + str_operands + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"codeview-row-header\">{0: >10} 0x{1:08x}: </span>".format(rangename, address)
+        return "<span class=\"codeview-row-header\">{0: >10} <span class=\"header-address\">0x{1:08x}</span>: </span>".format(rangename, address)
 
     def html_opcode(self, mnemonic):
         return "<span class=\"codeview-opcode spaceafter\">{0: <5}</span>".format(mnemonic)

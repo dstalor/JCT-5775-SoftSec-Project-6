@@ -99,6 +99,10 @@
             $("span.datahex-byte-data").click(function () {
                 //$(this).toggleClass("highlight");
                 $('#30')[0].scrollIntoView();
+                alert(pyObj.get_line_id_by_address("derp"));
+            });
+            $("span.header-address").dblclick(function () {
+                alert("Line #: " + pyObj.get_line_id_by_address($(this).text()));
             });
 
         });
