@@ -47,3 +47,13 @@ class psd_CodeView(psd_View):
 
     def html_operands(self, op_str):
         return "<span class=\"codeview-param\" >{0}</span>".format(op_str)
+
+    def find_line_by_address(self, address):
+        for id, l in enumerate(self._code_lines):
+            address_start = l.address
+            address_end = address_start + (l.size - 1)
+            #print "id:",id,"start:",hex(address_start),"end:",hex(address_end),"address:",hex(address)
+            if address in range(address_start, address_end + 1):
+                return id
+
+        return None
