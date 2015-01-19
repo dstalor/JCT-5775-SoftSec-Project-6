@@ -44,7 +44,7 @@ class psd_View(object):
 
     def get_line_id_by_address(self, address):
         rel_line = self.find_line_by_address(address)
-        if rel_line:
+        if rel_line is not None:
             return rel_line + self._line_range[0]
         else:
             return None

@@ -44,7 +44,7 @@ class psd_Visualizer:
         #find the correct view
         view = self.addressview_rangemap_list.get_view_by_address(address)
         line_id = view.get_line_id_by_address(address)
-        if line_id:
+        if line_id is not None:
             return line_id
         else:
             return -1

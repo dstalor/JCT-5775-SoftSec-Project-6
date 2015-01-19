@@ -38,3 +38,6 @@ class psdEditorGUI(object):
 
         self.webview.page().mainFrame().addToJavaScriptWindowObject("pyObj", self.bridge)
         self.webview.setHtml(self.html)
+
+       # test
+       #print self.psd_project.visualizer.get_line_id_by_address()
