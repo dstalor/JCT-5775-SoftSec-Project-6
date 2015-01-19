@@ -11,6 +11,7 @@
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
     <script src="qrc:/js/bootstrap-contextmenu.js"></script>
+    <script src="qrc:/js/jquery.onscreen.min.js"></script>
 
     <style>
         @font-face {
@@ -91,6 +92,7 @@
         }
     </style>
     <script>
+        var jumpStack = [];
         $(document).ready(function () {
             $('#myTab a').click(function (e) {
                 e.preventDefault()
@@ -100,16 +102,9 @@
         });
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
-            $("span.datahex-byte-data").click(function () {
-                //$(this).toggleClass("highlight");
-                $('#30')[0].scrollIntoView();
-                alert(pyObj.get_line_id_by_address("derp"));
-            });
-            $("span.header-address").dblclick(function () {
-                alert("Line #: " + pyObj.get_line_id_by_address($(this).text()));
-            });
-            $("span.jump-location").click(function () {
-                alert("'"  + $(this).text() + "'");
+            $("span.jump-location").dblclick(function () {
+                var linenum = pyObj.get_line_id_by_address($(this).text());
+                $('#' + linenum)[0].scrollIntoView();
             });
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {

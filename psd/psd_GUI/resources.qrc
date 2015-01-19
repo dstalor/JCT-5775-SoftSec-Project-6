@@ -5,6 +5,7 @@
     <file>js/bootstrap.min.js</file>
     <file>js/bootstrap-contextmenu.js</file>
     <file>js/npm.js</file>
+    <file>js/jquery.onscreen.min.js</file>
     <file>fonts/glyphicons-halflings-regular.eot</file>
     <file>fonts/glyphicons-halflings-regular.svg</file>
     <file>fonts/glyphicons-halflings-regular.ttf</file>
