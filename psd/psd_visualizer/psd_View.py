@@ -42,6 +42,13 @@ class psd_View(object):
     def get_html_lines(self, line_range_tup):
         raise NotImplementedError()
 
+    def get_line_id_by_address(self, address):
+        rel_line = self.find_line_by_address(address)
+        if rel_line:
+            return rel_line + self._line_range[0]
+        else:
+            return None
+
     def html_line_wrap(self, line_num, line_str):
         parity = "line-even" if line_num % 2 == 0 else "line-odd"
         return "<span class=\"line {0}\" id=\"{1:d}\">{2}</span>".format(parity, line_num, line_str)

@@ -91,9 +91,13 @@ class psd_HexView(psd_View):
     #     att_str = "".join([att+"="+att_dic[att]+" " for att in att_dic])
     #     return "<"+tag_str+" "+att_str+">"+text+"</"+tag_str+">"
 
+
     def find_line_by_address(self, address):
-        bytes = (address - self._address_range[0])
-        return int(math.floor(bytes / self._offset))
+        if self._memory_range.is_range_contains_value(address):
+            bytes = (address - self._address_range[0])
+            return int(math.floor(bytes / self._offset))
+        else:
+            return None
 
     def find_address_by_line(self, line):
         return (line * self._offset) + self._address_range[0]

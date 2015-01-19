@@ -1,15 +1,15 @@
-from AddressViewRangeMap import *
-from psd_visualizer.psd_HexView import psd_HexView
-from psd_visualizer.psd_CodeView import psd_CodeView
-
+from psd_HexView import psd_HexView
+from psd_CodeView import psd_CodeView
+from psd_AddressViewRangeMap import psd_AddressViewRangeMap
+from psd_AddressViewRangeMapList import psd_AddressViewRangeMapList
 
 class psd_Visualizer:
     def __init__(self, psd_project):
         self.psd_project = psd_project
-        self.addressview_rangemap_list = AddressViewRangeMapList()
+        self.addressview_rangemap_list = psd_AddressViewRangeMapList()
 
     def add_view(self, addressrange, view):
-        self.addressview_rangemap_list.add_range_map(AddressViewRangeMap(addressrange, view))
+        self.addressview_rangemap_list.add_range_map(psd_AddressViewRangeMap(addressrange, view))
 
     def add_hexview(self, memory_range):
         hexview = psd_HexView(self.psd_project.analyzer.pe, memory_range)
@@ -40,6 +40,12 @@ class psd_Visualizer:
     def get_all_html_lines(self):
         return self.addressview_rangemap_list.get_all_html_lines()
 
-    def print_disassembly(self, psd_project):
-        pass
+    def get_line_id_by_address(self, address):
+        #find the correct view
+        view = self.addressview_rangemap_list.get_view_by_address(address)
+        line_id = view.get_line_id_by_address(address)
+        if line_id:
+            return line_id
+        else:
+            return -1
 
