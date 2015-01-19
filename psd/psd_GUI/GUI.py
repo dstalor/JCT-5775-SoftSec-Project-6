@@ -29,7 +29,7 @@ class psdGUI(object):
 
         self.editor_view.update_view()
 
-        self.main_window.show()
+        self.main_window.showMaximized()
 
         sys.exit(app.exec_())
 
