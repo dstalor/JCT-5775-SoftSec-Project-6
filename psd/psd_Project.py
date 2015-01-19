@@ -1,4 +1,4 @@
-from psd_helpers.helpers import *
+from psd_helpers.psd_Helpers import *
 from psd_visualizer.psd_Visualizer import *
 from psd_analyzer.psd_Analyzer import *
 

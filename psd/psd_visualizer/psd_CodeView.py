@@ -1,5 +1,6 @@
 import math
 from psd_visualizer.psd_View import psd_View
+from psd_helpers.psd_Helpers import is_jmp_instruction
 
 __author__ = 'Noam'
 
@@ -35,7 +36,12 @@ class psd_CodeView(psd_View):
     def html_line(self, line):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
         str_opcode = self.html_opcode(line.mnemonic)
-        str_operands = self.html_operands(line.op_str)
+
+        operand_class_type = ""
+        if is_jmp_instruction(line.mnemonic):
+            operand_class_type = "jump-location"
+
+        str_operands = self.html_operands(line.op_str, operand_class_type)
 
         return str_rowheader + str_opcode + str_operands + "\n"
 
@@ -45,8 +51,8 @@ class psd_CodeView(psd_View):
     def html_opcode(self, mnemonic):
         return "<span class=\"codeview-opcode spaceafter\">{0: <5}</span>".format(mnemonic)
 
-    def html_operands(self, op_str):
-        return "<span class=\"codeview-param\" >{0}</span>".format(op_str)
+    def html_operands(self, op_str, more_class_type = ""):
+        return "<span class=\"codeview-param {0}\" >{1}</span>".format(more_class_type, op_str)
 
     def find_line_by_address(self, address):
         for id, l in enumerate(self._code_lines):

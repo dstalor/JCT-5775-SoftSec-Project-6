@@ -1,7 +1,7 @@
 from ThirdParty.pefile.pefile import PE
 from capstone import *
 
-from psd_helpers.helpers import *
+from psd_helpers.psd_Helpers import *
 from psd_MemoryRangeMetadata import psd_MemoryRangeMetadata
 from psd_MemoryRangeRangeMap import psd_MemoryRangeRangeMap
 from psd_helpers.psd_RangeMap import RangeMapList
