@@ -7,11 +7,13 @@
 
     <!-- Bootstrap -->
     <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
+    <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
     <script src="qrc:/js/bootstrap-contextmenu.js"></script>
     <script src="qrc:/js/jquery.onscreen.min.js"></script>
+    <script src="qrc:/js/jquery-ui.min.js"></script>
 
     <style>
         @font-face {
@@ -86,10 +88,22 @@
             margin-right: 48px;
         }
 
-        .highlight {
-            background-color: #FDF6A2;
-            color: #0f0f0f;
+        .back-to-prev {
+            position: fixed;
+            bottom: 2em;
+            right: 0px;
+            text-decoration: none;
+            color: #000000;
+            background-color: rgba(235, 235, 235, 0.80);
+            font-size: 12px;
+            padding: 1em;
+            display: none;
         }
+
+        .back-to-prev:hover {
+            background-color: rgba(135, 135, 135, 0.50);
+        }
+
     </style>
     <script>
         var jumpStack = [];
@@ -99,12 +113,26 @@
                 $(this).tab('show')
             });
             $('#myTab a[href="#datahexview"]').tab('show');
+
+            jQuery('.back-to-prev').click(function (event) {
+                event.preventDefault();
+                var linenum = pyObj.get_line_id_by_address(jumpStack.pop());
+                $('#' + linenum)[0].scrollIntoView();
+                $('#' + linenum).effect("highlight", {}, 1500);
+                if (jumpStack.length == 0) {
+                    $('.back-to-prev').fadeOut();
+                }
+                return false;
+            })
         });
         $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
             $("#datahexview").html(pyObj.visualizer_lines);
             $("span.jump-location").dblclick(function () {
+                jumpStack.push($("span.header-address:onScreen:first").text());
                 var linenum = pyObj.get_line_id_by_address($(this).text());
                 $('#' + linenum)[0].scrollIntoView();
+                $('#' + linenum).effect("highlight", {}, 1500);
+                $('.back-to-prev').fadeIn();
             });
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
@@ -250,7 +278,7 @@
                 <li><a tabindex="-1">Binary</a></li>
             </ul>
         </div>
-
+        <a href="#" class="back-to-prev">Back to last location</a>
     </div>
 </div>
 </body>
