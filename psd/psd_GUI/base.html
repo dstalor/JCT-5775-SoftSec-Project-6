@@ -93,8 +93,10 @@
 
         .back-to-prev {
             position: fixed;
-            bottom: 2em;
-            right: 0px;
+            margin-bottom: 2em;
+            margin-right: 3em;
+            bottom: 20%;
+            right: 15%;
             text-decoration: none;
             color: #000000;
             background-color: rgba(235, 235, 235, 0.80);
@@ -105,6 +107,15 @@
 
         .back-to-prev:hover {
             background-color: rgba(135, 135, 135, 0.50);
+        }
+
+        #info-bar {
+            background: #CCC;
+            display: inline-block;
+            position: fixed;
+            bottom: 20%;
+            left: 0;
+            margin-bottom: 6px;
         }
 
     </style>
@@ -270,19 +281,19 @@
         });
 
     </script>
-    	<style type="text/css">
-	/* remove padding & scrolling from panes that are 'containers' for nested layouts */
-	.outer-center ,
-	.outer-east {
-		border:			0; /* cosmetic */
-		padding:		0;
-		overflow:		hidden;
-	}
+    <style type="text/css">
+        /* remove padding & scrolling from panes that are 'containers' for nested layouts */
+        .outer-center,
+        .outer-east {
+            border: 0; /* cosmetic */
+            padding: 0;
+            overflow: hidden;
+        }
 
-    .center-center {
-        padding:		0;
-    }
-	</style>
+        .center-center {
+            padding: 0;
+        }
+    </style>
 </head>
 
 
@@ -331,6 +342,9 @@
                 </div>
                 <a href="#" class="back-to-prev">Back to last location</a>
             </div>
+        </div>
+        <div id="info-bar">
+            Info bar
         </div>
     </div>
     <div class="center-south">Center South</div>
