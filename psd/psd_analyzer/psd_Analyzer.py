@@ -29,6 +29,9 @@ class psd_Analyzer(object):
 
         self.analyze_pe()
 
+        #
+        self.pe.print_info()
+
     def analyze_pe(self):
         """
         This function calls all the analyze functions after the self.pe created by load_executable
@@ -46,8 +49,23 @@ class psd_Analyzer(object):
         :return: None
         """
         # setting all range as 'unknown' as we start
-        base_range = psd_MemoryRangeRangeMap(self.get_address_range(), psd_MemoryRangeMetadata("unknown"))
+        base_range = psd_MemoryRangeRangeMap(self.get_address_range(), psd_MemoryRangeMetadata("unmapped"))
         self.address_section_rmp.add_range_map(base_range)
+
+        # add headers
+        headers = { self.pe.DOS_HEADER : "DOS_HEADER",
+                    self.pe.NT_HEADERS : "NT_HEADERS",
+                    self.pe.FILE_HEADER: "FILE_HEADER",
+                    self.pe.OPTIONAL_HEADER: "OPTIONAL_HEADER"}
+
+        for header, header_name in headers.iteritems():
+            phy_start_address = header.get_file_offset()
+            phy_end_address = phy_start_address + header.sizeof()
+            start_address = self.pe.get_physical_by_rva(phy_start_address)
+            end_address= self.pe.get_physical_by_rva(phy_end_address)
+
+            new_range = psd_MemoryRangeRangeMap((start_address, end_address), psd_MemoryRangeMetadata(header_name))
+            self.address_section_rmp.add_range_map(new_range)
 
         # add sections
         for section in self.pe.sections:
