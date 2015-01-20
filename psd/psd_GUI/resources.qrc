@@ -7,6 +7,7 @@
     <file>js/npm.js</file>
     <file>js/jquery.onscreen.min.js</file>
     <file>js/jquery-ui.min.js</file>
+    <file>js/jquery.layout_and_plugins.js</file>
     <file>fonts/glyphicons-halflings-regular.eot</file>
     <file>fonts/glyphicons-halflings-regular.svg</file>
     <file>fonts/glyphicons-halflings-regular.ttf</file>
@@ -22,5 +23,6 @@
     <file>css/bootstrap-theme.css</file>
     <file>css/bootstrap-theme.css.map</file>
     <file>css/bootstrap-theme.min.css</file>
+    <file>css/layout-default.css</file>
 </qresource>
 </RCC>
