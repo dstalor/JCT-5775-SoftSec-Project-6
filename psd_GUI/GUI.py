@@ -1,7 +1,8 @@
 import sys
-from PyQt4 import QtCore, QtGui, QtWebKit
+
+from PyQt4 import QtGui, QtWebKit
+
 from psdEditorGUI import *
-from psd import *
 
 
 class psdGUI(object):
