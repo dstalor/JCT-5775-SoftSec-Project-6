@@ -1,4 +1,4 @@
-from psd_Project import psd_Project
+import psd_Project
 
 
 class psd:
