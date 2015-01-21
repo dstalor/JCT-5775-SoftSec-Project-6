@@ -6,7 +6,7 @@
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
     <!-- Bootstrap -->
-    <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
+    <link href="qrc:/css/bootstrap.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="qrc:/css/layout-default.css">
 
@@ -23,12 +23,14 @@
             src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");
         }
 
-        #datahexview, #dataview, #codeview {
+        #datahexview, #dataview, #codeview,
+        .center-south, .east-center, .east-south {
             font-size: 120%;
             font-weight: normal;
             font-family: "UbuntuMono", "Consolas", "Courier New", Courier, monospace;
             white-space: pre;
             background-color: #252223;
+            color: #dddddd;
         }
 
         /* Data hex view */
@@ -117,7 +119,9 @@
             left: 0;
             margin-bottom: 6px;
         }
-
+        #bookmark-button .glyphicon-bookmark:hover {
+            color: #fff;
+        }
     </style>
     <script>
         var jumpStack = [];
@@ -148,6 +152,17 @@
                 $('#' + linenum).effect("highlight", {}, 1500);
                 $('.back-to-prev').fadeIn();
             });
+            $('.datahex-row-header').mouseenter(function () {
+                $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
+                var address = $(this).children(".header-address:first").text();
+                $('#bookmark-button').click(function () {
+                    $("#bookmark-list").append( "<li class='bookmark'>" + address + "</li>" );
+                });
+            });
+            $('.datahex-row-header').mouseleave(function () {
+                $("#bookmark-button").remove();
+            });
+
         });
         $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
             $('.codeview-constant').contextmenu({
@@ -258,20 +273,33 @@
 
             // OUTER-LAYOUT
             $('body').layout({
-                center__paneSelector: ".outer-center"
+                defaults: {
+                    resizable: false
+                    , closable: false
+                }
+
+                , center__paneSelector: ".outer-center"
                 , east__paneSelector: ".outer-east"
                 , east__size: .15
 
                 // CENTER-LAYOUT
                 , center__childOptions: {
-                    center__paneSelector: ".center-center"
+                    defaults: {
+                        resizable: false
+                        , closable: false
+                    }
+                    , center__paneSelector: ".center-center"
                     , south__paneSelector: ".center-south"
                     , south__size: .20
 
                 }
                 // EAST-LAYOUT
                 , east__childOptions: {
-                    center__paneSelector: ".east-center"
+                    defaults: {
+                        resizable: false
+                        , closable: false
+                    }
+                    , center__paneSelector: ".east-center"
                     , south__paneSelector: ".east-south"
                     , south__size: .50
 
@@ -292,6 +320,12 @@
 
         .center-center {
             padding: 0;
+        }
+
+        .ui-layout-resizer-open-hover, /* hover-color to 'resize' */
+        .ui-layout-resizer-dragging {
+            /* resizer beging 'dragging' */
+            background: #DDD;
         }
     </style>
 </head>
@@ -351,7 +385,7 @@
 </div>
 
 <div class="outer-east">Outer East
-    <div class="east-center">East Center</div>
+    <div class="east-center">Bookmarks:<ul id="bookmark-list"></ul></div>
     <div class="east-south">East South</div>
 </div>
 </body>
