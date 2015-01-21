@@ -69,7 +69,7 @@ class psd_HexView(psd_View):
         return str_rowheader + str_bytedata + str_asciidata + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"datahex-row-header\">{0: >10} <span class=\"header-address\">0x{1:08x}</span>: </span>".format(rangename, address)
+        return "<span class=\"datahex-row-header\">{0: >20} <span class=\"header-address\"> 0x{1:08x}</span>: </span>".format(rangename, address)
 
     def html_bytedata(self, address, byte, specialclass=""):
         return "<span id=\"datahex-{0:08x}-data\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address,
