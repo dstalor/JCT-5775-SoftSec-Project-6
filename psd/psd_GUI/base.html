@@ -152,14 +152,14 @@
                 $('#' + linenum).effect("highlight", {}, 1500);
                 $('.back-to-prev').fadeIn();
             });
-            $('.datahex-row-header').mouseenter(function () {
+            $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
                 $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $('#bookmark-button').click(function () {
                     $("#bookmark-list").append( "<li class='bookmark'>" + address + "</li>" );
                 });
             });
-            $('.datahex-row-header').mouseleave(function () {
+            $('.datahex-row-header, .codeview-row-header').mouseleave(function () {
                 $("#bookmark-button").remove();
             });
 
