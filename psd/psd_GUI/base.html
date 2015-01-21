@@ -125,6 +125,7 @@
     </style>
     <script>
         var jumpStack = [];
+        var bookmarks = [];
         $(document).ready(function () {
             $('#myTab a').click(function (e) {
                 e.preventDefault()
@@ -156,7 +157,10 @@
                 $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $('#bookmark-button').click(function () {
-                    $("#bookmark-list").append( "<li class='bookmark'>" + address + "</li>" );
+                    if (bookmarks.indexOf(address) == -1) {
+                        $("#bookmark-list").append( "<li class='bookmark'>" + address + "</li>" );
+                        bookmarks.push(address);
+                    }
                 });
             });
             $('.datahex-row-header, .codeview-row-header').mouseleave(function () {
