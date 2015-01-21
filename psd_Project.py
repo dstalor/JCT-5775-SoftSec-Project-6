@@ -6,8 +6,8 @@ from psd_analyzer.psd_Analyzer import *
 # psd_io = psd_HandlersFactory.hfactory.get_psd_io_handler()
 
 class psd_Project:
-    def __init__(self, psd, filename = None):
-        self.psd=psd
+    def __init__(self, psd, filename=None):
+        self.psd = psd
         self.visualizer = psd_Visualizer(self)
         self.analyzer = psd_Analyzer(self)
 
