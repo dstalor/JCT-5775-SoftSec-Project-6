@@ -79,8 +79,8 @@ class psd_CodeView(psd_View):
                 c_html_str = self.constant_html(c_str, c_jump_address)
                 op_str = op_str.replace(c_str, c_html_str, 1)
 
-        print ("<span class=\"codeview-param >{0}</span>").format(op_str)
-        return ("<span class=\"codeview-param >{0}</span>").format(op_str)
+        print ("<span class=\"codeview-param\">{0}</span>").format(op_str)
+        return ("<span class=\"codeview-param\" >{0}</span>").format(op_str)
 
     def constant_html(self, constant_str, c_jump_address=None):
         class_str = "constant"
