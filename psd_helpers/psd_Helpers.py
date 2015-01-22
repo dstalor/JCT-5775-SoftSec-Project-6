@@ -1,6 +1,6 @@
 import string
 
-jump_instructions = ['call', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
+jump_instructions = ['call','jmp', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
 
 def ask_yes_no(str_prompt):
     answer=""
@@ -17,3 +17,4 @@ def strip_non_printable(dirty_str):
 
 def is_jmp_instruction(nemonic_str):
     return  nemonic_str in jump_instructions
+

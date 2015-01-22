@@ -35,7 +35,8 @@ class psd_CodeView(psd_View):
 
     def html_line(self, line):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
-        str_opcode = self.html_opcode(line.mnemonic)
+        str_opcode = self.html_opcode(line.bytes)
+        str_mnemonic = self.html_mnemonic(line.mnemonic)
 
         operand_class_type = ""
         if is_jmp_instruction(line.mnemonic):
@@ -43,13 +44,17 @@ class psd_CodeView(psd_View):
 
         str_operands = self.html_operands(line.op_str, operand_class_type)
 
-        return str_rowheader + str_opcode + str_operands + "\n"
+        return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"codeview-row-header\">{0: >20} <span class=\"header-address\">0x{1:08x}</span>: </span>".format(rangename, address)
+        return "<span class=\"codeview-row-header\">{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
 
-    def html_opcode(self, mnemonic):
-        return "<span class=\"codeview-opcode spaceafter\">{0: <5}</span>".format(mnemonic)
+    def html_opcode(self, opcode_bytes):
+        opcode_str = ''.join(["{0:02x} ".format(byte) for byte in opcode_bytes])
+        return "<span class=\"codeview-opcode spaceafter\">{0: <24}</span>".format(opcode_str)
+
+    def html_mnemonic(self, mnemonic):
+        return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)
 
     def html_operands(self, op_str, more_class_type = ""):
         return "<span class=\"codeview-param {0}\" >{1}</span>".format(more_class_type, op_str)
