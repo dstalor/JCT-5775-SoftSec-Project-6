@@ -57,13 +57,13 @@ class psd_CodeView(psd_View):
         if op_str == "":
             return ""
 
-        #print op_str
+        c_html_str=[]
         #1. get constants
         constants = get_constants(line)
         if len(constants) > 0:
             #2. split constants from operand string
             constants.sort(reverse=True) # we sort, just in a case that the smaller is a substring of to bigger.
-            for c in constants:
+            for i, c in enumerate(constants):
                 c_str = hex(c) if c > 0xf else str(c)
 
                 #3. add jump to constants that can be and va or rva
@@ -75,9 +75,13 @@ class psd_CodeView(psd_View):
                     if self._pe.get_section_by_rva(rva) is not None:
                         c_jump_address = hex(rva)
 
-                #4. replace the constants with their html representation
-                c_html_str = self.constant_html(c_str, c_jump_address)
-                op_str = op_str.replace(c_str, c_html_str, 1)
+                #4. replace the constants with a place
+                c_html_str.append(self.constant_html(c_str, c_jump_address))
+                op_str = op_str.replace(c_str, "{"+str(i)+"}", 1)
+
+            #inject the html constants representation
+            print c_html_str
+            op_str = op_str.format(*c_html_str)
 
         print ("<span class=\"codeview-param\">{0}</span>").format(op_str)
         return ("<span class=\"codeview-param\">{0}</span>").format(op_str)
