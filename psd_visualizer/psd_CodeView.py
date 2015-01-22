@@ -37,7 +37,7 @@ class psd_CodeView(psd_View):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
         str_opcode = self.html_opcode(line.bytes)
         str_mnemonic = self.html_mnemonic(line.mnemonic)
-        str_operands = self.html_operands(line.mnemonic, line.op_str)
+        str_operands = self.html_operands(line)
 
         return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
 
@@ -52,15 +52,44 @@ class psd_CodeView(psd_View):
     def html_mnemonic(self, mnemonic):
         return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)
 
-    def html_operands(self, mnemoic_str, op_str):
-        operand_class_type = ""
-        jump_loc_str=""
-        if is_jmp_instruction(mnemoic_str):
-            if is_hex(op_str):
-                operand_class_type = "jump"
-                jump_loc_str = "data-jump-location=\""+op_str+"\""
+    def html_operands(self, line):
+        op_str = line.op_str
+        if op_str == "":
+            return ""
 
-        return ("<span class=\"codeview-param {0}\""+jump_loc_str+" >{1}</span>").format(operand_class_type, op_str)
+        #print op_str
+        #1. get constants
+        constants = get_constants(line)
+        if len(constants) > 0:
+            #2. split constants from operand string
+            constants.sort() # we sort, just in a case that the smaller is a substring of to bigger.
+            for c in constants:
+                c_str = hex(c) if c > 0xf else str(c)
+
+                #3. add jump to constants that can be and va or rva
+                c_jump_address = None
+                if self._pe.get_section_by_rva(c) is not None: #it can be RVA
+                    c_jump_address = hex(c)
+                elif (c - self._pe.OPTIONAL_HEADER.ImageBase) > 0: #it can be VA
+                    rva = c - self._pe.OPTIONAL_HEADER.ImageBase
+                    if self._pe.get_section_by_rva(rva) is not None:
+                        c_jump_address = hex(rva)
+
+                #4. replace the constants with their html representation
+                c_html_str = self.constant_html(c_str, c_jump_address)
+                op_str = op_str.replace(c_str, c_html_str, 1)
+
+        print ("<span class=\"codeview-param >{0}</span>").format(op_str)
+        return ("<span class=\"codeview-param >{0}</span>").format(op_str)
+
+    def constant_html(self, constant_str, c_jump_address=None):
+        class_str = "constant"
+        jump_str = ""
+        if c_jump_address is not None:
+            class_str += " jump"
+            jump_str = " data-jump-location=\""+c_jump_address+"\""
+        #print ("<span class=\"{0}\""+jump_str+" >{1}</span>").format(class_str, constant_str)
+        return ("<span class=\"{0}\""+jump_str+" >{1}</span>").format(class_str, constant_str)
 
     def find_line_by_address(self, address):
         for id, l in enumerate(self._code_lines):

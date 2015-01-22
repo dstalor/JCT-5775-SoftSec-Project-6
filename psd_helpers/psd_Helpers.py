@@ -1,5 +1,6 @@
 import string
 import re
+from capstone.x86 import *
 
 jump_instructions = ['call','jmp', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
 
@@ -27,9 +28,22 @@ def is_hex(str):
     except ValueError:
         return False
 
+def is_ptr(str):
+    return "ptr" in str
+
 def is_dword_ptr(str):
     return "dword ptr" in str
 
 def get_hexes_in_str(str):
     hex_pattern = r'(0x[0-9a-fA-F]+)'
     return re.findall(hex_pattern, str)
+
+def get_constants(code_line):
+    constants = []
+    for op in code_line.operands:
+        if op.type == X86_OP_MEM:
+            if op.mem.disp != 0:
+                constants.append(int(op.mem.disp))
+        elif op.type == X86_OP_IMM:
+            constants.append(int(op.imm))
+    return constants

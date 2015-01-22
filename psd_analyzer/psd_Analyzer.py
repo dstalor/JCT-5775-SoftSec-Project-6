@@ -16,6 +16,7 @@ class psd_Analyzer(object):
         self.asm_architecture = CS_ARCH_X86
         self.asm_mode = CS_MODE_32
         self.disassembler = Cs(self.asm_architecture, self.asm_mode)
+        self.disassembler.detail = True
 
     def load_executable(self, filename):
         """
@@ -105,8 +106,6 @@ class psd_Analyzer(object):
                 self.disassemble_memory_range(rm)
                 break
 
-
-
     def disassemble_memory_range(self, memoryrange_rm):
         """
         Analyze a memory range as a code
@@ -121,7 +120,6 @@ class psd_Analyzer(object):
         code_bytes = self.pe.get_memory_mapped_image()[start: end+1]
 
         metadata.set_code_lines(self.disassemble_bytes(start, code_bytes))
-
 
     def disassemble_bytes(self, start_address, code_bytes):
         return [line for line in self.disassembler.disasm(code_bytes, start_address)]
