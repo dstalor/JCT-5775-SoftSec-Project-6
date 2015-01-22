@@ -1,6 +1,6 @@
 import math
 from psd_visualizer.psd_View import psd_View
-from psd_helpers.psd_Helpers import is_jmp_instruction
+from psd_helpers.psd_Helpers import *
 
 __author__ = 'Noam'
 
@@ -37,12 +37,7 @@ class psd_CodeView(psd_View):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
         str_opcode = self.html_opcode(line.bytes)
         str_mnemonic = self.html_mnemonic(line.mnemonic)
-
-        operand_class_type = ""
-        if is_jmp_instruction(line.mnemonic):
-            operand_class_type = "jump-location"
-
-        str_operands = self.html_operands(line.op_str, operand_class_type)
+        str_operands = self.html_operands(line.mnemonic, line.op_str)
 
         return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
 
@@ -50,14 +45,22 @@ class psd_CodeView(psd_View):
         return "<span class=\"codeview-row-header\">{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
 
     def html_opcode(self, opcode_bytes):
+        max_padding = 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
         opcode_str = ''.join(["{0:02x} ".format(byte) for byte in opcode_bytes])
-        return "<span class=\"codeview-opcode spaceafter\">{0: <24}</span>".format(opcode_str)
+        return ("<span class=\"codeview-opcode spaceafter\">{0: <29}</span>").format(opcode_str)
 
     def html_mnemonic(self, mnemonic):
         return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)
 
-    def html_operands(self, op_str, more_class_type = ""):
-        return "<span class=\"codeview-param {0}\" >{1}</span>".format(more_class_type, op_str)
+    def html_operands(self, mnemoic_str, op_str):
+        operand_class_type = ""
+        jump_loc_str=""
+        if is_jmp_instruction(mnemoic_str):
+            if is_hex(op_str):
+                operand_class_type = "jump"
+                jump_loc_str = "data-jump-location=\""+op_str+"\""
+
+        return ("<span class=\"codeview-param {0}\""+jump_loc_str+" >{1}</span>").format(operand_class_type, op_str)
 
     def find_line_by_address(self, address):
         for id, l in enumerate(self._code_lines):

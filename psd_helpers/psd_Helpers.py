@@ -1,4 +1,5 @@
 import string
+import re
 
 jump_instructions = ['call','jmp', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
 
@@ -18,3 +19,17 @@ def strip_non_printable(dirty_str):
 def is_jmp_instruction(nemonic_str):
     return  nemonic_str in jump_instructions
 
+#this one is from stackoverflow: http://stackoverflow.com/questions/11592261/check-if-string-is-hexadecimal
+def is_hex(str):
+    try:
+        int(str, 16)
+        return True
+    except ValueError:
+        return False
+
+def is_dword_ptr(str):
+    return "dword ptr" in str
+
+def get_hexes_in_str(str):
+    hex_pattern = r'(0x[0-9a-fA-F]+)'
+    return re.findall(hex_pattern, str)
