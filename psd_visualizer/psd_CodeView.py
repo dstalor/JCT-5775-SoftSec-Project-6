@@ -47,7 +47,7 @@ class psd_CodeView(psd_View):
     def html_opcode(self, opcode_bytes):
         max_padding = 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
         opcode_str = ''.join(["{0:02x} ".format(byte) for byte in opcode_bytes])
-        return ("<span class=\"codeview-opcode spaceafter\">{0: <29}</span>").format(opcode_str)
+        return ("<span class=\"codeview-opcode spaceafter\">{0: <30}</span>").format(opcode_str)
 
     def html_mnemonic(self, mnemonic):
         return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)
@@ -62,7 +62,7 @@ class psd_CodeView(psd_View):
         constants = get_constants(line)
         if len(constants) > 0:
             #2. split constants from operand string
-            constants.sort() # we sort, just in a case that the smaller is a substring of to bigger.
+            constants.sort(reverse=True) # we sort, just in a case that the smaller is a substring of to bigger.
             for c in constants:
                 c_str = hex(c) if c > 0xf else str(c)
 
