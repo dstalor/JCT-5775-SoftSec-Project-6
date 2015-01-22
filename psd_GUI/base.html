@@ -23,7 +23,7 @@
             src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");
         }
 
-        #datahexview, #dataview, #codeview,
+        #mixview, #dataview, #codeview,
         .center-south, .east-center, .east-south {
             font-size: 120%;
             font-weight: normal;
@@ -115,10 +115,11 @@
             background: #CCC;
             display: inline-block;
             position: fixed;
-            bottom: 20%;
-            left: 0;
-            margin-bottom: 6px;
+            bottom: 1px;
+            left: 1px;
+            padding: 2px;
         }
+
         #bookmark-button .glyphicon-bookmark:hover {
             color: #fff;
         }
@@ -131,34 +132,38 @@
                 e.preventDefault()
                 $(this).tab('show')
             });
-            $('#myTab a[href="#datahexview"]').tab('show');
+            $("#mixview").html(pyObj.visualizer_lines);
+            $('#myTab a[href="#mixview"]').tab('show');
 
-            jQuery('.back-to-prev').click(function (event) {
+            jQuery('#back-button').click(function (event) {
                 event.preventDefault();
                 var linenum = pyObj.get_line_id_by_address(jumpStack.pop());
-                $('#' + linenum)[0].scrollIntoView();
+                $('#previous-locations > span:last').remove();
+                $('#' + (linenum - 12))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
                 if (jumpStack.length == 0) {
-                    $('.back-to-prev').fadeOut();
+                    $('#back-button').fadeOut();
                 }
                 return false;
-            })
-        });
-        $(document).on('shown.bs.tab', 'a[href="#datahexview"]', function (e) {
-            $("#datahexview").html(pyObj.visualizer_lines);
-            $("span.jump-location").dblclick(function () {
-                jumpStack.push($("span.header-address:onScreen:first").text());
-                var linenum = pyObj.get_line_id_by_address($(this).text());
-                $('#' + linenum)[0].scrollIntoView();
-                $('#' + linenum).effect("highlight", {}, 1500);
-                $('.back-to-prev').fadeIn();
             });
+            $("span.jump").click(function () {
+                //var screenAnchor = $("span.header-address:onScreen:first").text();
+                var screenAnchor = $(this).closest('.line').find('.header-address').text();
+                jumpStack.push(screenAnchor);
+                $('#previous-locations').append('<span data-jump-location="' + screenAnchor + '" class="jump-location">' + screenAnchor + '<br /></span>');
+                var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
+                $('#' + (linenum - 12))[0].scrollIntoView();
+                $('#' + linenum).effect("highlight", {}, 1500);
+                $('#back-button').fadeIn();
+            });
+        });
+        $(document).on('shown.bs.tab', 'a[href="#mixview"]', function (e) {
             $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
                 $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $('#bookmark-button').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
-                        $("#bookmark-list").append( "<li class='bookmark'>" + address + "</li>" );
+                        $("#bookmark-list").append("<li class='bookmark'>" + address + "</li>");
                         bookmarks.push(address);
                     }
                 });
@@ -293,8 +298,6 @@
                         , closable: false
                     }
                     , center__paneSelector: ".center-center"
-                    , south__paneSelector: ".center-south"
-                    , south__size: .20
 
                 }
                 // EAST-LAYOUT
@@ -340,9 +343,9 @@
     <div class="center-center">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs" role="tablist">
-                <li role="presentation" class=""><a href="#datahexview" role="tab" id="datahexview-tab"
+                <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
                                                     data-toggle="tab"
-                                                    aria-controls="datahexview" aria-expanded="false">Editor View</a>
+                                                    aria-controls="mixview" aria-expanded="false">Mix View</a>
                 </li>
                 <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
                                                     aria-controls="codeview" aria-expanded="false">Code View</a></li>
@@ -350,8 +353,8 @@
                                                     aria-controls="dataview" aria-expanded="false">Data View</a></li>
             </ul>
             <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active" id="datahexview"
-                     aria-labelledby="datahexview-tab"></div>
+                <div role="tabpanel" class="tab-pane fade active" id="mixview"
+                     aria-labelledby="mixview-tab"></div>
                 <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span
                         class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                         class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
@@ -385,12 +388,12 @@
             Info bar
         </div>
     </div>
-    <div class="center-south">Center South</div>
 </div>
 
-<div class="outer-east">Outer East
-    <div class="east-center">Bookmarks:<ul id="bookmark-list"></ul></div>
-    <div class="east-south">East South</div>
+<div class="outer-east">
+    <div class="east-center"><strong>Bookmarks:</strong><ul id="bookmark-list"></ul></div>
+    <div class="east-south"><strong>Previous Locations:</strong><button id="back-button" style="float: right; color: #000000; display: none">Back</button>
+<div id="previous-locations"></div></div>
 </div>
 </body>
 </html>
