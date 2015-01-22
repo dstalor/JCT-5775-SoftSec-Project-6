@@ -80,7 +80,7 @@ class psd_CodeView(psd_View):
                 op_str = op_str.replace(c_str, c_html_str, 1)
 
         print ("<span class=\"codeview-param\">{0}</span>").format(op_str)
-        return ("<span class=\"codeview-param\" >{0}</span>").format(op_str)
+        return ("<span class=\"codeview-param\">{0}</span>").format(op_str)
 
     def constant_html(self, constant_str, c_jump_address=None):
         class_str = "constant"
@@ -88,8 +88,8 @@ class psd_CodeView(psd_View):
         if c_jump_address is not None:
             class_str += " jump"
             jump_str = " data-jump-location=\""+c_jump_address+"\""
-        #print ("<span class=\"{0}\""+jump_str+" >{1}</span>").format(class_str, constant_str)
-        return ("<span class=\"{0}\""+jump_str+" >{1}</span>").format(class_str, constant_str)
+        #print ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
+        return ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
 
     def find_line_by_address(self, address):
         for id, l in enumerate(self._code_lines):

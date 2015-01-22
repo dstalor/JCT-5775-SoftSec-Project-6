@@ -77,7 +77,10 @@
 
         .jump {
             cursor: pointer;
-            color: #FFAAAA;
+            color: #FFAAAA !important;
+        }
+        .constant {
+            color: #f0ad4e;
         }
 
         /* Spacing */
@@ -160,6 +163,20 @@
                 $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
+            $('.constant').contextmenu({
+                target: '#context-menu-constant',
+                onItem: function (context, e) {
+                    if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
+                        $(context).html(toHex(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Decimal") == 0) {
+                        $(context).html(toDec(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Binary") == 0) {
+                        $(context).html(toBin(context.text()));
+                    }
+                }
+            });
         });
         $(document).on('shown.bs.tab', 'a[href="#mixview"]', function (e) {
             $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
@@ -176,22 +193,6 @@
                 $("#bookmark-button").remove();
             });
 
-        });
-        $(document).on('shown.bs.tab', 'a[href="#codeview"]', function (e) {
-            $('.codeview-constant').contextmenu({
-                target: '#context-menu-constant',
-                onItem: function (context, e) {
-                    if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
-                        $(context).html(toHex(context.text()));
-                    }
-                    else if ($(e.target).text().localeCompare("Decimal") == 0) {
-                        $(context).html(toDec(context.text()));
-                    }
-                    else if ($(e.target).text().localeCompare("Binary") == 0) {
-                        $(context).html(toBin(context.text()));
-                    }
-                }
-            });
         });
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -369,15 +370,6 @@
                      data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span
                         class="dataview-label">aHMS</span><span
                         class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></div>
-                <div id="context-menu">
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a tabindex="-1">Action</a></li>
-                        <li><a tabindex="-1">Another action</a></li>
-                        <li><a tabindex="-1">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a tabindex="-1">Separated link</a></li>
-                    </ul>
-                </div>
                 <div id="context-menu-constant">
                     <ul class="dropdown-menu" role="menu">
                         <li><a tabindex="-1">Hexadecimal</a></li>
