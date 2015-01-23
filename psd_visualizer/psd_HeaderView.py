@@ -8,11 +8,10 @@ class psd_HeaderView(psd_View):
         self.header = self._memory_range.get_memory_range_metadata().get_header()
         self.html_lines = []
         self.create_html_lines()
-
+        self.title_lines = 2
+        self.end_lines = 1
     def calculate_line_count(self):
-        title_lines = 2
-        end_lines = 1
-        return len(self.header.__keys__) + title_lines + end_lines
+        return len(self.header.__keys__) + self.title_lines + self.end_lines
 
     def create_html_lines(self):
         self.html_lines = []
@@ -39,7 +38,7 @@ class psd_HeaderView(psd_View):
                             more_info = ' [%s UTC]' % time.asctime(time.gmtime(val))
                         except exceptions.ValueError, e:
                             more_info = ' [INVALID TIME]'
-                    elif key in ['VirtualAddress', 'AddressOfEntryPoint']:
+                    elif key in ['VirtualAddress', 'AddressOfEntryPoint', 'e_lfanew']:
                         jump_location = val_str
 
                     str_constant = self.constant_html(val_str, jump_location)
@@ -79,3 +78,19 @@ class psd_HeaderView(psd_View):
 
     def field_value_html(self, value_str):
         return ("<span class=\"headerview-field-value\"> {0} </span>").format(value_str)
+
+    def find_line_by_address(self, address):
+        if self._memory_range.is_range_contains_value(address):
+            i=0
+            for keys in self.header.__keys__:
+                for key in keys:
+                    key_address = self.header.__field_offsets__[key]+ self.header.__file_offset__
+                    if key_address == address:
+                        return (self.title_lines-1) + i
+                    elif key_address > address:
+                        return (self.title_lines-1) + i-1
+                    i+=1
+
+            return (self.title_lines-1) + i-1 #return the line of last key
+        else:
+            return None
