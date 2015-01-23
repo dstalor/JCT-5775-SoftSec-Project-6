@@ -39,10 +39,10 @@ class psd_HeaderView(psd_View):
                             more_info = ' [%s UTC]' % time.asctime(time.gmtime(val))
                         except exceptions.ValueError, e:
                             more_info = ' [INVALID TIME]'
-                    elif key in ['VirtualAddress']:
+                    elif key in ['VirtualAddress', 'AddressOfEntryPoint']:
                         jump_location = val_str
 
-                    str_constant = self.constant_html(val, jump_location)
+                    str_constant = self.constant_html(val_str, jump_location)
                     str_field_value = self.field_value_html(str_constant)
                     if more_info:
                         str_more_info = self.more_info_html(more_info)

@@ -71,10 +71,16 @@ class psd_CodeView(psd_View):
 
                 #4. replace the constants with a place
                 c_html_str.append(self.constant_html(c_str, c_jump_address))
-                op_str = op_str.replace(c_str, "{"+str(i)+"}", 1)
+                #the str(i+ord('a')) thing is a workaround for substring wrong substitution in case where
+                #the second number is 0/1/2
+                op_str = op_str.replace(c_str, "{"+chr(i+ord('a'))+"}", 1)
+
+
+            #changing back to numbers
+            for i in range(4):
+                op_str = op_str.replace("{"+chr(i+ord('a'))+"}", "{"+str(i)+"}", 1)
 
             #inject the html constants representation
-            #print c_html_str
             op_str = op_str.format(*c_html_str)
 
         #print ("<span class=\"codeview-param\">{0}</span>").format(op_str)

@@ -56,10 +56,30 @@ class psd_Analyzer(object):
         # add headers
         headers = { self.pe.DOS_HEADER : "DOS_HEADER",
                     self.pe.NT_HEADERS : "NT_HEADERS",
-                    self.pe.FILE_HEADER: "FILE_HEADER",
-                    self.pe.OPTIONAL_HEADER: "OPTIONAL_HEADER",
-                    self.pe.RICH_HEADER: "RICH_HEADER"}
+                    self.pe.FILE_HEADER: "FILE_HEADER"}
 
+        if hasattr(self.pe, "OPTIONAL_HEADER"):
+            headers[self.pe.OPTIONAL_HEADER] = "OPTIONAL_HEADER"
+
+        if hasattr(self.pe, "RICH_HEADER"):
+            headers[self.pe.RICH_HEADER] = "RICH_HEADER"
+
+        if hasattr(self.pe, "VS_FIXEDFILEINFO"):
+            headers[self.pe.VS_FIXEDFILEINFO] = "VS_FIXEDFILEINFO"
+
+        if hasattr(self.pe, "VS_VERSIONINFO"):
+            headers[self.pe.VS_VERSIONINFO] = "VS_VERSIONINFO"
+
+        #adding section headers
+        for s in self.pe.sections:
+            headers[s] = s.Name
+
+        #adding directories headers
+        if (hasattr(self.pe, 'OPTIONAL_HEADER') and
+            hasattr(self.pe.OPTIONAL_HEADER, 'DATA_DIRECTORY') ):
+            for idx in xrange(len(self.pe.OPTIONAL_HEADER.DATA_DIRECTORY)):
+                dir = self.pe.OPTIONAL_HEADER.DATA_DIRECTORY[idx]
+                headers[dir] = dir.name
 
         for header, header_name in headers.iteritems():
             if header:
