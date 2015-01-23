@@ -57,16 +57,19 @@ class psd_Analyzer(object):
         headers = { self.pe.DOS_HEADER : "DOS_HEADER",
                     self.pe.NT_HEADERS : "NT_HEADERS",
                     self.pe.FILE_HEADER: "FILE_HEADER",
-                    self.pe.OPTIONAL_HEADER: "OPTIONAL_HEADER"}
+                    self.pe.OPTIONAL_HEADER: "OPTIONAL_HEADER",
+                    self.pe.RICH_HEADER: "RICH_HEADER"}
+
 
         for header, header_name in headers.iteritems():
-            phy_start_address = header.get_file_offset()
-            phy_end_address = phy_start_address + header.sizeof()
-            start_address = self.pe.get_physical_by_rva(phy_start_address)
-            end_address= self.pe.get_physical_by_rva(phy_end_address)
+            if header:
+                phy_start_address = header.get_file_offset()
+                phy_end_address = phy_start_address + header.sizeof()
+                start_address = self.pe.get_physical_by_rva(phy_start_address)
+                end_address= self.pe.get_physical_by_rva(phy_end_address)
 
-            new_range = psd_MemoryRangeRangeMap((start_address, end_address), psd_MemoryRangeMetadata(header_name))
-            self.address_section_rmp.add_range_map(new_range)
+                new_range = psd_MemoryRangeRangeMap((start_address, end_address), psd_MemoryRangeMetadata(header_name, display = "headerview", header = header))
+                self.address_section_rmp.add_range_map(new_range)
 
         # add sections
         for section in self.pe.sections:

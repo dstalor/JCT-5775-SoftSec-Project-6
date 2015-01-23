@@ -30,25 +30,20 @@ class psd_HexView(psd_View):
     #     return str_out
 
 
-    def get_html_lines(self, line_range_tup):
-        intersect_lines = self.get_lines_intersection(line_range_tup)
-        if not intersect_lines:
-            return ""
+    def get_html_line_list(self, line_range_tup):
 
-        line_abs_index = intersect_lines[0]
-        (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
+        (line_start, line_end) = line_range_tup
         address_start = self.find_address_by_line(line_start)
-        str_out = ""
+        html_lines = []
         img = self._pe.get_memory_mapped_image()
 
         for l in range(line_start, line_end + 1):
             bytes = map(ord, img[address_start:address_start + self._offset])
             line_str = self.html_line(address_start, bytes)
-            str_out += self.html_line_wrap(line_abs_index, line_str)
+            html_lines.append(line_str)
             address_start += self._offset
-            line_abs_index += 1
 
-        return str_out
+        return html_lines
 
     def html_line(self, start_address, bytes):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), start_address)
