@@ -59,7 +59,9 @@ class psd_HeaderView(psd_View):
         return "<span class=\"headerview-title\">***   {0}   [0x{1:08x} -> 0x{2:08x}]</span></span>".format(header_name, *address_tup)
 
     def html_rowheader(self, address):
-        return ("<span class=\"headerview-row-header\">"+" "*20+" <span class=\"header-address\">0x{0:08x}</span>: </span>").format(address)
+        return ("<span class=\"headerview-row-header\">"
+                + "<div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>"
+                + " "*20+" <span class=\"header-address\">0x{0:08x}</span>: </span>").format(address)
 
     def constant_html(self, constant_str, c_jump_address=None):
         class_str = "constant"

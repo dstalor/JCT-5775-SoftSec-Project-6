@@ -177,7 +177,7 @@
                 $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
-            $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header', function () {
+            $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
                 //$(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $(this).find('.bookmark-button').css('visibility', 'visible').click(function () {
@@ -186,7 +186,7 @@
                         bookmarks.push(address);
                     }
                 });
-            }).on('mouseleave', '.datahex-row-header, .codeview-row-header', function () {
+            }).on('mouseleave', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
                 //$(".bookmark-button").remove();
                 $(this).find('.bookmark-button').css('visibility', 'hidden');
             });
