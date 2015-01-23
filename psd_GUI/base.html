@@ -6,7 +6,7 @@
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
     <!-- Bootstrap -->
-    <link href="qrc:/css/bootstrap.css" rel="stylesheet">
+    <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
     <link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">
     <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
@@ -132,6 +132,10 @@
 
         #bookmark-button .glyphicon-bookmark:hover {
             color: #fff;
+        }
+
+        #myTab {
+            position: fixed;
         }
     </style>
     <script>
@@ -332,6 +336,8 @@
                         , closable: false
                     }
                     , center__paneSelector: ".center-center"
+                    , north__paneSelector: ".center-north"
+                    , north__size: 53
 
                 }
                 // EAST-LAYOUT
@@ -374,27 +380,29 @@
 
 <body>
 <div class="outer-center">
+    <div class="center-north">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
+                                                data-toggle="tab"
+                                                aria-controls="mixview" aria-expanded="false">Mix View</a>
+            </li>
+            <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
+                                                aria-controls="codeview" aria-expanded="false">Code View</a></li>
+            <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
+                                                aria-controls="dataview" aria-expanded="false">Data View</a></li>
+        </ul>
+    </div>
     <div class="center-center">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-            <ul id="myTab" class="nav nav-tabs" role="tablist">
-                <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
-                                                    data-toggle="tab"
-                                                    aria-controls="mixview" aria-expanded="false">Mix View</a>
-                </li>
-                <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
-                                                    aria-controls="codeview" aria-expanded="false">Code View</a></li>
-                <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
-                                                    aria-controls="dataview" aria-expanded="false">Data View</a></li>
-            </ul>
             <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active" id="mixview"
+                <div role="tabpanel" class="tab-pane active" id="mixview"
                      aria-labelledby="mixview-tab"></div>
-                <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span
+                <div role="tabpanel" class="tab-pane" id="codeview" aria-labelledby="codeview-tab"><span
                         class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                         class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
                         class="codeview-constant">20h</span></span>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab"
+                <div role="tabpanel" class="tab-pane" id="dataview" aria-labelledby="dataview-tab"
                      data-toggle="context"
                      data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span
                         class="dataview-label">aHMS</span><span
