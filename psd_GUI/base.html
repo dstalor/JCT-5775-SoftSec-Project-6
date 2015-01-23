@@ -6,10 +6,10 @@
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
 
     <!-- Bootstrap -->
-    <link href="qrc:/css/bootstrap.css" rel="stylesheet">
+    <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
     <link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">
-    <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
@@ -86,6 +86,7 @@
             cursor: pointer;
             color: #ff9191 !important;
         }
+
         .constant {
             color: #FFAAAA;
         }
@@ -103,22 +104,10 @@
             margin-right: 48px;
         }
 
-        .back-to-prev {
-            position: fixed;
-            margin-bottom: 2em;
-            margin-right: 3em;
-            bottom: 20%;
-            right: 15%;
-            text-decoration: none;
+        #back-button {
+            float: right;
             color: #000000;
-            background-color: rgba(235, 235, 235, 0.80);
-            font-size: 12px;
-            padding: 1em;
-            display: none;
-        }
-
-        .back-to-prev:hover {
-            background-color: rgba(135, 135, 135, 0.50);
+            display: none
         }
 
         #info-bar {
@@ -130,8 +119,12 @@
             padding: 2px;
         }
 
-        #bookmark-button .glyphicon-bookmark:hover {
+        .bookmark-button .glyphicon-bookmark:hover {
             color: #fff;
+        }
+
+        #myTab {
+            position: fixed;
         }
     </style>
     <script>
@@ -143,7 +136,7 @@
                 $(this).tab('show')
             });
             $("#mixview").html(pyObj.visualizer_lines);
-             $('#mixview .constant').contextmenu({
+            $('#mixview').find('.constant').contextmenu({
                 target: '#context-menu-constant',
                 onItem: function (context, e) {
                     if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
@@ -157,7 +150,7 @@
                     }
                 }
             });
-            $('#myTab a[href="#mixview"]').tab('show');
+            $('#myTab').find('a[href="#mixview"]').tab('show');
 
             jQuery('#back-button').click(function (event) {
                 event.preventDefault();
@@ -170,58 +163,55 @@
                 }
                 return false;
             });
-            $("#mixview span.jump").click(function () {
+            $("#mixview").find("span.jump").click(function () {
                 var screenAnchor = $(this).closest('.line').find('.header-address').text();
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
+                $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
                 $('#back-button').fadeIn();
             });
-            $('#previous-locations, #bookmark-list').on('click', '.jump', function() {
+            $('#previous-locations, #bookmark-list').on('click', '.jump', function () {
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
+                $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
-        });
-        $(document).on('shown.bs.tab', 'a[href="#mixview"]', function (e) {
-            $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
-                $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
+            $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header', function () {
+                //$(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
-                $('#bookmark-button').click(function () {
+                $(this).find('.bookmark-button').css('visibility', 'visible').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
-                        $("#bookmark-list").append('<li class="bookmark"><span class="jump" data-jump-location="' + address + '">' + address + '</span></li>');
+                        $("#bookmark-list").append('<span class="jump" data-jump-location="' + address + '">' + address + '<br /></span>');
                         bookmarks.push(address);
                     }
                 });
+            }).on('mouseleave', '.datahex-row-header, .codeview-row-header', function () {
+                //$(".bookmark-button").remove();
+                $(this).find('.bookmark-button').css('visibility', 'hidden');
             });
-            $('.datahex-row-header, .codeview-row-header').mouseleave(function () {
-                $("#bookmark-button").remove();
-            });
-
         });
-     /*       $(function(){
-                $('.codeview-param').contextMenu({
-                    selector: '*',
-                    callback: function(key, options) {
-                        if (key.toString().localeCompare("hex") == 0) {
-                            $(this).html(toHex($(this).text()));
-                        }
-                        else if (key.toString().localeCompare("dec") == 0) {
-                            $(this).html(toDec($(this).text()));
-                        }
-                        else if (key.toString().localeCompare("bin") == 0) {
-                            $(this).html(toBin($(this).text()));
-                        }
-                    },
-                    items: {
-                        "hex": {name: "Hexadecimal"},
-                        "dec": {name: "Decimal"},
-                        "bin": {name: "Binary"}
-                    }
-                });
-            });*/
+        /*       $(function(){
+         $('.codeview-param').contextMenu({
+         selector: '*',
+         callback: function(key, options) {
+         if (key.toString().localeCompare("hex") == 0) {
+         $(this).html(toHex($(this).text()));
+         }
+         else if (key.toString().localeCompare("dec") == 0) {
+         $(this).html(toDec($(this).text()));
+         }
+         else if (key.toString().localeCompare("bin") == 0) {
+         $(this).html(toBin($(this).text()));
+         }
+         },
+         items: {
+         "hex": {name: "Hexadecimal"},
+         "dec": {name: "Decimal"},
+         "bin": {name: "Binary"}
+         }
+         });
+         });*/
 
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -277,10 +267,10 @@
             return this;
         })();
         function toHex(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return string;
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return ('0x' + bin2hex(string.substr(2, string.length)));
             }
             else {                              //context is dec
@@ -288,10 +278,10 @@
             }
         }
         function toDec(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return (hex2dec(string.substr(2, string.length)));
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return (bin2dec(string.substr(2, string.length)));
             }
             else {                              //context is dec
@@ -299,10 +289,10 @@
             }
         }
         function toBin(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return '0b' + (hex2bin(string.substr(2, string.length)));
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return string;
             }
             else {                              //context is dec
@@ -332,6 +322,8 @@
                         , closable: false
                     }
                     , center__paneSelector: ".center-center"
+                    , north__paneSelector: ".center-north"
+                    , north__size: 53
 
                 }
                 // EAST-LAYOUT
@@ -374,27 +366,29 @@
 
 <body>
 <div class="outer-center">
+    <div class="center-north">
+        <ul id="myTab" class="nav nav-tabs" role="tablist">
+            <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
+                                                data-toggle="tab"
+                                                aria-controls="mixview" aria-expanded="false">Mix View</a>
+            </li>
+            <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
+                                                aria-controls="codeview" aria-expanded="false">Code View</a></li>
+            <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
+                                                aria-controls="dataview" aria-expanded="false">Data View</a></li>
+        </ul>
+    </div>
     <div class="center-center">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
-            <ul id="myTab" class="nav nav-tabs" role="tablist">
-                <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
-                                                    data-toggle="tab"
-                                                    aria-controls="mixview" aria-expanded="false">Mix View</a>
-                </li>
-                <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
-                                                    aria-controls="codeview" aria-expanded="false">Code View</a></li>
-                <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
-                                                    aria-controls="dataview" aria-expanded="false">Data View</a></li>
-            </ul>
             <div id="myTabContent" class="tab-content">
-                <div role="tabpanel" class="tab-pane fade active" id="mixview"
+                <div role="tabpanel" class="tab-pane active" id="mixview"
                      aria-labelledby="mixview-tab"></div>
-                <div role="tabpanel" class="tab-pane fade" id="codeview" aria-labelledby="codeview-tab"><span
+                <div role="tabpanel" class="tab-pane" id="codeview" aria-labelledby="codeview-tab"><span
                         class="codeview-row-header fourspacesafter">.text:00408E79</span><span
                         class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
                         class="codeview-constant">20h</span></span>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="dataview" aria-labelledby="dataview-tab"
+                <div role="tabpanel" class="tab-pane" id="dataview" aria-labelledby="dataview-tab"
                      data-toggle="context"
                      data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span
                         class="dataview-label">aHMS</span><span
@@ -409,15 +403,13 @@
                 <a href="#" class="back-to-prev">Back to last location</a>
             </div>
         </div>
-        <div id="info-bar">
-            Info bar
-        </div>
+        <div id="info-bar"></div>
     </div>
 </div>
 
 <div class="outer-east">
-    <div class="east-center"><strong>Bookmarks:</strong><ul id="bookmark-list"></ul></div>
-    <div class="east-south"><strong>Previous Locations:</strong><button id="back-button" style="float: right; color: #000000; display: none">Back</button>
+    <div class="east-center">Bookmarks:<div id="bookmark-list"></div></div>
+    <div class="east-south">Previous Locations:<button id="back-button">Back</button>
 <div id="previous-locations"></div></div>
 </div>
 </body>
