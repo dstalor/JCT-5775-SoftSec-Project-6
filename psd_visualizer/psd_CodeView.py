@@ -36,7 +36,7 @@ class psd_CodeView(psd_View):
         return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"codeview-row-header\">{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
+        return "<span class=\"codeview-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
 
     def html_opcode(self, opcode_bytes):
         max_padding = 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view

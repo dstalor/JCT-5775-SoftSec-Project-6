@@ -130,7 +130,7 @@
             padding: 2px;
         }
 
-        #bookmark-button .glyphicon-bookmark:hover {
+        .bookmark-button .glyphicon-bookmark:hover {
             color: #fff;
         }
 
@@ -147,7 +147,7 @@
                 $(this).tab('show')
             });
             $("#mixview").html(pyObj.visualizer_lines);
-             $('#mixview .constant').contextmenu({
+             $('#mixview').find('.constant').contextmenu({
                 target: '#context-menu-constant',
                 onItem: function (context, e) {
                     if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
@@ -161,7 +161,7 @@
                     }
                 }
             });
-            $('#myTab a[href="#mixview"]').tab('show');
+            $('#myTab').find('a[href="#mixview"]').tab('show');
 
             jQuery('#back-button').click(function (event) {
                 event.preventDefault();
@@ -174,7 +174,7 @@
                 }
                 return false;
             });
-            $("#mixview span.jump").click(function () {
+            $("#mixview").find("span.jump").click(function () {
                 var screenAnchor = $(this).closest('.line').find('.header-address').text();
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
@@ -189,16 +189,17 @@
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
             $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header', function () {
-                $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
+                //$(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
-                $('#bookmark-button').click(function () {
+                $(this).find('.bookmark-button').css('visibility', 'visible').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
                         $("#bookmark-list").append('<span class="jump" data-jump-location="' + address + '">' + address + '<br /></span>');
                         bookmarks.push(address);
                     }
                 });
             }).on('mouseleave', '.datahex-row-header, .codeview-row-header', function () {
-                $("#bookmark-button").remove();
+                //$(".bookmark-button").remove();
+                $(this).find('.bookmark-button').css('visibility', 'hidden');
             });
         });
      /*       $(function(){
@@ -413,9 +414,7 @@
                 <a href="#" class="back-to-prev">Back to last location</a>
             </div>
         </div>
-        <div id="info-bar">
-            Info bar
-        </div>
+        <div id="info-bar"></div>
     </div>
 </div>
 
