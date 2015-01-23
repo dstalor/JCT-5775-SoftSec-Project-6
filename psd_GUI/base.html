@@ -188,22 +188,18 @@
                 $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
-        });
-        $(document).on('shown.bs.tab', 'a[href="#mixview"]', function (e) {
-            $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
+            $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header', function () {
                 $(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $('#bookmark-button').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
-                        $("#bookmark-list").append('<li class="bookmark"><span class="jump" data-jump-location="' + address + '">' + address + '</span></li>');
+                        $("#bookmark-list").append('<span class="jump" data-jump-location="' + address + '">' + address + '<br /></span>');
                         bookmarks.push(address);
                     }
                 });
-            });
-            $('.datahex-row-header, .codeview-row-header').mouseleave(function () {
+            }).on('mouseleave', '.datahex-row-header, .codeview-row-header', function () {
                 $("#bookmark-button").remove();
             });
-
         });
      /*       $(function(){
                 $('.codeview-param').contextMenu({
@@ -424,8 +420,8 @@
 </div>
 
 <div class="outer-east">
-    <div class="east-center"><strong>Bookmarks:</strong><ul id="bookmark-list"></ul></div>
-    <div class="east-south"><strong>Previous Locations:</strong><button id="back-button" style="float: right; color: #000000; display: none">Back</button>
+    <div class="east-center">Bookmarks:<div id="bookmark-list"></div></div>
+    <div class="east-south">Previous Locations:<button id="back-button" style="float: right; color: #000000; display: none">Back</button>
 <div id="previous-locations"></div></div>
 </div>
 </body>
