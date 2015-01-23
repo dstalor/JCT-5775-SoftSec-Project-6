@@ -16,22 +16,16 @@ class psd_CodeView(psd_View):
         else:
             return len(self._code_lines)
 
-    def get_html_lines(self, line_range_tup):
-        intersect_lines = self.get_lines_intersection(line_range_tup)
-        if not intersect_lines:
-            return ""
+    def get_html_line_list(self, line_range_tup):
+        (line_start, line_end) = line_range_tup
 
-        line_abs_index = intersect_lines[0]
-        (line_start, line_end) = self.absolute_lines_to_relative(intersect_lines)
-
-        str_out = ""
+        html_lines = []
         for l_idx in range(line_start, line_end):
             line = self._code_lines[l_idx]
             line_str = self.html_line(line)
-            str_out += self.html_line_wrap(line_abs_index, line_str)
-            line_abs_index += 1
+            html_lines.append(line_str)
 
-        return str_out
+        return html_lines
 
     def html_line(self, line):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
@@ -80,10 +74,10 @@ class psd_CodeView(psd_View):
                 op_str = op_str.replace(c_str, "{"+str(i)+"}", 1)
 
             #inject the html constants representation
-            print c_html_str
+            #print c_html_str
             op_str = op_str.format(*c_html_str)
 
-        print ("<span class=\"codeview-param\">{0}</span>").format(op_str)
+        #print ("<span class=\"codeview-param\">{0}</span>").format(op_str)
         return ("<span class=\"codeview-param\">{0}</span>").format(op_str)
 
     def constant_html(self, constant_str, c_jump_address=None):

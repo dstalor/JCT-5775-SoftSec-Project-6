@@ -36,12 +36,6 @@ class psd_View(object):
         end_rel = start_rel + (rel_line_tup[1] - rel_line_tup[0])
         return start_rel, end_rel
 
-    def calculate_line_count(self):
-        raise NotImplementedError()
-
-    def get_html_lines(self, line_range_tup):
-        raise NotImplementedError()
-
     def get_line_id_by_address(self, address):
         rel_line = self.find_line_by_address(address)
         if rel_line is not None:
@@ -52,3 +46,30 @@ class psd_View(object):
     def html_line_wrap(self, line_num, line_str):
         parity = "line-even" if line_num % 2 == 0 else "line-odd"
         return "<span class=\"line {0}\" id=\"{1:d}\">{2}</span>".format(parity, line_num, line_str)
+
+    def get_html_lines(self, line_range_tup):
+        intersect_lines = self.get_lines_intersection(line_range_tup)
+        if not intersect_lines:
+            return ""
+
+        start_line_id = intersect_lines[0]
+        relative_line_range_tup = self.absolute_lines_to_relative(intersect_lines)
+
+        html_lines = self.get_html_line_list(relative_line_range_tup)
+
+        str_out = ""
+        for i, hline in enumerate(html_lines):
+            str_out += self.html_line_wrap(start_line_id + i, hline)
+
+        return str_out
+
+    ### Abstract functions ##
+
+    def calculate_line_count(self):
+        raise NotImplementedError()
+
+    def get_html_line_list(self, line_range_tup):
+        raise NotImplementedError()
+
+    def find_line_by_address(self, address):
+        raise NotImplementedError()

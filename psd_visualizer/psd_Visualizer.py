@@ -1,5 +1,7 @@
 from psd_HexView import psd_HexView
 from psd_CodeView import psd_CodeView
+from psd_HeaderView import psd_HeaderView
+
 from psd_AddressViewRangeMap import psd_AddressViewRangeMap
 from psd_AddressViewRangeMapList import psd_AddressViewRangeMapList
 
@@ -19,6 +21,10 @@ class psd_Visualizer:
         codeview = psd_CodeView(self.psd_project.analyzer.pe, memory_range)
         self.add_view(memory_range.get_range(), codeview)
 
+    def add_headerview(self, memory_range):
+        headerview = psd_HeaderView(self.psd_project.analyzer.pe, memory_range)
+        self.add_view(memory_range.get_range(), headerview)
+
     def create_views(self):
         # This is the function that should be called after the PE file analysis
         # We should add here logic for creating view for each part of code
@@ -29,6 +35,8 @@ class psd_Visualizer:
                 self.add_hexview(memory_range_rm)
             elif display == "codeview":
                 self.add_codeview(memory_range_rm)
+            elif display == "headerview":
+                self.add_headerview(memory_range_rm)
             else:
                 print "Unknown display type:", display
 
