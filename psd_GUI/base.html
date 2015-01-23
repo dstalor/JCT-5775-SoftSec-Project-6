@@ -9,7 +9,7 @@
     <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
     <link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">
-    <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
+    <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
@@ -86,6 +86,7 @@
             cursor: pointer;
             color: #ff9191 !important;
         }
+
         .constant {
             color: #FFAAAA;
         }
@@ -103,22 +104,10 @@
             margin-right: 48px;
         }
 
-        .back-to-prev {
-            position: fixed;
-            margin-bottom: 2em;
-            margin-right: 3em;
-            bottom: 20%;
-            right: 15%;
-            text-decoration: none;
+        #back-button {
+            float: right;
             color: #000000;
-            background-color: rgba(235, 235, 235, 0.80);
-            font-size: 12px;
-            padding: 1em;
-            display: none;
-        }
-
-        .back-to-prev:hover {
-            background-color: rgba(135, 135, 135, 0.50);
+            display: none
         }
 
         #info-bar {
@@ -147,7 +136,7 @@
                 $(this).tab('show')
             });
             $("#mixview").html(pyObj.visualizer_lines);
-             $('#mixview').find('.constant').contextmenu({
+            $('#mixview').find('.constant').contextmenu({
                 target: '#context-menu-constant',
                 onItem: function (context, e) {
                     if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
@@ -179,13 +168,13 @@
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
+                $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
                 $('#back-button').fadeIn();
             });
-            $('#previous-locations, #bookmark-list').on('click', '.jump', function() {
+            $('#previous-locations, #bookmark-list').on('click', '.jump', function () {
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
+                $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
             $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header', function () {
@@ -202,27 +191,27 @@
                 $(this).find('.bookmark-button').css('visibility', 'hidden');
             });
         });
-     /*       $(function(){
-                $('.codeview-param').contextMenu({
-                    selector: '*',
-                    callback: function(key, options) {
-                        if (key.toString().localeCompare("hex") == 0) {
-                            $(this).html(toHex($(this).text()));
-                        }
-                        else if (key.toString().localeCompare("dec") == 0) {
-                            $(this).html(toDec($(this).text()));
-                        }
-                        else if (key.toString().localeCompare("bin") == 0) {
-                            $(this).html(toBin($(this).text()));
-                        }
-                    },
-                    items: {
-                        "hex": {name: "Hexadecimal"},
-                        "dec": {name: "Decimal"},
-                        "bin": {name: "Binary"}
-                    }
-                });
-            });*/
+        /*       $(function(){
+         $('.codeview-param').contextMenu({
+         selector: '*',
+         callback: function(key, options) {
+         if (key.toString().localeCompare("hex") == 0) {
+         $(this).html(toHex($(this).text()));
+         }
+         else if (key.toString().localeCompare("dec") == 0) {
+         $(this).html(toDec($(this).text()));
+         }
+         else if (key.toString().localeCompare("bin") == 0) {
+         $(this).html(toBin($(this).text()));
+         }
+         },
+         items: {
+         "hex": {name: "Hexadecimal"},
+         "dec": {name: "Decimal"},
+         "bin": {name: "Binary"}
+         }
+         });
+         });*/
 
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
@@ -278,10 +267,10 @@
             return this;
         })();
         function toHex(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return string;
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return ('0x' + bin2hex(string.substr(2, string.length)));
             }
             else {                              //context is dec
@@ -289,10 +278,10 @@
             }
         }
         function toDec(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return (hex2dec(string.substr(2, string.length)));
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return (bin2dec(string.substr(2, string.length)));
             }
             else {                              //context is dec
@@ -300,10 +289,10 @@
             }
         }
         function toBin(string) {
-            if (string.slice(0,2) == '0x') {      // context is hex
+            if (string.slice(0, 2) == '0x') {      // context is hex
                 return '0b' + (hex2bin(string.substr(2, string.length)));
             }
-            else if (string.slice(0,2) == '0b') { // context is bin
+            else if (string.slice(0, 2) == '0b') { // context is bin
                 return string;
             }
             else {                              //context is dec
@@ -420,7 +409,7 @@
 
 <div class="outer-east">
     <div class="east-center">Bookmarks:<div id="bookmark-list"></div></div>
-    <div class="east-south">Previous Locations:<button id="back-button" style="float: right; color: #000000; display: none">Back</button>
+    <div class="east-south">Previous Locations:<button id="back-button">Back</button>
 <div id="previous-locations"></div></div>
 </div>
 </body>

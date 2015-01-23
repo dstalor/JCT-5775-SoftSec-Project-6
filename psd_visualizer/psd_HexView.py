@@ -15,7 +15,7 @@ class psd_HexView(psd_View):
     # def get_lines_str(self, line_range_tup):
     # line_start = line_range_tup[0] if line_range_tup[0] >
     #
-    #     address_start = self.find_address_by_line(line_start)
+    # address_start = self.find_address_by_line(line_start)
     #     fmt = "".join(['{' + str(i) + ':02x} ' for i in range(self._offset)])
     #     str_out = ""
     #     img = self._pe.get_memory_mapped_image()
@@ -64,7 +64,8 @@ class psd_HexView(psd_View):
         return str_rowheader + str_bytedata + str_asciidata + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"datahex-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>: </span>".format(rangename, address)
+        return "<span class=\"datahex-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>: </span>".format(
+            rangename, address)
 
     def html_bytedata(self, address, byte, specialclass=""):
         return "<span id=\"datahex-{0:08x}-data\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address,

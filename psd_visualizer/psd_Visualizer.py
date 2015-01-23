@@ -5,6 +5,7 @@ from psd_HeaderView import psd_HeaderView
 from psd_AddressViewRangeMap import psd_AddressViewRangeMap
 from psd_AddressViewRangeMapList import psd_AddressViewRangeMapList
 
+
 class psd_Visualizer:
     def __init__(self, psd_project):
         self.psd_project = psd_project
@@ -49,7 +50,7 @@ class psd_Visualizer:
         return self.addressview_rangemap_list.get_all_html_lines()
 
     def get_line_id_by_address(self, address):
-        #find the correct view
+        # find the correct view
         view = self.addressview_rangemap_list.get_view_by_address(address)
         line_id = view.get_line_id_by_address(address)
         if line_id is not None:

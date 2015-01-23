@@ -36,10 +36,11 @@ class psd_CodeView(psd_View):
         return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
 
     def html_rowheader(self, rangename, address):
-        return "<span class=\"codeview-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
+        return "<span class=\"codeview-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(
+            rangename, address)
 
     def html_opcode(self, opcode_bytes):
-        max_padding = 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
+        max_padding = 15 * 3 - 1  # max bytes in x86 is 15. we don't use this because it not nice in the view
         opcode_str = ''.join(["{0:02x} ".format(byte) for byte in opcode_bytes])
         return ("<span class=\"codeview-opcode spaceafter\">{0: <30}</span>").format(opcode_str)
 
@@ -51,27 +52,27 @@ class psd_CodeView(psd_View):
         if op_str == "":
             return ""
 
-        c_html_str=[]
-        #1. get constants
+        c_html_str = []
+        # 1. get constants
         constants = get_constants(line)
         if len(constants) > 0:
             #2. split constants from operand string
-            constants.sort(reverse=True) # we sort, just in a case that the smaller is a substring of to bigger.
+            constants.sort(reverse=True)  # we sort, just in a case that the smaller is a substring of to bigger.
             for i, c in enumerate(constants):
                 c_str = hex(c) if c > 0xf else str(c)
 
                 #3. add jump to constants that can be and va or rva
                 c_jump_address = None
-                if self._pe.get_section_by_rva(c) is not None: #it can be RVA
+                if self._pe.get_section_by_rva(c) is not None:  #it can be RVA
                     c_jump_address = hex(c)
-                elif (c - self._pe.OPTIONAL_HEADER.ImageBase) > 0: #it can be VA
+                elif (c - self._pe.OPTIONAL_HEADER.ImageBase) > 0:  #it can be VA
                     rva = c - self._pe.OPTIONAL_HEADER.ImageBase
                     if self._pe.get_section_by_rva(rva) is not None:
                         c_jump_address = hex(rva)
 
                 #4. replace the constants with a place
                 c_html_str.append(self.constant_html(c_str, c_jump_address))
-                op_str = op_str.replace(c_str, "{"+str(i)+"}", 1)
+                op_str = op_str.replace(c_str, "{" + str(i) + "}", 1)
 
             #inject the html constants representation
             #print c_html_str
@@ -85,15 +86,15 @@ class psd_CodeView(psd_View):
         jump_str = ""
         if c_jump_address is not None:
             class_str += " jump"
-            jump_str = " data-jump-location=\""+c_jump_address+"\""
-        #print ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
-        return ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
+            jump_str = " data-jump-location=\"" + c_jump_address + "\""
+        # print ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
+        return ("<span class=\"{0}\"" + jump_str + ">{1}</span>").format(class_str, constant_str)
 
     def find_line_by_address(self, address):
         for id, l in enumerate(self._code_lines):
             address_start = l.address
             address_end = address_start + (l.size - 1)
-            #print "id:",id,"start:",hex(address_start),"end:",hex(address_end),"address:",hex(address)
+            # print "id:",id,"start:",hex(address_start),"end:",hex(address_end),"address:",hex(address)
             if address in range(address_start, address_end + 1):
                 return id
 
