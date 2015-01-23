@@ -9,6 +9,8 @@
     <file>js/jquery-ui.min.js</file>
     <file>js/jquery.layout_and_plugins.js</file>
     <file>js/jquery.selection.js</file>
+    <file>js/jquery.ui.position.js</file>
+    <file>js/jquery.contextMenu.js</file>
     <file>fonts/glyphicons-halflings-regular.eot</file>
     <file>fonts/glyphicons-halflings-regular.svg</file>
     <file>fonts/glyphicons-halflings-regular.ttf</file>
@@ -25,5 +27,6 @@
     <file>css/bootstrap-theme.css.map</file>
     <file>css/bootstrap-theme.min.css</file>
     <file>css/layout-default.css</file>
+    <file>css/jquery.contextMenu.css</file>
 </qresource>
 </RCC>

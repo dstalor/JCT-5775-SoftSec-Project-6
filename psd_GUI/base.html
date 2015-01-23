@@ -8,14 +8,17 @@
     <!-- Bootstrap -->
     <link href="qrc:/css/bootstrap.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="qrc:/css/layout-default.css">
+    <link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">
+    <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css" />
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
-    <script src="qrc:/js/bootstrap-contextmenu.js"></script>
+    <!--<script src="qrc:/js/bootstrap-contextmenu.js"></script>-->
     <script src="qrc:/js/jquery.onscreen.min.js"></script>
     <script src="qrc:/js/jquery-ui.min.js"></script>
     <script src="qrc:/js/jquery.layout_and_plugins.js"></script>
+    <script src="qrc:/js/jquery.ui.position.js" type="text/javascript"></script>
+    <script src="qrc:/js/jquery.contextMenu.js" type="text/javascript"></script>
 
     <style>
         @font-face {
@@ -140,6 +143,20 @@
                 $(this).tab('show')
             });
             $("#mixview").html(pyObj.visualizer_lines);
+             $('#mixview .constant').contextmenu({
+                target: '#context-menu-constant',
+                onItem: function (context, e) {
+                    if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
+                        $(context).html(toHex(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Decimal") == 0) {
+                        $(context).html(toDec(context.text()));
+                    }
+                    else if ($(e.target).text().localeCompare("Binary") == 0) {
+                        $(context).html(toBin(context.text()));
+                    }
+                }
+            });
             $('#myTab a[href="#mixview"]').tab('show');
 
             jQuery('#back-button').click(function (event) {
@@ -167,20 +184,6 @@
                 $('#' + ((linenum >= 12)?(linenum - 12):0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
-            $('.constant').contextmenu({
-                target: '#context-menu-constant',
-                onItem: function (context, e) {
-                    if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
-                        $(context).html(toHex(context.text()));
-                    }
-                    else if ($(e.target).text().localeCompare("Decimal") == 0) {
-                        $(context).html(toDec(context.text()));
-                    }
-                    else if ($(e.target).text().localeCompare("Binary") == 0) {
-                        $(context).html(toBin(context.text()));
-                    }
-                }
-            });
         });
         $(document).on('shown.bs.tab', 'a[href="#mixview"]', function (e) {
             $('.datahex-row-header, .codeview-row-header').mouseenter(function () {
@@ -198,6 +201,28 @@
             });
 
         });
+     /*       $(function(){
+                $('.codeview-param').contextMenu({
+                    selector: '*',
+                    callback: function(key, options) {
+                        if (key.toString().localeCompare("hex") == 0) {
+                            $(this).html(toHex($(this).text()));
+                        }
+                        else if (key.toString().localeCompare("dec") == 0) {
+                            $(this).html(toDec($(this).text()));
+                        }
+                        else if (key.toString().localeCompare("bin") == 0) {
+                            $(this).html(toBin($(this).text()));
+                        }
+                    },
+                    items: {
+                        "hex": {name: "Hexadecimal"},
+                        "dec": {name: "Decimal"},
+                        "bin": {name: "Binary"}
+                    }
+                });
+            });*/
+
         /**
          * Convert From/To Binary/Decimal/Hexadecimal in JavaScript
          * https://gist.github.com/faisalman
@@ -252,36 +277,36 @@
             return this;
         })();
         function toHex(string) {
-            if (string.slice(-1) == 'h') {      // context is hex
+            if (string.slice(0,2) == '0x') {      // context is hex
                 return string;
             }
-            else if (string.slice(-1) == 'b') { // context is bin
-                return (bin2hex(string.substr(0, string.length - 1))) + 'h';
+            else if (string.slice(0,2) == '0b') { // context is bin
+                return ('0x' + bin2hex(string.substr(2, string.length)));
             }
             else {                              //context is dec
-                return (dec2hex(string) + 'h');
+                return ('0x' + dec2hex(string));
             }
         }
         function toDec(string) {
-            if (string.slice(-1) == 'h') {      // context is hex
-                return (hex2dec(string.substr(0, string.length - 1)));
+            if (string.slice(0,2) == '0x') {      // context is hex
+                return (hex2dec(string.substr(2, string.length)));
             }
-            else if (string.slice(-1) == 'b') { // context is bin
-                return (bin2dec(string.substr(0, string.length - 1)));
+            else if (string.slice(0,2) == '0b') { // context is bin
+                return (bin2dec(string.substr(2, string.length)));
             }
             else {                              //context is dec
                 return string;
             }
         }
         function toBin(string) {
-            if (string.slice(-1) == 'h') {      // context is hex
-                return (hex2bin(string.substr(0, string.length - 1))) + 'b';
+            if (string.slice(0,2) == '0x') {      // context is hex
+                return '0b' + (hex2bin(string.substr(2, string.length)));
             }
-            else if (string.slice(-1) == 'b') { // context is bin
+            else if (string.slice(0,2) == '0b') { // context is bin
                 return string;
             }
             else {                              //context is dec
-                return (dec2bin(string) + 'b');
+                return ('0b' + dec2bin(string));
             }
         }
     </script>

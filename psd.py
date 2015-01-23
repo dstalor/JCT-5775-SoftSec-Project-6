@@ -1,4 +1,5 @@
 from psd_Project import *
+from psd_GUI.GUI import psdGUI
 
 
 class psd:
@@ -17,20 +18,20 @@ def test_HexView(psd_project):
 
 
 def test_GUI(psd):
-    from psd_GUI.GUI import psdGUI
-
     psd_GUI = psdGUI(psd)
     psd_GUI.run()
 
 
 if __name__ == "__main__":
     psd_main = psd()
-    psd_main.create_new_project("examples\\helloworld.exe")
+    psd_GUI = psdGUI(psd)
+    filename = psdGUI.get_filename(psd_GUI)
+    psd_main.create_new_project(filename)
 
     # psd_main.psd_project.pe.print_info()
 
-    #tests
-    #test_HexView(psd_main.psd_project)
+    # tests
+    # test_HexView(psd_main.psd_project)
     test_GUI(psd_main)
 
 
