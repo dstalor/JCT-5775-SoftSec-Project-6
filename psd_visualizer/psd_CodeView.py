@@ -47,10 +47,10 @@ class psd_CodeView(psd_View):
 
         padding_str = " " * max(max_padding - (line.size*3), 0)
         #print opcode_str
-        return ("<span class=\"codeview-opcode spaceafter\">{0}{1}</span>").format(opcode_str , padding_str)
+        return ("<span class=\"codeview-opcode spaceafter\">{0}{1}</span>").format(opcode_str, padding_str)
 
     def html_bytedata(self, rva_address, byte, specialclass=""):
-        return "<span data-address-rva=\"{0:08x}\" class=\"datahex-byte-data {1:s}\">{2:02x} </span>".format(rva_address, specialclass, byte)
+        return "<span data-address-rva=\"{0:08x}\" class=\"datahex-byte-data {1:s}\">{2:02x}</span> ".format(rva_address, specialclass, byte)
 
     def html_mnemonic(self, mnemonic):
         return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)
