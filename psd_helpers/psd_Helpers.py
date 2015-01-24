@@ -2,7 +2,7 @@ import string
 import re
 from capstone.x86 import *
 
-jump_instructions = ['call','jmp', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
+#jump_instructions = ['call','jmp', 'jo', 'jno', 'js', 'jns', 'je', 'jz', 'jne', 'jnz', 'jb', 'jnae', 'jc', 'jnb', 'jae', 'jnc', 'jbe', 'jna', 'ja', 'jnbe', 'jl', 'jnge', 'jge', 'jnl', 'jle', 'jng', 'jg', 'jnle', 'jp', 'jpe', 'jnp', 'jpo', 'jcxz', 'jecxz']
 
 def ask_yes_no(str_prompt):
     answer=""
@@ -17,8 +17,8 @@ def strip_non_printable(dirty_str):
     """
     return ''.join(filter(string.printable.__contains__, dirty_str))
 
-def is_jmp_instruction(nemonic_str):
-    return  nemonic_str in jump_instructions
+#def is_jmp_instruction(nemonic_str):
+#    return  nemonic_str in jump_instructions
 
 #this one is from stackoverflow: http://stackoverflow.com/questions/11592261/check-if-string-is-hexadecimal
 def is_hex(str):
@@ -38,12 +38,17 @@ def get_hexes_in_str(str):
     hex_pattern = r'(0x[0-9a-fA-F]+)'
     return re.findall(hex_pattern, str)
 
+#TODO move this to analyzer
 def get_constants(code_line):
-    constants = []
-    for op in code_line.operands:
-        if op.type == X86_OP_MEM:
-            if op.mem.disp != 0:
-                constants.append(int(op.mem.disp))
-        elif op.type == X86_OP_IMM:
-            constants.append(int(op.imm))
-    return constants
+        """
+        :param code_line: capstone instruction
+        :return: list of constants
+        """
+        constants = []
+        for op in code_line.operands:
+            if op.type == X86_OP_MEM:
+                if op.mem.disp != 0:
+                    constants.append(int(op.mem.disp))
+            elif op.type == X86_OP_IMM:
+                constants.append(int(op.imm))
+        return constants

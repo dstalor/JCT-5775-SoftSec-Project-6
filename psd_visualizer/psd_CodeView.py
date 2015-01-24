@@ -46,7 +46,7 @@ class psd_CodeView(psd_View):
             opcode_str += self.html_bytedata(line.address+1, byte)
 
         padding_str = " " * max(max_padding - (line.size*3), 0)
-        print opcode_str
+        #print opcode_str
         return ("<span class=\"codeview-opcode spaceafter\">{0}{1}</span>").format(opcode_str , padding_str)
 
     def html_bytedata(self, rva_address, byte, specialclass=""):

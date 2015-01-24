@@ -4,8 +4,6 @@ from psd_analyzer.psd_Analyzer import *
 from sys import maxint, path
 import subprocess
 
-# from psd_handlers import psd_HandlersFactory
-# psd_io = psd_HandlersFactory.hfactory.get_psd_io_handler()
 
 class psd_Project:
     def __init__(self, psd, filename=""):
@@ -16,8 +14,6 @@ class psd_Project:
 
         if filename != "":
             self.load_executable(filename)
-
-
 
     def load_executable(self, filename):
         if self.analyzer.get_pe() is not None:
@@ -58,8 +54,13 @@ class psd_Project:
         pe = self.analyzer.pe
         pe.write(filename)
 
-    def patch_byte_by_rva(self, byte_val, rva_address):
-        byte_str = byte_val.decode('hex')
+    def patch_byte_by_rva(self, rva_address, byte_val_str):
+        """
+        :param rva_address: int, the rva address of the byte to change
+        :param byte_val_str: string with the byte value, like "ff" or "01"
+        :return:
+        """
+        byte_str = byte_val_str.decode('hex')
         pe = self.analyzer.pe
-        pe.set_bytes_at_rva(byte_str, rva_address)
+        pe.set_bytes_at_rva(rva_address, byte_str)
 

@@ -58,17 +58,79 @@ class psd_Analyzer(object):
                     self.pe.NT_HEADERS : "NT_HEADERS",
                     self.pe.FILE_HEADER: "FILE_HEADER"}
 
-        if hasattr(self.pe, "OPTIONAL_HEADER"):
+        if hasattr(self.pe, "OPTIONAL_HEADER") and self.pe.OPTIONAL_HEADER is not None:
             headers[self.pe.OPTIONAL_HEADER] = "OPTIONAL_HEADER"
 
-        if hasattr(self.pe, "RICH_HEADER"):
+        if hasattr(self.pe, "RICH_HEADER") and self.pe.RICH_HEADER is not None:
             headers[self.pe.RICH_HEADER] = "RICH_HEADER"
 
-        if hasattr(self.pe, "VS_FIXEDFILEINFO"):
+        if hasattr(self.pe, "VS_FIXEDFILEINFO") and self.pe.VS_FIXEDFILEINFO is not None:
             headers[self.pe.VS_FIXEDFILEINFO] = "VS_FIXEDFILEINFO"
 
-        if hasattr(self.pe, "VS_VERSIONINFO"):
+        if hasattr(self.pe, "VS_VERSIONINFO") and self.pe.VS_VERSIONINFO is not None :
             headers[self.pe.VS_VERSIONINFO] = "VS_VERSIONINFO"
+
+        if hasattr(self.pe, 'FileInfo'):
+                for entry in self.pe.FileInfo:
+                    headers[entry] = "FileInfo_entry"
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_EXPORT'):
+            headers[self.pe.DIRECTORY_ENTRY_EXPORT.struct] = 'DIRECTORY_ENTRY_EXPORT'
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_IMPORT') and self.pe.DIRECTORY_ENTRY_IMPORT is not None:
+            for module in self.pe.DIRECTORY_ENTRY_IMPORT:
+                headers[module.struct] = "module"
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_BOUND_IMPORT'):
+            for bound_imp_desc in self.pe.DIRECTORY_ENTRY_BOUND_IMPORT:
+
+                headers[bound_imp_desc.struct] = "DIRECTORY_ENTRY_BOUND_IMPORT"
+
+                for bound_imp_ref in bound_imp_desc.entries:
+                    headers[bound_imp_ref.struct] = "DIRECTORY_ENTRY_BOUND_IMPORT"
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_DELAY_IMPORT'):
+
+            for module in self.pe.DIRECTORY_ENTRY_DELAY_IMPORT:
+                headers[module.struct] = "DIRECTORY_ENTRY_DELAY_IMPORT"
+
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_RESOURCE'):
+
+            headers[self.pe.DIRECTORY_ENTRY_RESOURCE.struct] = 'DIRECTORY_ENTRY_RESOURCE'
+
+            for resource_type in self.pe.DIRECTORY_ENTRY_RESOURCE.entries:
+                headers[resource_type.struct] = "resource_type"
+
+                if hasattr(resource_type, 'directory'):
+
+                    headers[resource_type.directory.struct] = 'directory'
+
+                    for resource_id in resource_type.directory.entries:
+                        headers[resource_id.struct] = "resource_id"
+
+                        if hasattr(resource_id, 'directory'):
+                            headers[resource_id.directory.struct] = 'directory'
+
+                            for resource_lang in resource_id.directory.entries:
+                                if hasattr(resource_lang, 'data'):
+                                    headers[resource_lang.struct] = "resource_lang"
+                                    headers[resource_lang.data.struct] = "data"
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_TLS') and self.pe.DIRECTORY_ENTRY_TLS and self.pe.DIRECTORY_ENTRY_TLS.struct:
+            headers[self.pe.DIRECTORY_ENTRY_TLS.struct] = 'DIRECTORY_ENTRY_TLS'
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_LOAD_CONFIG') and self.pe.DIRECTORY_ENTRY_LOAD_CONFIG and self.pe.DIRECTORY_ENTRY_LOAD_CONFIG.struct:
+            headers[self.pe.DIRECTORY_ENTRY_LOAD_CONFIG.struct] = 'DIRECTORY_ENTRY_LOAD_CONFIG'
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_DEBUG'):
+            for dbg in self.pe.DIRECTORY_ENTRY_DEBUG:
+                headers[dbg.struct] = 'DIRECTORY_ENTRY_DEBUG'
+
+        if hasattr(self.pe, 'DIRECTORY_ENTRY_BASERELOC'):
+            for base_reloc in self.pe.DIRECTORY_ENTRY_BASERELOC:
+                headers[base_reloc.struct] = 'DIRECTORY_ENTRY_BASERELOC'
+
 
         #adding section headers
         for s in self.pe.sections:
@@ -146,3 +208,4 @@ class psd_Analyzer(object):
 
     def disassemble_bytes(self, start_address, code_bytes):
         return [line for line in self.disassembler.disasm(code_bytes, start_address)]
+
