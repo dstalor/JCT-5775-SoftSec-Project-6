@@ -58,4 +58,8 @@ class psd_Project:
         pe = self.analyzer.pe
         pe.write(filename)
 
+    def patch_byte_by_rva(self, byte_val, rva_address):
+        byte_str = byte_val.decode('hex')
+        pe = self.analyzer.pe
+        pe.set_bytes_at_rva(byte_str, rva_address)
 
