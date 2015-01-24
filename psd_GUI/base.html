@@ -520,7 +520,7 @@
                     else {
                         $("span.datahex-byte-ascii[data-address-rva='" + address.val() + "']").text('.');
                     }
-                    pyObj.patch_byte_by_rva(newByte.val(),address.val());
+                    pyObj.patch_byte_by_rva(address.val(), newByte.val());
                 }
                 form[0].reset();
                 success = false;

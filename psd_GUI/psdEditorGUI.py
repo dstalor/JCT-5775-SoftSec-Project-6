@@ -21,8 +21,8 @@ class JsHooks(QObject):
         return self.visualizer.get_line_id_by_address(int(str(address), 16))
 
     @pyqtSlot(str, str)
-    def patch_byte_by_rva(self, byte_val, rva_address):
-        self.psd_project.patch_byte_by_rva(str(byte_val), str(rva_address))
+    def patch_byte_by_rva(self, rva_address, byte_val_str):
+        self.psd_project.patch_byte_by_rva(str(rva_address), str(byte_val_str))
 
     @pyqtSlot()
     def run_executable(self):
