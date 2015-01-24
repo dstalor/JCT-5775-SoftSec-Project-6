@@ -29,7 +29,7 @@ class psd_CodeView(psd_View):
 
     def html_line(self, line):
         str_rowheader = self.html_rowheader(self._memory_range_metadata.get_range_name(), line.address)
-        str_opcode = self.html_opcode(line.bytes)
+        str_opcode = self.html_opcode(line)
         str_mnemonic = self.html_mnemonic(line.mnemonic)
         str_operands = self.html_operands(line)
 
@@ -38,10 +38,19 @@ class psd_CodeView(psd_View):
     def html_rowheader(self, rangename, address):
         return "<span class=\"codeview-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)
 
-    def html_opcode(self, opcode_bytes):
-        max_padding = 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
-        opcode_str = ''.join(["{0:02x} ".format(byte) for byte in opcode_bytes])
-        return ("<span class=\"codeview-opcode spaceafter\">{0: <30}</span>").format(opcode_str)
+    def html_opcode(self, line):
+        max_padding = 30 # 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
+        opcode_str = ""
+        
+        for i, byte in enumerate(line.bytes):
+            opcode_str += self.html_bytedata(line.address+1, byte)
+
+        padding_str = " " * max(max_padding - (line.size*3), 0)
+        print opcode_str
+        return ("<span class=\"codeview-opcode spaceafter\">{0}{1}</span>").format(opcode_str , padding_str)
+
+    def html_bytedata(self, rva_address, byte, specialclass=""):
+        return "<span data-address-rva=\"{0:08x}\" class=\"datahex-byte-data {1:s}\">{2:02x} </span>".format(rva_address, specialclass, byte)
 
     def html_mnemonic(self, mnemonic):
         return "<span class=\"codeview-mnemonic spaceafter\">{0: <5}</span>".format(mnemonic)

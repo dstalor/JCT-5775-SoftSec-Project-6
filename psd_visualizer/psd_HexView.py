@@ -68,12 +68,12 @@ class psd_HexView(psd_View):
             rangename, address)
 
     def html_bytedata(self, address, byte, specialclass=""):
-        return "<span id=\"datahex-{0:08x}-data\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address,
+        return "<span data-address-rva=\"{0:08x}\" class=\"datahex-byte-data {1:s}\">{2:02x}</span>".format(address,
                                                                                                            specialclass,
                                                                                                            byte)
 
     def html_byte_ascii(self, address, byte, specialclass=""):
-        return "<span id=\"datahex-{0:08x}-ascii\" class=\"datahex-byte-ascii {1:s}\">{2:s}</span>".format(address,
+        return "<span data-address-rva=\"{0:08x}\" class=\"datahex-byte-ascii {1:s}\">{2:s}</span>".format(address,
                                                                                                            specialclass,
                                                                                                            self.get_visible_ascii(
                                                                                                                chr(
