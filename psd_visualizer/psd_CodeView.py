@@ -41,7 +41,7 @@ class psd_CodeView(psd_View):
     def html_opcode(self, line):
         max_padding = 30 # 15*3-1 # max bytes in x86 is 15. we don't use this because it not nice in the view
         opcode_str = ""
-        
+
         for i, byte in enumerate(line.bytes):
             opcode_str += self.html_bytedata(line.address+1, byte)
 
