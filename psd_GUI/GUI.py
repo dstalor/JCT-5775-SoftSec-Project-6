@@ -16,7 +16,7 @@ class psdGUI(object):
     def get_filename(self):
         dialog = QtGui.QFileDialog()
         filename = QtGui.QFileDialog.getOpenFileName(dialog)
-        return filename
+        return str(filename)
 
     def create_main_window(self):
         self.main_window = QtGui.QMainWindow()

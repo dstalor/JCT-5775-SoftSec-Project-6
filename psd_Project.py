@@ -1,9 +1,9 @@
 from psd_helpers.psd_Helpers import *
 from psd_visualizer.psd_Visualizer import *
 from psd_analyzer.psd_Analyzer import *
-from sys import maxint, path
+from sys import maxint
 import subprocess
-
+import os
 
 class psd_Project:
     def __init__(self, psd, filename=""):
@@ -30,16 +30,18 @@ class psd_Project:
     def run_executable(self):
         temp_filename = ""
         #1. find a temp-name that does not exist already
-        for i in range(maxint):
+
+        for i in xrange(maxint):
             temp_filename = self.filename+"_temp_"+str(i)
-            if path.isfile(temp_filename):
+            if os.path.isfile(temp_filename):
                 continue
             else:
                 break
-
-        if i == (maxint-1):
-            print "Coudn't find a temp file name."
+        else:
+            print "Couldn't find a temp file name."
             return
+
+        print self.filename, temp_filename
 
         #2. save executable
         self.save_executable(temp_filename)
