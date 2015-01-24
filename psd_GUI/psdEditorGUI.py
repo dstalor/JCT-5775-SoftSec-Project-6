@@ -24,6 +24,10 @@ class JsHooks(QObject):
     def patch_byte_by_rva(self, byte_val, rva_address):
         self.psd_project.patch_byte_by_rva(str(byte_val), str(rva_address))
 
+    @pyqtSlot()
+    def run_executable(self):
+        self.psd_project.run_executable()
+
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 
 

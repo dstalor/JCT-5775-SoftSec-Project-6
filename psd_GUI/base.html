@@ -151,6 +151,9 @@
                 }
             });
             $('#myTab').find('a[href="#mixview"]').tab('show');
+            $('#run-program').click(function(event) {
+                pyObj.run_executable();
+            });
 
             jQuery('#back-button').click(function (event) {
                 event.preventDefault();
