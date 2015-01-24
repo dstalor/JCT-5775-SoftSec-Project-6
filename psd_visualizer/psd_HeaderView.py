@@ -40,6 +40,9 @@ class psd_HeaderView(psd_View):
                             more_info = ' [INVALID TIME]'
                     elif key in ['VirtualAddress', 'AddressOfEntryPoint', 'e_lfanew', 'BaseOfCode', 'BaseOfData', 'PointerToSymbolTable']:
                         jump_location = val_str
+                    elif key in ['AddressOfCallBacks', 'AddressOfIndex', 'EndAddressOfRawData', 'StartAddressOfRawData']:
+                        rva = int(val_str, 16) - self._pe.OPTIONAL_HEADER.ImageBase
+                        jump_location = hex(rva)
 
                     str_constant = self.constant_html(val_str, jump_location)
                     str_field_value = self.field_value_html(str_constant)

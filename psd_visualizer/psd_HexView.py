@@ -57,6 +57,8 @@ class psd_HexView(psd_View):
                 specialclass = "final"
             else:
                 specialclass = ""
+            if start_address+i == 0x301f:
+                i=1
 
             str_bytedata += self.html_bytedata(start_address + i, byte, specialclass)
             str_asciidata += self.html_byte_ascii(start_address + i, byte)

@@ -22,7 +22,8 @@ class JsHooks(QObject):
 
     @pyqtSlot(str, str)
     def patch_byte_by_rva(self, rva_address, byte_val_str):
-        self.psd_project.patch_byte_by_rva(str(rva_address), str(byte_val_str))
+        rva_address_int = int(str(rva_address), 16)
+        self.psd_project.patch_byte_by_rva(rva_address_int, str(byte_val_str))
 
     @pyqtSlot()
     def run_executable(self):

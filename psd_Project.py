@@ -46,11 +46,14 @@ class psd_Project:
         #2. save executable
         self.save_executable(temp_filename)
 
-        #3. run
-        subprocess.call([temp_filename])
+        #3. run and wait for it to finish
+        try:
+            subprocess.check_call([temp_filename])
+        except subprocess.CalledProcessError:
+            pass
 
         #4. delete file
-
+        os.remove(temp_filename)
 
     def save_executable(self, filename):
         pe = self.analyzer.pe
