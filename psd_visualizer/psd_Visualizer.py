@@ -41,7 +41,7 @@ class psd_Visualizer:
             else:
                 print "Unknown display type:", display
 
-        print self.addressview_rangemap_list
+        #print self.addressview_rangemap_list
 
     # def get_lines(self, lines_range_tup):
     # return self.addressview_rangemap_list.get_lines(lines_range_tup)

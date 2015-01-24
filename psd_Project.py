@@ -41,7 +41,7 @@ class psd_Project:
             print "Couldn't find a temp file name."
             return
 
-        print self.filename, temp_filename
+        #print self.filename, temp_filename
 
         #2. save executable
         self.save_executable(temp_filename)

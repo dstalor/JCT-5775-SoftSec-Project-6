@@ -31,7 +31,7 @@ class psd_Analyzer(object):
         self.analyze_pe()
 
         #
-        self.pe.print_info()
+        #self.pe.print_info()
 
     def analyze_pe(self):
         """
@@ -163,7 +163,7 @@ class psd_Analyzer(object):
             new_range = psd_MemoryRangeRangeMap(address_range, psd_MemoryRangeMetadata(sec_name, section))
 
             self.address_section_rmp.add_range_map(new_range)
-        print self.address_section_rmp
+        #print self.address_section_rmp
 
     def get_address_range(self):
         """
