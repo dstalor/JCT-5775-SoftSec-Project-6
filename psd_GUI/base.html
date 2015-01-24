@@ -178,7 +178,6 @@
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
             $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
-                //$(this).append('<div id="bookmark-button" style="float: left;"><span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="float: left; margin: 0;"></span></div>');
                 var address = $(this).children(".header-address:first").text();
                 $(this).find('.bookmark-button').css('visibility', 'visible').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
@@ -187,8 +186,10 @@
                     }
                 });
             }).on('mouseleave', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
-                //$(".bookmark-button").remove();
                 $(this).find('.bookmark-button').css('visibility', 'hidden');
+            }).on('click', '.datahex-byte-data', function () {
+                var oldData = $(this).text();
+
             });
         });
         /*       $(function(){
@@ -361,6 +362,18 @@
             background: #DDD;
         }
     </style>
+  <style>
+    /*body { font-size: 62.5%; }*/
+    label, input { display:block; }
+    input.text { margin-bottom:12px; width:95%; padding: .4em; }
+    fieldset { padding:0; border:0; margin-top:25px; }
+    /*h1 { font-size: 1.2em; margin: .6em 0; }*/
+    div#users-contain { width: 350px; margin: 20px 0; }
+    div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+    div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+    .ui-dialog .ui-state-error { padding: .3em; }
+    .validateTips { border: 1px solid transparent; padding: 0.3em; }
+  </style>
 </head>
 
 
@@ -377,6 +390,7 @@
             <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
                                                 aria-controls="dataview" aria-expanded="false">Data View</a></li>
         </ul>
+        <button id="run-program" style="float: right;font-size: 100%;">Run</button>
     </div>
     <div class="center-center">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
@@ -400,7 +414,6 @@
                         <li><a tabindex="-1">Binary</a></li>
                     </ul>
                 </div>
-                <a href="#" class="back-to-prev">Back to last location</a>
             </div>
         </div>
         <div id="info-bar"></div>
@@ -412,5 +425,118 @@
     <div class="east-south">Previous Locations:<button id="back-button">Back</button>
 <div id="previous-locations"></div></div>
 </div>
+<div id="dialog-form" title="Patching Individual Byte">
+    <p class="validateTips">All form fields are required.</p>
+
+    <form>
+        <fieldset>
+            <label for="changeByte-newByte">New Byte</label>
+            <input type="text" name="newByte" id="changeByte-newByte" value=""
+                   class="text ui-widget-content ui-corner-all">
+            <input type="hidden" name="address" id="changeByte-address" value="">
+            <input type="hidden" name="oldByte" id="changeByte-oldByte" value="">
+            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+        </fieldset>
+    </form>
+</div>
+
 </body>
+<script>
+    $(function () {
+        var dialog, form,
+
+                address = $("#changeByte-address"),
+                oldByte = $("#changeByte-oldByte"),
+                newByte = $("#changeByte-newByte"),
+                success = false,
+                allFields = $([]).add(newByte),
+                tips = $(".validateTips");
+
+        function updateTips(t) {
+            tips
+                    .text(t)
+                    .addClass("ui-state-highlight");
+            setTimeout(function () {
+                tips.removeClass("ui-state-highlight", 1500);
+            }, 500);
+        }
+
+        function checkLength(o, min, max) {
+            if (o.val().length > max || o.val().length < min) {
+                o.addClass("ui-state-error");
+                updateTips("Must be exactly 2 characters in length.");
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function checkRegexp(o, regexp, n) {
+            if (!( regexp.test(o.val()) )) {
+                o.addClass("ui-state-error");
+                updateTips(n);
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function setByte() {
+            var valid = true;
+            allFields.removeClass("ui-state-error");
+
+            valid = valid && checkLength(newByte, 2, 2);
+            valid = valid && checkRegexp(newByte, /[0-9a-f]{2}/i, "Byte must be in hexidecimal form");
+
+            if (valid) {
+                success = true;
+                dialog.dialog("close");
+            }
+            return valid;
+        }
+
+        dialog = $("#dialog-form").dialog({
+            autoOpen: false,
+            height: 300,
+            width: 350,
+            modal: true,
+            buttons: {
+                "Set Byte": setByte,
+                Cancel: function () {
+                    dialog.dialog("close");
+                }
+            },
+            close: function () {
+                if (success == true) {
+                    $("span.datahex-byte-data[data-address-rva='" + address.val() + "']").text(newByte.val());
+                    var decVal = hex2dec(newByte.val());
+                    if (decVal >= 32) {
+                        $("span.datahex-byte-ascii[data-address-rva='" + address.val() + "']").html('&#' + decVal + ';');
+                    }
+                    else {
+                        $("span.datahex-byte-ascii[data-address-rva='" + address.val() + "']").text('.');
+                    }
+                    pyObj.patch_byte_by_rva(newByte.val(),address.val());
+                }
+                form[0].reset();
+                success = false;
+                allFields.removeClass("ui-state-error");
+            }
+        });
+
+        form = dialog.find("form").on("submit", function (event) {
+            event.preventDefault();
+            setByte();
+        });
+
+        $(".datahex-byte-data").on("click", function () {
+            var address = $(this).data('addressRva');
+            var oldByte = $(this).text();
+            $("#changeByte-address").val(address);
+            $("#changeByte-oldByte").val(oldByte);
+            dialog.dialog("open");
+        });
+    });
+</script>
 </html>
