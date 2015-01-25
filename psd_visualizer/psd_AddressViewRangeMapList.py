@@ -21,7 +21,7 @@ class psd_AddressViewRangeMapList(RangeMapList):
     def get_all_lines_range(self):
         # we assume that the lines are sorted, so
         start = 0
-        if not self._range_map_lst[-1]:
+        if len(self._range_map_lst) == 0:
             end = 0
         else:
             end = self._range_map_lst[-1].get_view().get_lines()[1]
