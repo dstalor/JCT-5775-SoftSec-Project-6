@@ -25,7 +25,7 @@
             font-family: 'UbuntuMono';
             src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");
         }
-        .center-north {
+        .center-north, .center-center {
             background-color: #252223;
         }
 
@@ -162,7 +162,7 @@
                 pyObj.run_executable();
             });
 
-            jQuery('#back-button').click(function (event) {
+            $('#back-button').click( function (event) {
                 event.preventDefault();
                 var linenum = pyObj.get_line_id_by_address(jumpStack.pop());
                 $('#previous-locations > span:last').remove();
@@ -173,7 +173,7 @@
                 }
                 return false;
             });
-            $("#mixview").find("span.jump").click(function () {
+            $("#mixview").on('click',".jump", function () {
                 var screenAnchor = $(this).closest('.line').find('.header-address').text();
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
@@ -541,7 +541,7 @@
             setByte();
         });
 
-        $(".datahex-byte-data").on("click", function () {
+        $('#mixview').on("click", ".datahex-byte-data", function () {
             var address = $(this).data('addressRva');
             var oldByte = $(this).text();
             $("#changeByte-address").val(address);
