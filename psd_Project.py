@@ -6,21 +6,23 @@ import subprocess
 import os
 
 class psd_Project:
-    def __init__(self, psd, filename=""):
+    def __init__(self, psd, filename=None):
         self.psd = psd
         self.visualizer = psd_Visualizer(self)
         self.analyzer = psd_Analyzer(self)
         self.filename = filename
 
-        if filename != "":
+        if filename != None:
             self.load_executable(filename)
 
     def load_executable(self, filename):
         if self.analyzer.get_pe() is not None:
-            answer = ask_yes_no("There is already file loaded, overwrite?")
-            if answer is 'n':
-                print("File not loaded.")
-                return
+            # answer = ask_yes_no("There is already file loaded, overwrite?")
+            # if answer is 'n':
+            #     print("File not loaded.")
+            #     return
+            #TODO This print is until we have console-view
+            print "There is already file loaded, overwriting"
 
         self.filename = filename
         # This function loads the file, parse it and creates pefile object from it.
@@ -28,6 +30,10 @@ class psd_Project:
         self.visualizer.create_views()
 
     def run_executable(self):
+        if not self.filename:
+            print "Can not run because no executable is loaded!"
+            return
+
         temp_filename = ""
 
         #1. find a temp-name that does not exist already
@@ -52,6 +58,7 @@ class psd_Project:
         #3. run and wait for it to finish
 
         # this command should work only under windows
+        # http://stackoverflow.com/questions/11585168/launch-an-independent-process-with-python
         os.startfile(temp_filename)
 
         #try:
@@ -63,6 +70,10 @@ class psd_Project:
         #os.remove(temp_filename)
 
     def save_executable(self, filename):
+        if not self.filename:
+            print "Can not save because no executable is loaded!"
+            return
+
         pe = self.analyzer.pe
         pe.write(filename)
 
@@ -72,6 +83,10 @@ class psd_Project:
         :param byte_val_str: string with the byte value, like "ff" or "01"
         :return:
         """
+        if not self.filename:
+            print "Can not patch file because no executable is loaded!"
+            return
+
         byte_str = byte_val_str.decode('hex')
         pe = self.analyzer.pe
 

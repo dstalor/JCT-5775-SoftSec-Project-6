@@ -25,6 +25,9 @@
             font-family: 'UbuntuMono';
             src: url("qrc:/fonts/ubuntu-mono/UbuntuMono-R.ttf") format("truetype");
         }
+        body {
+            background-color: #252223;
+        }
 
         .center-north {
             background-color: #252223;
@@ -155,6 +158,10 @@
                 }
             });
             $('#myTab').find('a[href="#mixview"]').tab('show');
+            $('#load-executable').click(function(event) {
+                pyObj.load_executable();
+                $("#mixview").html(pyObj.visualizer_lines);
+            });
             $('#run-program').click(function(event) {
                 pyObj.run_executable();
             });
@@ -398,6 +405,7 @@
                                                 aria-controls="dataview" aria-expanded="false">Data View</a></li>
         </ul>
         <button id="run-program" style="float: right;font-size: 100%;">Run</button>
+        <button id="load-executable" style="float: right;font-size: 100%;">Load</button>
     </div>
     <div class="center-center">
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">

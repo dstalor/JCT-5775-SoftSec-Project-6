@@ -1,5 +1,5 @@
 from psd_Project import *
-from psd_GUI.GUI import psdGUI
+from psd_GUI.psd_GUI import psd_GUI
 
 
 class psd:
@@ -17,22 +17,16 @@ def test_HexView(psd_project):
     hv.get_html_lines((0, 50))
 
 
-def test_GUI(psd):
-    psd_GUI = psdGUI(psd)
-    psd_GUI.run()
-
-
 if __name__ == "__main__":
     psd_main = psd()
-    psd_GUI = psdGUI(psd)
-    filename = psdGUI.get_filename(psd_GUI)
-    psd_main.create_new_project(filename)
+    psd_main.create_new_project()
 
     # psd_main.psd_project.pe.print_info()
 
     # tests
     # test_HexView(psd_main.psd_project)
-    test_GUI(psd_main)
 
-
+    psd_GUI = psd_GUI(psd_main)
+    #filename = psd_GUI.get_filename()
+    psd_GUI.run()
 
