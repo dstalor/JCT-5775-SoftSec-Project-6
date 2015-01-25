@@ -29,10 +29,12 @@ class psd_Project:
 
     def run_executable(self):
         temp_filename = ""
+
         #1. find a temp-name that does not exist already
+        #TODO This is temporary for our POC. Ideally we will ask the user for the file name
 
         for i in xrange(maxint):
-            temp_filename = self.filename+"_temp_"+str(i)
+            temp_filename = self.filename+"_temp_"+str(i)+".exe"
             if os.path.isfile(temp_filename):
                 continue
             else:
@@ -41,19 +43,24 @@ class psd_Project:
             print "Couldn't find a temp file name."
             return
 
-        #print self.filename, temp_filename
+        print "Creating temporary file: ",temp_filename
+        print "Please delete it manually, currently delete mechanizem is not implemented! "
 
         #2. save executable
         self.save_executable(temp_filename)
 
         #3. run and wait for it to finish
-        try:
-            subprocess.check_call([temp_filename])
-        except subprocess.CalledProcessError:
-            pass
+
+        # this command should work only under windows
+        os.startfile(temp_filename)
+
+        #try:
+        #    subprocess.check_call([temp_filename])
+        #except subprocess.CalledProcessError:
+        #     pass
 
         #4. delete file
-        os.remove(temp_filename)
+        #os.remove(temp_filename)
 
     def save_executable(self, filename):
         pe = self.analyzer.pe
@@ -67,5 +74,8 @@ class psd_Project:
         """
         byte_str = byte_val_str.decode('hex')
         pe = self.analyzer.pe
+
+        #TODO Add here update to disassembly
+
         pe.set_bytes_at_rva(rva_address, byte_str)
 

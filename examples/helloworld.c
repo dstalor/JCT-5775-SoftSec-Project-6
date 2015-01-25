@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<conio.h>
 
 int main()
 {
@@ -12,6 +13,8 @@ int main()
 	{
 		printf("Goodbye world!;-(\n");
 	}
-		
+	
+	getch();
+	
 	return 0;
 }
