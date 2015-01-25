@@ -139,7 +139,7 @@
                 $(this).tab('show')
             });
             $("#mixview").html(pyObj.visualizer_lines);
-            $('#mixview').find('.constant').contextmenu({
+            $('#mixview').find('span.constant').contextmenu({
                 target: '#context-menu-constant',
                 onItem: function (context, e) {
                     if ($(e.target).text().localeCompare("Hexadecimal") == 0) {
@@ -173,8 +173,8 @@
                 }
                 return false;
             });
-            $("#mixview").on('click',".jump", function () {
-                var screenAnchor = $(this).closest('.line').find('.header-address').text();
+            $("#mixview").on('click',"span.jump", function () {
+                var screenAnchor = $(this).closest('span.line').find('.header-address').text();
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
@@ -187,16 +187,16 @@
                 $('#' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#' + linenum).effect("highlight", {}, 1500);
             });
-            $('#mixview').on('mouseenter', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
+            $('#mixview').on('mouseenter', 'span.datahex-row-header, span.codeview-row-header, span.headerview-row-header', function () {
                 var address = $(this).children(".header-address:first").text();
-                $(this).find('.bookmark-button').css('visibility', 'visible').click(function () {
+                $(this).find('div.bookmark-button').css('visibility', 'visible').click(function () {
                     if (bookmarks.indexOf(address) == -1) {
                         $("#bookmark-list").append('<span class="jump" data-jump-location="' + address + '">' + address + '<br /></span>');
                         bookmarks.push(address);
                     }
                 });
-            }).on('mouseleave', '.datahex-row-header, .codeview-row-header, .headerview-row-header', function () {
-                $(this).find('.bookmark-button').css('visibility', 'hidden');
+            }).on('mouseleave', 'span.datahex-row-header, span.codeview-row-header, span.headerview-row-header', function () {
+                $(this).find('div.bookmark-button').css('visibility', 'hidden');
             }).on('click', '.datahex-byte-data', function () {
                 var oldData = $(this).text();
 
@@ -541,7 +541,7 @@
             setByte();
         });
 
-        $('#mixview').on("click", ".datahex-byte-data", function () {
+        $('#mixview').on("click", "span.datahex-byte-data", function () {
             var address = $(this).data('addressRva');
             var oldByte = $(this).text();
             $("#changeByte-address").val(address);
