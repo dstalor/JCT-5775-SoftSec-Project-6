@@ -11,12 +11,21 @@ class psd_AddressViewRangeMapList(RangeMapList):
         for rm in self._range_map_lst:
             base_line = rm.update_line_range(base_line)
 
-    def get_html_lines(self, lines_range):
-        str = ""
+    def get_html_line(self, line_id):
+        line_str=""
         for rm in self._range_map_lst:
             view = rm.get_obj()
-            str += view.get_html_lines(lines_range)
-        return str
+            line_str = view.get_html_lines((line_id, line_id))
+            if line_str != "":
+                break
+        return line_str
+
+    def get_html_lines(self, lines_range):
+        str_lst = []
+        for rm in self._range_map_lst:
+            view = rm.get_obj()
+            str_lst.append(view.get_html_lines(lines_range))
+        return ''.join(str_lst)
 
     def get_all_lines_range(self):
         # we assume that the lines are sorted, so

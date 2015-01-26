@@ -1,15 +1,16 @@
 from psd_HexView import psd_HexView
 from psd_CodeView import psd_CodeView
 from psd_HeaderView import psd_HeaderView
-
+from psd_HTMLGenerator import *
 from psd_AddressViewRangeMap import psd_AddressViewRangeMap
 from psd_AddressViewRangeMapList import psd_AddressViewRangeMapList
 
-
+#TODO: This class should be changed by desgin to represent a collaction of views combined to one linear view
 class psd_Visualizer:
     def __init__(self, psd_project):
         self.psd_project = psd_project
         self.addressview_rangemap_list = psd_AddressViewRangeMapList()
+        self.psd_html_generator = psd_HTMLGenerator()
 
     def add_view(self, addressrange, view):
         self.addressview_rangemap_list.add_range_map(psd_AddressViewRangeMap(addressrange, view))
@@ -43,9 +44,20 @@ class psd_Visualizer:
 
         #print self.addressview_rangemap_list
 
-    # def get_lines(self, lines_range_tup):
-    # return self.addressview_rangemap_list.get_lines(lines_range_tup)
-    #
+    def get_all_html_empty_lines(self):
+        lines_range = self.addressview_rangemap_list.get_all_lines_range()
+        str_line_list = []
+        for line_idx in xrange(lines_range[0], lines_range[1]+1):
+            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, "."))
+
+        return ''.join(str_line_list)
+
+    def get_html_line(self, line_id):
+        return self.addressview_rangemap_list.get_html_line(line_id)
+
+    def get_html_lines(self, lines_range_tup):
+        return self.addressview_rangemap_list.get_html_lines(lines_range_tup)
+
     def get_all_html_lines(self):
         return self.addressview_rangemap_list.get_all_html_lines()
 

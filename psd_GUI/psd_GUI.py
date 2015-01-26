@@ -31,6 +31,15 @@ class JsHooks(QObject):
     def load_executable(self):
         self.psd_gui.load_executable_gui()
 
+    @pyqtSlot()
+    def get_all_html_empty_lines(self):
+        self.visualizer.get_all_html_empty_lines()
+
+    @pyqtSlot()
+    def get_html_line(self, line_id_str):
+        line_id = str(line_id_str)
+        self.visualizer.get_html_line(line_id)
+
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 
 class psd_GUI(object):

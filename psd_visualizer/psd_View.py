@@ -1,3 +1,5 @@
+from psd_HTMLGenerator import *
+
 class psd_View(object):
     def __init__(self, pe, memory_range):
         self._memory_range = memory_range
@@ -5,6 +7,7 @@ class psd_View(object):
         self._memory_range_metadata = memory_range.get_memory_range_metadata()
         self._pe = pe
         self._line_range = (0, 0)
+        self._html_generator = psd_HTMLGenerator()
 
     def update_line_range(self, base_line):
         linecount = self.calculate_line_count()
@@ -43,10 +46,6 @@ class psd_View(object):
         else:
             return None
 
-    def html_line_wrap(self, line_num, line_str):
-        parity = "line-even" if line_num % 2 == 0 else "line-odd"
-        return "<span class=\"line {0}\" id=\"{1:d}\">{2}</span>".format(parity, line_num, line_str)
-
     def get_html_lines(self, line_range_tup):
         intersect_lines = self.get_lines_intersection(line_range_tup)
         if not intersect_lines:
@@ -59,7 +58,7 @@ class psd_View(object):
 
         str_out = ""
         for i, hline in enumerate(html_lines):
-            str_out += self.html_line_wrap(start_line_id + i, hline)
+            str_out += self._html_generator.html_line_wrap(start_line_id + i, hline)
 
         return str_out
 
