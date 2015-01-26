@@ -48,7 +48,7 @@ class psd_Visualizer:
         lines_range = self.addressview_rangemap_list.get_all_lines_range()
         str_line_list = []
         for line_idx in xrange(lines_range[0], lines_range[1]+1):
-            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, "."))
+            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
 
         return ''.join(str_line_list)
 

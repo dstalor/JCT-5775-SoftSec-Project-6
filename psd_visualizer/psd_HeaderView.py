@@ -52,8 +52,8 @@ class psd_HeaderView(psd_View):
                     val_str = ''.join(filter(lambda c:c != '\0', str(val)))
                     str_field_value = self.field_value_html(val_str)
 
-                self.html_lines.append(str_rowheader + str_field_name + str_field_value + str_more_info+ "\n")
-        self.html_lines.append("\n")
+                self.html_lines.append(str_rowheader + str_field_name + str_field_value + str_more_info)
+        self.html_lines.append("")
 
     def get_html_line_list(self, line_range_tup):
         return self.html_lines[line_range_tup[0]: line_range_tup[1]+1]

@@ -164,11 +164,14 @@
                 $('span.line').onScreen({
                     container: 'div.center-center',
                     doIn: function () {
-                        $(this).text("hi mom")
-                    },
+                        var lineHtml = pyObj.get_html_line($(this).attr('id'));
+                        $(this).html(lineHtml);
+                    },/*
                     doOut: function () {
-                        alert($(this).attr('id') + "leaving");
-                    }
+                        $(this).text(".");
+                    },*/
+                    tolerance: -200,
+                    throttle: 100
                 });
             });
             $('#run-program').click(function(event) {
