@@ -1,26 +1,21 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file alias="js/jQuery.min.js">js/jquery-1.11.2.min.js</file>
-    <file>js/bootstrap.js</file>
     <file>js/bootstrap.min.js</file>
     <file>js/bootstrap-contextmenu.js</file>
     <file>js/npm.js</file>
     <file>js/jquery.onscreen.js</file>
     <file>js/jquery-ui.min.js</file>
     <file>js/jquery.layout_and_plugins.js</file>
-    <file>js/jquery.selection.js</file>
-    <file>js/jquery.ui.position.js</file>
     <file>js/jquery.contextMenu.js</file>
     <file>fonts/glyphicons-halflings-regular.eot</file>
     <file>fonts/glyphicons-halflings-regular.svg</file>
     <file>fonts/glyphicons-halflings-regular.ttf</file>
     <file>fonts/glyphicons-halflings-regular.woff</file>
     <file>fonts/ubuntu-mono/UbuntuMono-R.ttf</file>
-    <file>css/jquery-ui.css</file>
     <file>css/jquery-ui.min.css</file>
     <file>css/jquery-ui.structure.min.css</file>
     <file>css/jquery-ui.theme.min.css</file>
-    <file>css/bootstrap.css</file>
     <file>css/bootstrap.css.map</file>
     <file>css/bootstrap.min.css</file>
     <file>css/bootstrap-theme.css</file>
