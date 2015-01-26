@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link href="qrc:/css/bootstrap.min.css" rel="stylesheet">
     <link href="qrc:/css/jquery-ui.css" rel="stylesheet">
-    <link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">
+    <!--<link href="qrc:/css/layout-default.css" rel="stylesheet" type="text/css">-->
     <link href="qrc:/css/jquery.contextMenu.css" rel="stylesheet" type="text/css"/>
 
     <script src="qrc:/js/jQuery.min.js"></script>
@@ -16,7 +16,7 @@
     <!--<script src="qrc:/js/bootstrap-contextmenu.js"></script>-->
     <script src="qrc:/js/jquery.onscreen.js"></script>
     <script src="qrc:/js/jquery-ui.min.js"></script>
-    <script src="qrc:/js/jquery.layout_and_plugins.js"></script>
+    <!--<script src="qrc:/js/jquery.layout_and_plugins.js"></script>-->
     <script src="qrc:/js/jquery.ui.position.js" type="text/javascript"></script>
     <script src="qrc:/js/jquery.contextMenu.js" type="text/javascript"></script>
 
@@ -162,16 +162,15 @@
                 $("#mixview").html(pyObj.get_all_html_empty_lines());
 
                 $('span.line').onScreen({
-                    container: 'div.center-center',
+                    //container: 'div.center-center',
                     doIn: function () {
                         var lineHtml = pyObj.get_html_line($(this).attr('id'));
                         $(this).html(lineHtml);
-                    },/*
+                    },
                     doOut: function () {
-                        $(this).text(".");
-                    },*/
-                    tolerance: -200,
-                    throttle: 100
+                        $(this).html(".");
+                    },
+                    throttle: 50
                 });
             });
             $('#run-program').click(function(event) {
@@ -328,6 +327,7 @@
         }
     </script>
     <script type="text/javascript">
+/*
 
         $(document).ready(function () {
 
@@ -368,6 +368,7 @@
 
         });
 
+*/
     </script>
     <style type="text/css">
         /* remove padding & scrolling from panes that are 'containers' for nested layouts */
@@ -404,7 +405,7 @@
 
 
 <body>
-<div class="outer-center">
+<!--<div class="outer-center">
     <div class="center-north">
         <ul id="myTab" class="nav nav-tabs" role="tablist">
             <li role="presentation" class=""><a href="#mixview" role="tab" id="mixview-tab"
@@ -419,7 +420,9 @@
         <button id="run-program" style="float: right;font-size: 100%;">Run</button>
         <button id="load-executable" style="float: right;font-size: 100%;">Load</button>
     </div>
-    <div class="center-center">
+    <div class="center-center">-->
+<button id="run-program" style="float: right;font-size: 100%;">Run</button>
+        <button id="load-executable" style="float: right;font-size: 100%;">Load</button>
         <div class="bs-example bs-example-tabs" role="tabpanel" data-example-id="togglable-tabs">
             <div id="myTabContent" class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="mixview"
@@ -444,8 +447,9 @@
             </div>
         </div>
         <div id="info-bar"></div>
-    </div>
-</div>
+<!--    </div>
+</div>-->
+<!--
 
 <div class="outer-east">
     <div class="east-center">Bookmarks:<div id="bookmark-list"></div></div>
@@ -462,11 +466,12 @@
                    class="text ui-widget-content ui-corner-all">
             <input type="hidden" name="address" id="changeByte-address" value="">
             <input type="hidden" name="oldByte" id="changeByte-oldByte" value="">
-            <!-- Allow form submission with keyboard without duplicating the dialog button -->
+            &lt;!&ndash; Allow form submission with keyboard without duplicating the dialog button &ndash;&gt;
             <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </fieldset>
     </form>
 </div>
+-->
 
 </body>
 <script>
