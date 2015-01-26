@@ -164,13 +164,15 @@
                 $('span.linechunk').onScreen({
                     //container: 'div.center-center',
                     doIn: function () {
+                        alert($(this).attr('id') + " coming in");
                         var linechunkHtml = pyObj.get_linechunk($(this).attr('id'));
                         $(this).html(linechunkHtml);
                     },
                     doOut: function () {
+                        alert($(this).attr('id') + " leaving");
                         $(this).html(".\n".repeat(100));
                     },
-                    throttle: 50
+                    throttle: 100
                 });
             });
             $('#run-program').click(function(event) {
