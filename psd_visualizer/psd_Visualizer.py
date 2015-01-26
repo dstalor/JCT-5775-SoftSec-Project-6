@@ -11,6 +11,7 @@ class psd_Visualizer:
         self.psd_project = psd_project
         self.addressview_rangemap_list = psd_AddressViewRangeMapList()
         self.psd_html_generator = psd_HTMLGenerator()
+        self.lineschunk_size = 100
 
     def add_view(self, addressrange, view):
         self.addressview_rangemap_list.add_range_map(psd_AddressViewRangeMap(addressrange, view))
@@ -70,3 +71,9 @@ class psd_Visualizer:
         else:
             return -1
 
+    ## Experimental:
+    def get_lineschunk(self, lineschunk_id):
+        start_line = lineschunk_id*self.lineschunk_size
+        linesrange = (start_line, start_line + self.lineschunk_size)
+        html_lines_str = self.get_html_lines(linesrange)
+        return self.psd_html_generator.html_lineschunk_wrap(lineschunk_id, html_lines_str)
