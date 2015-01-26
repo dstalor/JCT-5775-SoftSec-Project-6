@@ -5,7 +5,7 @@
     <file>js/bootstrap.min.js</file>
     <file>js/bootstrap-contextmenu.js</file>
     <file>js/npm.js</file>
-    <file>js/jquery.onscreen.min.js</file>
+    <file>js/jquery.onscreen.js</file>
     <file>js/jquery-ui.min.js</file>
     <file>js/jquery.layout_and_plugins.js</file>
     <file>js/jquery.selection.js</file>

@@ -31,19 +31,19 @@ class JsHooks(QObject):
     def load_executable(self):
         self.psd_gui.load_executable_gui()
 
-    @pyqtSlot()
+    @pyqtSlot(result=str)
     def get_all_html_empty_lines(self):
-        self.visualizer.get_all_html_empty_lines()
+        return self.visualizer.get_all_html_empty_lines()
 
-    @pyqtSlot()
+    @pyqtSlot(str, result=str)
     def get_html_line(self, lineid_str):
         line_id = int(lineid_str)
-        self.visualizer.get_html_line(line_id)
+        return self.visualizer.get_html_line(line_id)
 
-    @pyqtSlot()
+    @pyqtSlot(str, str, result=str)
     def get_html_lines(self, start_lineid_str, end_lineid_str):
         linerange = (int(start_lineid_str), int(end_lineid_str))
-        self.visualizer.get_html_lines(linerange)
+        return self.visualizer.get_html_lines(linerange)
     
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 

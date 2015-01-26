@@ -14,7 +14,7 @@
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
     <!--<script src="qrc:/js/bootstrap-contextmenu.js"></script>-->
-    <script src="qrc:/js/jquery.onscreen.min.js"></script>
+    <script src="qrc:/js/jquery.onscreen.js"></script>
     <script src="qrc:/js/jquery-ui.min.js"></script>
     <script src="qrc:/js/jquery.layout_and_plugins.js"></script>
     <script src="qrc:/js/jquery.ui.position.js" type="text/javascript"></script>
@@ -138,7 +138,10 @@
                 e.preventDefault()
                 $(this).tab('show')
             });
-            $("#mixview").html(pyObj.visualizer_lines);
+            //$("#mixview").html(pyObj.get_all_html_empty_lines());
+           /* $(document).on( 'scroll', '#mixview', function () {
+               $('span.line').text('hi dad');
+            });*/
             $('#mixview').find('span.constant').contextmenu({
                 target: '#context-menu-constant',
                 onItem: function (context, e) {
@@ -154,9 +157,19 @@
                 }
             });
             $('#myTab').find('a[href="#mixview"]').tab('show');
-            $('#load-executable').click(function(event) {
+            $('#load-executable').click(function (event) {
                 pyObj.load_executable();
-                $("#mixview").html(pyObj.visualizer_lines);
+                $("#mixview").html(pyObj.get_all_html_empty_lines());
+
+                $('span.line').onScreen({
+                    container: 'div.center-center',
+                    doIn: function () {
+                        $(this).text("hi mom")
+                    },
+                    doOut: function () {
+                        alert($(this).attr('id') + "leaving");
+                    }
+                });
             });
             $('#run-program').click(function(event) {
                 pyObj.run_executable();
