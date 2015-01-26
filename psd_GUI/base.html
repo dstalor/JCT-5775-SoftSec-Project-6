@@ -161,14 +161,14 @@
                 pyObj.load_executable();
                 $("#mixview").html(pyObj.get_all_html_empty_lines());
 
-                $('span.line').onScreen({
+                $('span.linechunk').onScreen({
                     //container: 'div.center-center',
                     doIn: function () {
-                        var lineHtml = pyObj.get_html_line($(this).attr('id'));
-                        $(this).html(lineHtml);
+                        var linechunkHtml = pyObj.get_linechunk($(this).attr('id'));
+                        $(this).html(linechunkHtml);
                     },
                     doOut: function () {
-                        $(this).html(".");
+                        $(this).html(".\n".repeat(100));
                     },
                     throttle: 50
                 });

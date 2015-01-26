@@ -36,6 +36,11 @@ class JsHooks(QObject):
         return self.visualizer.get_all_html_empty_lines()
 
     @pyqtSlot(str, result=str)
+    def get_linechunk(self, linechunkid_str):
+        linechunk_id = int(linechunkid_str)
+        return self.visualizer.get_linechunk(linechunk_id)
+
+    @pyqtSlot(str, result=str)
     def get_html_line(self, lineid_str):
         line_id = int(lineid_str)
         return self.visualizer.get_html_line(line_id)
