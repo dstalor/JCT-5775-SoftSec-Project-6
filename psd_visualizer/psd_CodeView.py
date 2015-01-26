@@ -8,20 +8,21 @@ __author__ = 'Noam'
 class psd_CodeView(psd_View):
     def __init__(self, pe, memory_range):
         super(psd_CodeView, self).__init__(pe, memory_range)
-        self._code_lines = memory_range.get_memory_range_metadata().get_code_lines()
+        self._psd_code_lines = memory_range.get_memory_range_metadata().get_psd_code_lines()
 
     def calculate_line_count(self):
-        if not self._code_lines:
+        if not self._psd_code_lines:
             return 0
         else:
-            return len(self._code_lines)
+            return len(self._psd_code_lines.get_clines())
 
     def get_html_line_list(self, line_range_tup):
         (line_start, line_end) = line_range_tup
 
         html_lines = []
+        code_lines = self._psd_code_lines.get_clines()
         for l_idx in range(line_start, line_end):
-            line = self._code_lines[l_idx]
+            line = code_lines[l_idx]
             line_str = self.html_line(line)
             html_lines.append(line_str)
 
@@ -105,7 +106,8 @@ class psd_CodeView(psd_View):
         return ("<span class=\"{0}\""+jump_str+">{1}</span>").format(class_str, constant_str)
 
     def find_line_by_address(self, address):
-        for id, l in enumerate(self._code_lines):
+        code_lines = self._psd_code_lines.get_clines()
+        for id, l in enumerate(code_lines):
             address_start = l.address
             address_end = address_start + (l.size - 1)
             #print "id:",id,"start:",hex(address_start),"end:",hex(address_end),"address:",hex(address)

@@ -90,7 +90,12 @@ class psd_Project:
         byte_str = byte_val_str.decode('hex')
         pe = self.analyzer.pe
 
-        #TODO Add here update to disassembly
-
         pe.set_bytes_at_rva(rva_address, byte_str)
+
+        # update disassembly if the address is in a memory code range
+        rm = self.analyzer.get_address_section_rmp().get_rm_by_value(rva_address)
+        metadata = rm.get_memory_range_metadata()
+        if metadata.get_is_code() == True:
+            self.analyzer.disassemble_memory_range(rm)
+
 

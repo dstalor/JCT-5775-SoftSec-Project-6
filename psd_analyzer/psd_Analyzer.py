@@ -188,10 +188,10 @@ class psd_Analyzer(object):
         for rm in self.address_section_rmp.get_range_map_lst():
             sec_name = rm.get_memory_range_metadata().get_range_name()
             if sec_name == ".text":
-                self.disassemble_memory_range(rm)
+                self.set_memory_range_as_code(rm)
                 break
 
-    def disassemble_memory_range(self, memoryrange_rm):
+    def set_memory_range_as_code(self, memoryrange_rm):
         """
         Analyze a memory range as a code
         :param memoryrange_rm: MemoryRangeRangeMap
@@ -201,10 +201,21 @@ class psd_Analyzer(object):
         metadata.set_is_code(True)
         metadata.set_display("codeview")
 
+        self.disassemble_memory_range(memoryrange_rm)
+
+    def disassemble_memory_range(self, memoryrange_rm):
+        """
+        disassemble memory range data
+        :param memoryrange_rm: MemoryRangeRangeMap
+        :return: none
+        """
+        metadata = memoryrange_rm.get_memory_range_metadata()
+
         start, end = memoryrange_rm.get_range()
         code_bytes = self.pe.get_memory_mapped_image()[start: end+1]
 
-        metadata.set_code_lines(self.disassemble_bytes(start, code_bytes))
+        clines = self.disassemble_bytes(start, code_bytes)
+        metadata.get_psd_code_lines().set_clines(clines)
 
     def disassemble_bytes(self, start_address, code_bytes):
         return [line for line in self.disassembler.disasm(code_bytes, start_address)]

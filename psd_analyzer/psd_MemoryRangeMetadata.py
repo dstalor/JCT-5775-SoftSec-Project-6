@@ -1,16 +1,16 @@
-__author__ = 'Noam'
+from psd_CodeLines import *
 
 class psd_MemoryRangeMetadata(object):
     """
     This class is encapsulation of meta-data about the different memory ranges.
     """
-    def __init__(self, range_name = "", section = None , display = "hexview", is_code = False, code_lines = [], header = None ):
+    def __init__(self, range_name = "", section = None , display = "hexview", is_code = False, psd_code_lines = psd_CodeLines([]), header = None ):
         self._range_name=range_name
         #self.section_name=section_name
         self._section=section
         self._display=display
         self._is_code=is_code
-        self._code_lines=code_lines
+        self._psd_code_lines = psd_code_lines
         self._header = header
 
     def __str__(self):
@@ -40,11 +40,11 @@ class psd_MemoryRangeMetadata(object):
     def set_is_code(self, is_code):
         self._is_code = is_code
 
-    def get_code_lines(self):
-        return self._code_lines
+    def get_psd_code_lines(self):
+        return self._psd_code_lines
 
-    def set_code_lines(self, code_lines):
-        self._code_lines = code_lines
+    def set_psd_code_lines(self, code_lines):
+        self._psd_code_lines = code_lines
 
     def get_header(self):
         return self._header
