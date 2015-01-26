@@ -37,7 +37,7 @@ class JsHooks(QObject):
 
     @pyqtSlot()
     def get_html_line(self, line_id_str):
-        line_id = str(line_id_str)
+        line_id = int(line_id_str)
         self.visualizer.get_html_line(line_id)
 
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
