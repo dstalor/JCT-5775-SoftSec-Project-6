@@ -4,14 +4,14 @@ from psd_HeaderView import psd_HeaderView
 from psd_HTMLGenerator import *
 from psd_AddressViewRangeMap import psd_AddressViewRangeMap
 from psd_AddressViewRangeMapList import psd_AddressViewRangeMapList
-
+import math
 #TODO: This class should be changed by desgin to represent a collaction of views combined to one linear view
 class psd_Visualizer:
     def __init__(self, psd_project):
         self.psd_project = psd_project
         self.addressview_rangemap_list = psd_AddressViewRangeMapList()
         self.psd_html_generator = psd_HTMLGenerator()
-        self.lineschunk_size = 100
+        self.linechunk_size = 100
 
     def add_view(self, addressrange, view):
         self.addressview_rangemap_list.add_range_map(psd_AddressViewRangeMap(addressrange, view))
@@ -47,11 +47,20 @@ class psd_Visualizer:
 
     def get_all_html_empty_lines(self):
         lines_range = self.addressview_rangemap_list.get_all_lines_range()
-        str_line_list = []
-        for line_idx in xrange(lines_range[0], lines_range[1]+1):
-            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
+        range_length =  (lines_range[1]-lines_range[0]) + 1
+        linechunks = int(math.ceil(range_length / self.linechunk_size))
+        str_chunk_list = []
+        for lchunk in xrange(linechunks):
+            str_line_list = []
+            start_line = lines_range[0] + lchunk * self.linechunk_size
+            end_line = min(start_line + self.linechunk_size, lines_range[1])
+            for line_idx in xrange(start_line,end_line +1):
+                str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
 
-        return ''.join(str_line_list)
+            chunk_html = self.psd_html_generator.html_lineschunk_wrap(lchunk, ''.join(str_line_list))
+            str_chunk_list.append(chunk_html)
+
+        return ''.join(str_chunk_list)
 
     def get_html_line(self, line_id):
         return self.addressview_rangemap_list.get_html_line(line_id)
@@ -72,8 +81,8 @@ class psd_Visualizer:
             return -1
 
     ## Experimental:
-    def get_lineschunk(self, lineschunk_id):
-        start_line = lineschunk_id*self.lineschunk_size
-        linesrange = (start_line, start_line + self.lineschunk_size)
+    def get_linechunk(self, lineschunk_id):
+        start_line = lineschunk_id*self.linechunk_size
+        linesrange = (start_line, start_line + self.linechunk_size)
         html_lines_str = self.get_html_lines(linesrange)
         return self.psd_html_generator.html_lineschunk_wrap(lineschunk_id, html_lines_str)
