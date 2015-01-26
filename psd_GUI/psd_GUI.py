@@ -36,10 +36,15 @@ class JsHooks(QObject):
         self.visualizer.get_all_html_empty_lines()
 
     @pyqtSlot()
-    def get_html_line(self, line_id_str):
-        line_id = int(line_id_str)
+    def get_html_line(self, lineid_str):
+        line_id = int(lineid_str)
         self.visualizer.get_html_line(line_id)
 
+    @pyqtSlot()
+    def get_html_lines(self, start_lineid_str, end_lineid_str):
+        linerange = (int(start_lineid_str), int(end_lineid_str))
+        self.visualizer.get_html_lines(linerange)
+    
     visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 
 class psd_GUI(object):
