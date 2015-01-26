@@ -132,6 +132,9 @@
     <script>
         var jumpStack = [];
         var bookmarks = [];
+        String.prototype.repeat = function(n) {
+            return new Array(1 + (n || 0)).join(this);
+        };
         $(document).ready(function () {
             $('#myTab a').click(function (e) {
                 e.preventDefault()
@@ -163,15 +166,15 @@
                 $('span.linechunk').onScreen({
                     //container: 'div.center-center',
                     doIn: function () {
-                        alert($(this).attr('id') + " coming in");
+                        //alert($(this).attr('id') + " coming in");
                         var linechunkHtml = pyObj.get_linechunk($(this).attr('id'));
                         $(this).html(linechunkHtml);
                     },
                     doOut: function () {
-                        alert($(this).attr('id') + " leaving");
-                        $(this).html(".\n".repeat(100));
+                        //alert($(this).attr('id') + " leaving");
+                        $(this).text(".\n".repeat(100));
                     },
-                    throttle: 100
+                    tolerance: -200
                 });
             });
             $('#run-program').click(function(event) {
