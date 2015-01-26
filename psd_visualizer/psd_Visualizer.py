@@ -85,4 +85,5 @@ class psd_Visualizer:
         start_line = lineschunk_id*self.linechunk_size
         linesrange = (start_line, start_line + self.linechunk_size)
         html_lines_str = self.get_html_lines(linesrange)
-        return self.psd_html_generator.html_lineschunk_wrap(lineschunk_id, html_lines_str)
+        return html_lines_str
+        #return self.psd_html_generator.html_lineschunk_wrap(lineschunk_id, html_lines_str)
