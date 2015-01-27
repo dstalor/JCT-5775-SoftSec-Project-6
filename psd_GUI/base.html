@@ -126,6 +126,7 @@
     <script>
         var jumpStack = [];
         var bookmarks = [];
+        var highlightBuffer = [];
         String.prototype.repeat = function (n) {
             return new Array(1 + (n || 0)).join(this);
         };
@@ -157,8 +158,16 @@
                 $('span.linechunk').onScreen({
                     container: 'div.center-center',
                     doIn: function () {
-                        var linechunkHtml = pyObj.get_linechunk($(this).attr('id'));
+                        var linechunkId = $(this).attr('id');
+                        var linechunkHtml = pyObj.get_linechunk(linechunkId);
                         $(this).html(linechunkHtml);
+                        var topHighlight = highlightBuffer.pop();
+                        if ($('#line-' + topHighlight).closest('span.linechunk').attr('id') == linechunkId) {
+                            $('#line-' + topHighlight).effect("highlight", {}, 1500);
+                        }
+                        else {
+                            highlightBuffer.push(topHighlight);
+                        }
                     },
                     doOut: function () {
                         var linechunkHtml_empty = pyObj.get_linechunk_empty_lines($(this).attr('id'));
@@ -176,9 +185,14 @@
             $('#back-button').click(function (event) {
                 event.preventDefault();
                 var linenum = pyObj.get_line_id_by_address(jumpStack.pop());
-                $('#previous-locations > span:last').remove();
+                $('#previous-locations > span:first').remove();
                 $('#line-' + (linenum - 12))[0].scrollIntoView();
-                $('#line-' + linenum).effect("highlight", {}, 1500);
+                if ($('#line-' + linenum).closest('span.linechunk').hasClass("onscreen")){
+                    $('#line-' + linenum).effect("highlight", {}, 1500);
+                }
+                else {
+                    highlightBuffer.push(linenum);
+                }
                 if (jumpStack.length == 0) {
                     $('#back-button').fadeOut();
                 }
@@ -187,19 +201,26 @@
             $("#mixview").on('click', "span.jump", function () {
                 var screenAnchor = $(this).closest('span.line').find('.header-address').text();
                 jumpStack.push(screenAnchor);
-                $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
+                $('#previous-locations').prepend('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                alert('linenum: ' + linenum);
                 $('#line-' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
-                $('#line-' + linenum).effect("highlight", {}, 1500);
+                if ($('#line-' + linenum).closest('span.linechunk').hasClass("onscreen")){
+                    $('#line-' + linenum).effect("highlight", {}, 1500);
+                }
+                else {
+                    highlightBuffer.push(linenum);
+                }
                 $('#back-button').fadeIn();
             });
             $('#previous-locations, #bookmark-list').on('click', '.jump', function () {
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
-                alert('linenum: ' + linenum);
                 $('#line-' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
-                $('#line-' + linenum).effect("highlight", {}, 1500);
-            });
+                if ($('#line-' + linenum).closest('span.linechunk').hasClass("onscreen")){
+                    $('#line-' + linenum).effect("highlight", {}, 1500);
+                }
+                else {
+                    highlightBuffer.push(linenum);
+                }            });
             $('#mixview').on('mouseenter', 'span.datahex-row-header, span.codeview-row-header, span.headerview-row-header', function () {
                 var address = $(this).children(".header-address:first").text();
                 $(this).find('div.bookmark-button').css('visibility', 'visible').click(function () {
