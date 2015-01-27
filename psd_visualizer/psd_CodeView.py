@@ -34,7 +34,7 @@ class psd_CodeView(psd_View):
         str_mnemonic = self.html_mnemonic(line.mnemonic)
         str_operands = self.html_operands(line)
 
-        return str_rowheader + str_opcode + str_mnemonic + str_operands + "\n"
+        return str_rowheader + str_opcode + str_mnemonic + str_operands
 
     def html_rowheader(self, rangename, address):
         return "<span class=\"codeview-row-header\"><div class=\"bookmark-button\" style=\"float: left; visibility: hidden;\"><span class=\"glyphicon glyphicon-bookmark\" aria-hidden=\"true\"></span></div>{0: >20} <span class=\"header-address\">0x{1:08x}</span>:</span>".format(rangename, address)

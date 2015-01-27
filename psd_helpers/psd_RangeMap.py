@@ -117,7 +117,7 @@ class RangeMapList(object):
     def __str__(self):
         str=""
         for rm in self._range_map_lst:
-            str+= rm.__str__()+"\n"
+            str+= rm.__str__()
         return str
 
     def get_rm_by_value(self, value):

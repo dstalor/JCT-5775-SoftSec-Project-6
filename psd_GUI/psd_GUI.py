@@ -3,6 +3,7 @@ import resources
 from PyQt4 import QtGui, QtWebKit
 from PyQt4.QtCore import *
 
+
 class JsHooks(QObject):
     def __init__(self, psd, psd_gui):
         QObject.__init__(self)
@@ -11,6 +12,7 @@ class JsHooks(QObject):
         self.psd_gui  = psd_gui
         resources.qInitResources()
 
+    @pyqtSlot(result=str)
     def get_all_html_lines(self):
         return self.visualizer.get_all_html_lines()
 
@@ -38,12 +40,14 @@ class JsHooks(QObject):
     @pyqtSlot(str, result=str)
     def get_linechunk(self, linechunkid_str):
         linechunk_id = int(str(linechunkid_str).split('-')[1])
-        return self.visualizer.get_linechunk_lines(linechunk_id)
+        linechunk_lines = self.visualizer.get_linechunk_lines(linechunk_id)
+        return linechunk_lines
 
     @pyqtSlot(str, result=str)
     def get_linechunk_empty_lines(self, linechunkid_str):
         linechunk_id = int(str(linechunkid_str).split('-')[1])
-        return self.visualizer.get_linechunk_empty_lines(linechunk_id)
+        linechunk_lines = self.visualizer.get_linechunk_empty_lines(linechunk_id)
+        return linechunk_lines
 
     @pyqtSlot(str, result=str)
     def get_html_line(self, lineid_str):
@@ -54,8 +58,6 @@ class JsHooks(QObject):
     def get_html_lines(self, start_lineid_str, end_lineid_str):
         linerange = (int(start_lineid_str), int(end_lineid_str))
         return self.visualizer.get_html_lines(linerange)
-    
-    visualizer_lines = pyqtProperty(str, fget=get_all_html_lines)
 
 class psd_GUI(object):
     def __init__(self, psd):

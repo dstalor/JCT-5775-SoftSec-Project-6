@@ -12,7 +12,6 @@
 
     <script src="qrc:/js/jQuery.min.js"></script>
     <script src="qrc:/js/bootstrap.min.js"></script>
-    <!--<script src="qrc:/js/bootstrap-contextmenu.js"></script>-->
     <script src="qrc:/js/jquery.onscreen.js"></script>
     <script src="qrc:/js/jquery-ui.min.js"></script>
     <script src="qrc:/js/jquery.layout_and_plugins.js"></script>
@@ -112,13 +111,8 @@
             display: none
         }
 
-        #info-bar {
-            background: #CCC;
-            display: inline-block;
-            position: fixed;
-            bottom: 1px;
-            left: 1px;
-            padding: 2px;
+        button:disabled {
+            color: #999;
         }
 
         .bookmark-button .glyphicon-bookmark:hover {
@@ -163,19 +157,17 @@
                 $('span.linechunk').onScreen({
                     container: 'div.center-center',
                     doIn: function () {
-                        //alert($(this).attr('id') + " coming in");
                         var linechunkHtml = pyObj.get_linechunk($(this).attr('id'));
                         $(this).html(linechunkHtml);
                     },
                     doOut: function () {
-                        //alert($(this).attr('id') + " leaving");
-                        //$(this).text(".\n".repeat(100));
                         var linechunkHtml_empty = pyObj.get_linechunk_empty_lines($(this).attr('id'));
                         $(this).html(linechunkHtml_empty);
                     },
                     toggleClass: 'onscreen',
                     tolerance: -200
                 });
+                $('#run-program').removeAttr('disabled');
             });
             $('#run-program').click(function (event) {
                 pyObj.run_executable();
@@ -197,12 +189,14 @@
                 jumpStack.push(screenAnchor);
                 $('#previous-locations').append('<span class="jump" data-jump-location="' + screenAnchor + '" >' + screenAnchor + '<br /></span>');
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
+                alert('linenum: ' + linenum);
                 $('#line-' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#line-' + linenum).effect("highlight", {}, 1500);
                 $('#back-button').fadeIn();
             });
             $('#previous-locations, #bookmark-list').on('click', '.jump', function () {
                 var linenum = pyObj.get_line_id_by_address($(this).data("jumpLocation"));
+                alert('linenum: ' + linenum);
                 $('#line-' + ((linenum >= 12) ? (linenum - 12) : 0))[0].scrollIntoView();
                 $('#line-' + linenum).effect("highlight", {}, 1500);
             });
@@ -386,15 +380,8 @@
         .center-center {
             padding: 0;
         }
-
-        .ui-layout-resizer-open-hover, /* hover-color to 'resize' */
-        .ui-layout-resizer-dragging {
-            /* resizer beging 'dragging' */
-            background: #DDD;
-        }
     </style>
     <style>
-        /*body { font-size: 62.5%; }*/
         label, input {
             display: block;
         }
@@ -411,7 +398,6 @@
             margin-top: 25px;
         }
 
-        /*h1 { font-size: 1.2em; margin: .6em 0; }*/
         div#users-contain {
             width: 350px;
             margin: 20px 0;
@@ -449,12 +435,8 @@
                                                 data-toggle="tab"
                                                 aria-controls="mixview" aria-expanded="false">Mix View</a>
             </li>
-            <li role="presentation" class=""><a href="#codeview" id="codeview-tab" role="tab" data-toggle="tab"
-                                                aria-controls="codeview" aria-expanded="false">Code View</a></li>
-            <li role="presentation" class=""><a href="#dataview" role="tab" id="dataview-tab" data-toggle="tab"
-                                                aria-controls="dataview" aria-expanded="false">Data View</a></li>
         </ul>
-        <button id="run-program" style="float: right;font-size: 100%;">Run</button>
+        <button id="run-program" style="float: right;font-size: 100%;" disabled>Run</button>
         <button id="load-executable" style="float: right;font-size: 100%;">Load</button>
     </div>
     <div class="center-center">
@@ -462,16 +444,6 @@
             <div id="myTabContent" class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="mixview"
                      aria-labelledby="mixview-tab"></div>
-                <div role="tabpanel" class="tab-pane" id="codeview" aria-labelledby="codeview-tab"><span
-                        class="codeview-row-header fourspacesafter">.text:00408E79</span><span
-                        class="codeview-opcode spaceafter">sub</span><span class="codeview-param">esp, <span
-                        class="codeview-constant">20h</span></span>
-                </div>
-                <div role="tabpanel" class="tab-pane" id="dataview" aria-labelledby="dataview-tab"
-                     data-toggle="context"
-                     data-target="#context-menu"><span class="dataview-row-header">.data:00439359</span><span
-                        class="dataview-label">aHMS</span><span
-                        class="dataview-length">db</span><span class="dataview-data">'%H:%M:%S' ,0</span></div>
                 <div id="context-menu-constant">
                     <ul class="dropdown-menu" role="menu">
                         <li><a tabindex="-1">Hexadecimal</a></li>
@@ -481,7 +453,6 @@
                 </div>
             </div>
         </div>
-        <div id="info-bar"></div>
     </div>
 </div>
 

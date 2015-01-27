@@ -17,7 +17,7 @@ class psd_HeaderView(psd_View):
         self.html_lines = []
 
         html_title_str = self.html_header_title(self.header.name, self._memory_range.get_range())
-        self.html_lines.append('\n'+html_title_str+'\n')
+        self.html_lines.append(html_title_str)
 
         for keys in self.header.__keys__:
             for key in keys:
@@ -52,14 +52,14 @@ class psd_HeaderView(psd_View):
                     val_str = ''.join(filter(lambda c:c != '\0', str(val)))
                     str_field_value = self.field_value_html(val_str)
 
-                self.html_lines.append(str_rowheader + str_field_name + str_field_value + str_more_info + "\n")
-        self.html_lines.append("")
+                self.html_lines.append(str_rowheader + str_field_name + str_field_value + str_more_info)
+        # self.html_lines.append("")
 
     def get_html_line_list(self, line_range_tup):
         return self.html_lines[line_range_tup[0]: line_range_tup[1]+1]
 
     def html_header_title(self, header_name, address_tup):
-        return "<span class=\"headerview-title\">***   {0}   [0x{1:08x} -> 0x{2:08x}]</span></span>".format(header_name, *address_tup)
+        return "<span class=\"headerview-title\">***   {0}   [0x{1:08x} -> 0x{2:08x}]</span>".format(header_name, *address_tup)
 
     def html_rowheader(self, address):
         return ("<span class=\"headerview-row-header\">"

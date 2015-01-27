@@ -92,6 +92,6 @@ class psd_Visualizer:
 
         str_line_list = []
         for line_idx in xrange(start_line,end_line +1):
-            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
+            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, "."))
 
         return ''.join(str_line_list)
