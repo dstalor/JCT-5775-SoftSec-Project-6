@@ -48,17 +48,14 @@ class psd_Visualizer:
     def get_all_html_empty_lines(self):
         lines_range = self.addressview_rangemap_list.get_all_lines_range()
         range_length =  (lines_range[1]-lines_range[0]) + 1
-        linechunks = int(math.ceil(range_length / self.linechunk_size))
+        linechunks = int(math.ceil(range_length / self.linechunk_size)) + 1
         str_chunk_list = []
         for lchunk in xrange(linechunks):
-            str_line_list = []
-            start_line = lines_range[0] + lchunk * self.linechunk_size
-            end_line = min(start_line + self.linechunk_size, lines_range[1])
-            for line_idx in xrange(start_line,end_line +1):
-                str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
-
-            chunk_html = self.psd_html_generator.html_lineschunk_wrap(lchunk, ''.join(str_line_list))
+            html_lines_str = self.get_linechunk_empty_lines(lchunk)
+            chunk_html = self.psd_html_generator.html_lineschunk_wrap(lchunk, html_lines_str)
+            #print chunk_html
             str_chunk_list.append(chunk_html)
+
 
         return ''.join(str_chunk_list)
 
@@ -81,9 +78,20 @@ class psd_Visualizer:
             return -1
 
     ## Experimental:
-    def get_linechunk(self, lineschunk_id):
+    def get_linechunk_lines(self, lineschunk_id):
         start_line = lineschunk_id*self.linechunk_size
         linesrange = (start_line, start_line + self.linechunk_size)
         html_lines_str = self.get_html_lines(linesrange)
         return html_lines_str
         #return self.psd_html_generator.html_lineschunk_wrap(lineschunk_id, html_lines_str)
+
+    def get_linechunk_empty_lines(self, lineschunk_id):
+        lines_range = self.addressview_rangemap_list.get_all_lines_range()
+        start_line = lineschunk_id*self.linechunk_size
+        end_line = min((start_line + self.linechunk_size) - 1, lines_range[1])
+
+        str_line_list = []
+        for line_idx in xrange(start_line,end_line +1):
+            str_line_list.append(self.psd_html_generator.html_line_wrap(line_idx, ".") + "\n")
+
+        return ''.join(str_line_list)

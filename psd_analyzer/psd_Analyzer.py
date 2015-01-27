@@ -145,13 +145,17 @@ class psd_Analyzer(object):
 
         for header, header_name in headers.iteritems():
             if header:
-                phy_start_address = header.get_file_offset()
-                phy_end_address = phy_start_address + header.sizeof()
-                start_address = self.pe.get_physical_by_rva(phy_start_address)
-                end_address= self.pe.get_physical_by_rva(phy_end_address)
+                #TODO about "try-except", This is an ugly WA, because not all "headers" in the list has all the attributes here
+                try:
+                    phy_start_address = header.get_file_offset()
+                    phy_end_address = phy_start_address + header.sizeof()
+                    start_address = self.pe.get_physical_by_rva(phy_start_address)
+                    end_address= self.pe.get_physical_by_rva(phy_end_address)
 
-                new_range = psd_MemoryRangeRangeMap((start_address, end_address), psd_MemoryRangeMetadata(header_name, display = "headerview", header = header))
-                self.address_section_rmp.add_range_map(new_range)
+                    new_range = psd_MemoryRangeRangeMap((start_address, end_address), psd_MemoryRangeMetadata(header_name, display = "headerview", header = header))
+                    self.address_section_rmp.add_range_map(new_range)
+                except:
+                    pass
 
         # add sections
         for section in self.pe.sections:
