@@ -173,6 +173,7 @@
                         var linechunkHtml_empty = pyObj.get_linechunk_empty_lines($(this).attr('id'));
                         $(this).html(linechunkHtml_empty);
                     },
+                    toggleClass: 'onscreen',
                     tolerance: -200
                 });
             });
@@ -500,7 +501,7 @@
                    class="text ui-widget-content ui-corner-all">
             <input type="hidden" name="address" id="changeByte-address" value="">
             <input type="hidden" name="oldByte" id="changeByte-oldByte" value="">
-            &lt;!&ndash; Allow form submission with keyboard without duplicating the dialog button &ndash;&gt;
+            <!-- Allow form submission with keyboard without duplicating the dialog button-->
             <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
         </fieldset>
     </form>
@@ -575,15 +576,11 @@
             },
             close: function () {
                 if (success == true) {
-                    $("span.datahex-byte-data[data-address-rva='" + address.val() + "']").text(newByte.val());
-                    var decVal = hex2dec(newByte.val());
-                    if (decVal >= 32) {
-                        $("span.datahex-byte-ascii[data-address-rva='" + address.val() + "']").html('&#' + decVal + ';');
-                    }
-                    else {
-                        $("span.datahex-byte-ascii[data-address-rva='" + address.val() + "']").text('.');
-                    }
                     pyObj.patch_byte_by_rva(address.val(), newByte.val());
+                    $('.linechunk.onscreen').html(function () {
+                        var linechunkId = $(this).attr('id');
+                        return pyObj.get_linechunk(linechunkId);
+                    });
                 }
                 form[0].reset();
                 success = false;
