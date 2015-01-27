@@ -7,17 +7,23 @@ class psd_HeaderView(psd_View):
         super(psd_HeaderView, self).__init__(pe, memory_range)
         self.header = self._memory_range.get_memory_range_metadata().get_header()
         self.html_lines = []
+        self.empty_lines_before = 0
+
         self.create_html_lines()
-        self.title_lines = 2
-        self.end_lines = 1
+
+
     def calculate_line_count(self):
-        return len(self.header.__keys__) + self.title_lines + self.end_lines
+        return len(self.header.__keys__) + self.empty_lines_before
 
     def create_html_lines(self):
         self.html_lines = []
 
+        self.add_empty_html_line_before()
+
         html_title_str = self.html_header_title(self.header.name, self._memory_range.get_range())
         self.html_lines.append(html_title_str)
+
+        self.add_empty_html_line_before()
 
         for keys in self.header.__keys__:
             for key in keys:
@@ -91,11 +97,15 @@ class psd_HeaderView(psd_View):
                 for key in keys:
                     key_address = self.header.__field_offsets__[key]+ self.header.__file_offset__
                     if key_address == address:
-                        return (self.title_lines-1) + i
+                        return (self.empty_lines_before+1) + i
                     elif key_address > address:
-                        return (self.title_lines-1) + i-1
+                        return (self.empty_lines_before+1) + i-1
                     i+=1
 
-            return (self.title_lines-1) + i-1 #return the line of last key
+            return (self.empty_lines_before-1) + i-1 #return the line of last key
         else:
             return None
+
+    def add_empty_html_line_before(self):
+        self.html_lines.append("")
+        self.empty_lines_before +=1
